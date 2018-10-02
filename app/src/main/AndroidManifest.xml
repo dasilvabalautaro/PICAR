@@ -16,6 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         android:fullBackupContent="@xml/backup_descriptor">
         <activity android:name=".presentation.view.activities.RouteActivity"
+            android:configChanges="mcc|mnc|locale|keyboardHidden|screenLayout|screenSize|orientation"
             android:noHistory="true"
             android:theme="@style/AppTheme.Translucent">
             <intent-filter>
@@ -25,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.view.activities.SplashActivity" />
+        <activity android:name=".presentation.view.activities.OptionAccessActivity" />
     </application>
 
 </manifest>

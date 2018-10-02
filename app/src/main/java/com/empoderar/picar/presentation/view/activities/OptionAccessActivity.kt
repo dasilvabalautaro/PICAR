@@ -3,18 +3,17 @@ package com.empoderar.picar.presentation.view.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import com.empoderar.picar.presentation.plataform.BaseActivity
-import com.empoderar.picar.presentation.view.fragments.SplashFragment
+import com.empoderar.picar.presentation.view.fragments.OptionAccessFragment
 
-class SplashActivity: BaseActivity() {
+class OptionAccessActivity: BaseActivity() {
 
     companion object {
         fun callingIntent(context: Context) = Intent(context,
-                SplashActivity::class.java)
+                OptionAccessActivity::class.java)
     }
 
-    override fun fragment() = SplashFragment()
+    override fun fragment() = OptionAccessFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

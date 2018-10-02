@@ -12,6 +12,7 @@ ext {
     archComponents_version = '1.1.1'
     glide_version = '4.0.0'
     reactive_version = '2.1.0'
+    room_version = '1.0.0'
 
     //Third party libraries
     kotlin_coroutines_version = '0.22.1'
@@ -56,6 +57,8 @@ ext {
             okhttpLoggingInterceptor:   "com.squareup.okhttp3:logging-interceptor:$okhttp_logging_interceptor_version",
             rxjava:                     "io.reactivex.rxjava2:rxjava:$reactive_version",
             rxandroid:                  "io.reactivex.rxjava2:rxandroid:$reactive_version",
+            room:                       "android.arch.persistence.room:runtime:$room_version",
+            roomCompiler:               "android.arch.persistence.room:compiler:$room_version",
     ]
 
     unitTesting = [

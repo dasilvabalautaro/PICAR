@@ -1,8 +1,10 @@
 package com.empoderar.picar.di.viewmodel
 
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
 
 @Module
 abstract class ViewModelModule {
@@ -10,5 +12,6 @@ abstract class ViewModelModule {
     internal abstract fun bindViewModelFactory(factory:
                                                ViewModelFactory):
             ViewModelProvider.Factory
+
 
 }
