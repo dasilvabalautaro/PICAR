@@ -1,7 +1,7 @@
 package com.empoderar.picar.domain.interactor
 
 import com.empoderar.picar.model.persistent.network.repository.UsersRepository
-import com.empoderar.picar.presentation.data.User
+import com.empoderar.picar.domain.data.User
 import javax.inject.Inject
 
 

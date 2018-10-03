@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
 import android.os.Bundle
 import android.support.annotation.StringRes
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.empoderar.picar.App
 import com.empoderar.picar.R
 import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.model.exception.Failure
+import com.empoderar.picar.presentation.extension.viewContainer
 import kotlinx.android.synthetic.main.toolbar.*
 import javax.inject.Inject
 
@@ -49,8 +51,11 @@ abstract class BaseFragment: Fragment() {
         when (failure) {
             is Failure.NetworkConnection -> renderFailure(R.string.failure_network_connection)
             is Failure.ServerError -> renderFailure(R.string.failure_server_error)
+            is Failure.DatabaseError -> renderFailure(R.string.failure_database_error)
         }
     }
+    internal fun notify(@StringRes message: Int) =
+            Snackbar.make(viewContainer, message, Snackbar.LENGTH_SHORT).show()
 
     internal fun Context.toast(message: CharSequence) =
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

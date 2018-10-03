@@ -3,4 +3,7 @@
     <string name="lbl_image">Image</string>
     <string name="failure_network_connection">No Network Connection.</string>
     <string name="failure_server_error">Server Error</string>
+    <string name="failure_database_error">Database Error</string>
+    <string name="msg_users_saved">Users saved</string>
+    <string name="select_photo">Select a photo</string>
 </resources>

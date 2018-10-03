@@ -1,4 +1,4 @@
-package com.empoderar.picar.presentation.data
+package com.empoderar.picar.domain.data
 
 import com.empoderar.picar.presentation.extension.empty
 

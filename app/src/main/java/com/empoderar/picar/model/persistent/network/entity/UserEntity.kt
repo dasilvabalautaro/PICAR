@@ -1,6 +1,6 @@
 package com.empoderar.picar.model.persistent.network.entity
 
-import com.empoderar.picar.presentation.data.User
+import com.empoderar.picar.domain.data.User
 
 data class UserEntity(private var id: Int, private var unit: Int,
                       private var role: Int, private var name: String,

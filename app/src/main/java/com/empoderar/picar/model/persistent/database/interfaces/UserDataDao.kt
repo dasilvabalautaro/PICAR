@@ -16,6 +16,9 @@ interface UserDataDao {
     @Insert(onConflict = REPLACE)
     fun insert(userData: UserData)
 
+    @Insert(onConflict = REPLACE)
+    fun insertUsers(users: List<UserData>)
+
     @Query("DELETE FROM userData")
     fun deleteAll()
 

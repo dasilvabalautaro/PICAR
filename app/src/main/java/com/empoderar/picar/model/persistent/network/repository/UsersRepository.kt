@@ -3,7 +3,7 @@ package com.empoderar.picar.model.persistent.network.repository
 import com.empoderar.picar.domain.functional.Either
 import com.empoderar.picar.model.exception.Failure
 import com.empoderar.picar.model.persistent.network.services.UsersService
-import com.empoderar.picar.presentation.data.User
+import com.empoderar.picar.domain.data.User
 import com.empoderar.picar.presentation.plataform.NetworkHandler
 import retrofit2.Call
 import javax.inject.Inject
