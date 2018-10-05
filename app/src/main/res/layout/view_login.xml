@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background">
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/left_guideline"
+            app:layout_constraintGuide_percent=".05"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/left_two_guideline"
+            app:layout_constraintGuide_percent=".20"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/left_three_guideline"
+            app:layout_constraintGuide_percent=".15"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/right_guideline"
+            app:layout_constraintGuide_percent=".95"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/right_two_guideline"
+            app:layout_constraintGuide_percent=".80"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/right_three_guideline"
+            app:layout_constraintGuide_percent=".85"
+            android:orientation="vertical"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/top_guideline"
+            app:layout_constraintGuide_percent=".05"
+            android:orientation="horizontal"/>
+
+        <android.support.constraint.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottom_guideline"
+            app:layout_constraintGuide_percent=".95"
+            android:orientation="horizontal"/>
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/lbl_image"
+            android:src="@drawable/logo_picar"
+            android:layout_marginTop="25dp"
+            app:layout_constraintDimensionRatio="H,161:100"
+            app:layout_constraintLeft_toLeftOf="@+id/left_two_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_two_guideline"
+            app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
+            android:text="@string/lbl_title_login"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorSecondaryText"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_user"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorSecondaryText"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:hint="@string/hint_user"
+            android:background="@drawable/back_login_edit"
+            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:ignore="Autofill"
+            android:inputType="textPersonName" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/lbl_image"
+            app:layout_constraintLeft_toLeftOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_password"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorSecondaryText"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:hint="@string/hint_password"
+            android:background="@drawable/back_login_edit"
+            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/et_user"
+            tools:ignore="Autofill"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_password"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/lbl_image"
+            app:layout_constraintLeft_toLeftOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/et_user"/>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/ib_reports"
+            android:background="@drawable/btn_inside"
+            android:layout_marginTop="35dp"
+            android:contentDescription="@string/lbl_image"
+            app:layout_constraintDimensionRatio="H,9:2"
+            app:layout_constraintLeft_toLeftOf="@+id/left_three_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/et_password"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</ScrollView>

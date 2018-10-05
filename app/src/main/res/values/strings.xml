@@ -6,4 +6,14 @@
     <string name="failure_database_error">Database Error</string>
     <string name="msg_users_saved">Users saved</string>
     <string name="select_photo">Select a photo</string>
+    <string name="lbl_title_login">Sign In</string>
+    <string name="hint_user">User name</string>
+    <string name="hint_password">Password</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>

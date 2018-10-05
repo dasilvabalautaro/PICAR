@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="project">
+        <item>Action 1</item>
+        <item>Action 2</item>
+        <item>Action 3</item>
+    </string-array>
+    <string-array name="maps">
+        <item>Action 1</item>
+        <item>Action 2</item>
+        <item>Action 3</item>
+    </string-array>
+
+    <string-array name="system">
+        <item>Action 1</item>
+        <item>Action 2</item>
+        <item>Action 3</item>
+    </string-array>
+
+    <string-array name="help">
+        <item>Action 1</item>
+        <item>Action 2</item>
+        <item>Action 3</item>
+    </string-array>
+
+    <string-array name="options">
+        <item>Project</item>
+        <item>Map</item>
+        <item>System</item>
+        <item>Help</item>
+    </string-array>
+
+</resources>
