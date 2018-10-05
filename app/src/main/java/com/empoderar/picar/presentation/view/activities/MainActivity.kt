@@ -74,7 +74,4 @@ class MainActivity : BaseActivity(){
         return true
     }
 
-
-
-
 }

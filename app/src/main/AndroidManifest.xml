@@ -33,10 +33,8 @@
         </activity>
         <activity android:name=".presentation.view.activities.SplashActivity" />
         <activity android:name=".presentation.view.activities.OptionAccessActivity" />
-        <activity
-            android:name=".presentation.view.activities.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".presentation.view.activities.MainActivity"/>
+
     </application>
 
 </manifest>
