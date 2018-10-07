@@ -33,7 +33,7 @@
         </activity>
         <activity android:name=".presentation.view.activities.SplashActivity" />
         <activity android:name=".presentation.view.activities.OptionAccessActivity" />
-        <activity android:name=".presentation.view.activities.MainActivity"/>
+        <activity android:name=".presentation.view.activities.MenuActivity"/>
 
     </application>
 

@@ -8,4 +8,5 @@
     <color name="colorAccent">#B2FF59</color>
     <color name="colorPrimaryText">#FFFFFF</color>
     <color name="colorSecondaryText">#000000</color>
+    <color name="colorTransparent">#00000000</color>
 </resources>
