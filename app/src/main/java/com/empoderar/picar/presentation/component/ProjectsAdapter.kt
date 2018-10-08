@@ -33,9 +33,11 @@ class ProjectsAdapter @Inject constructor():
         fun bind(projectView: ProjectView, clickListener: (ProjectView, Navigator.Extras) -> Unit) {
             itemView.tv_title.text = projectView.name
             itemView.tv_title.tag = projectView.id
-            itemView.setOnClickListener { clickListener(projectView,
-                    Navigator.Extras(itemView.tv_title))
+            itemView.setOnClickListener {
+                clickListener(projectView,
+                        Navigator.Extras(itemView.tv_title))
 
+            }
         }
     }
 }

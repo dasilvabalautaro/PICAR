@@ -71,8 +71,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_lbl_description"
-            android:text="@string/lbl_description"
+            android:id="@+id/tv_lbl_date"
+            android:text="@string/lbl_date"
             android:textStyle="bold"
             android:textColor="@color/colorSecondaryText"
             android:layout_marginTop="5dp"
@@ -83,9 +83,28 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:id="@+id/tv_description"
-            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_description"
+            android:id="@+id/tv_date"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_date"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_state"
+            android:text="@string/lbl_state"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_date"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_state"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_state"
             card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
             card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
 
