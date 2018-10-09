@@ -16,9 +16,5 @@ class SplashActivity: BaseActivity() {
 
     override fun fragment() = SplashFragment()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        supportActionBar!!.hide()
 
-    }
 }

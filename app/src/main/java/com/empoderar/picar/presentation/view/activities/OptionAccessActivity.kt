@@ -15,9 +15,5 @@ class OptionAccessActivity: BaseActivity() {
 
     override fun fragment() = OptionAccessFragment()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        supportActionBar!!.hide()
 
-    }
 }

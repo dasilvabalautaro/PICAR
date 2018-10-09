@@ -2,18 +2,18 @@ package com.empoderar.picar.presentation.plataform
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.empoderar.picar.presentation.extension.inTransaction
 import com.empoderar.picar.R.id
 import com.empoderar.picar.R.layout
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.activity_task.*
 
 abstract class BaseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_task)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        navList.visibility = View.INVISIBLE
         addFragment(savedInstanceState)
 
     }

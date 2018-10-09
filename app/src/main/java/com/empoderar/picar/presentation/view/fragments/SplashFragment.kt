@@ -1,6 +1,7 @@
 package com.empoderar.picar.presentation.view.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.UserView
 import com.empoderar.picar.presentation.extension.observe
@@ -33,11 +34,9 @@ class SplashFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-/*
         Handler().postDelayed({
             navigator.showOptions(activity!!)
         }, 3000)
-*/
     }
 
     private fun handleDownUsers(list: List<UserView>?){
