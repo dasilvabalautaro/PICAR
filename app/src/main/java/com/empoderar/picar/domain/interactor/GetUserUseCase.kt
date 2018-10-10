@@ -1,5 +1,6 @@
 package com.empoderar.picar.domain.interactor
 
+import com.empoderar.picar.domain.data.User
 import com.empoderar.picar.domain.functional.Either
 import com.empoderar.picar.domain.functional.HashUtils
 import com.empoderar.picar.model.persistent.database.data.UserData
@@ -10,11 +11,13 @@ import javax.inject.Inject
 
 class GetUserUseCase @Inject constructor(private val userDataDao:
                                          UserDataDao):
-        UseCase<UserData, List<String>>() {
+        UseCase<User, List<String>>() {
 
-    override suspend fun run(params: List<String>): Either<Failure, UserData> {
+    override suspend fun run(params: List<String>): Either<Failure, User> {
         return try {
-            val list = userDataDao.findUserByName(params[0])
+            val listData = userDataDao.findUserByName(params[0])
+            val list = listData.map { User(it.id, it.unit, it.role, it.name,
+                    it.phone, it.address, it.password) }
             val user = verifyPassword(list, params[1])
             when (user != null){
                 true -> Either.Right(user!!)
@@ -26,8 +29,8 @@ class GetUserUseCase @Inject constructor(private val userDataDao:
         }
     }
 
-    private fun verifyPassword(listUser: List<UserData>,
-                               password: String): UserData?{
+    private fun verifyPassword(listUser: List<User>,
+                               password: String): User?{
         if (!listUser.isEmpty()){
             for (i in listUser.indices){
                 val us = listUser[i]

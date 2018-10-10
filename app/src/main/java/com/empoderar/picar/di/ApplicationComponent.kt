@@ -4,6 +4,8 @@ import com.empoderar.picar.App
 import com.empoderar.picar.di.viewmodel.ViewModelModule
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import com.empoderar.picar.presentation.view.activities.RouteActivity
+import com.empoderar.picar.presentation.view.fragments.FormsFragment
+import com.empoderar.picar.presentation.view.fragments.ListingsFragment
 import com.empoderar.picar.presentation.view.fragments.ProjectsFragment
 import com.empoderar.picar.presentation.view.fragments.SplashFragment
 import dagger.Component
@@ -17,4 +19,6 @@ interface ApplicationComponent {
     fun inject(menuActivity: MenuActivity)
     fun inject(splashFragment: SplashFragment)
     fun inject(projectsFragment: ProjectsFragment)
+    fun inject(formsFragment: FormsFragment)
+    fun inject(listingsFragment: ListingsFragment)
 }

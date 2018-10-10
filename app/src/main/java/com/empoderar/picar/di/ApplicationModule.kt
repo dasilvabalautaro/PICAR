@@ -60,6 +60,9 @@ class ApplicationModule(private val app: App) {
     fun provideRoleDao(database: AppDatabase) = database.roleDao()
 
     @Provides
+    fun provideFormDao(database: AppDatabase) = database.formDao()
+
+    @Provides
     @Singleton
     fun provideUsersRepository(dataSource: UsersRepository.UsersNetwork):
             UsersRepository = dataSource

@@ -13,10 +13,10 @@ import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.presentation.component.ExpandableListMenu
 import com.empoderar.picar.presentation.component.MenuExpandableAdapter
 import com.empoderar.picar.presentation.plataform.BaseActivity
-import com.empoderar.picar.presentation.view.fragments.ProjectsFragment
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.android.synthetic.main.toolbar.*
 import com.empoderar.picar.presentation.navigation.Navigator
+import com.empoderar.picar.presentation.view.fragments.ListingsFragment
 import javax.inject.Inject
 
 class MenuActivity : BaseActivity(){
@@ -39,7 +39,7 @@ class MenuActivity : BaseActivity(){
     private var expandableHeaderMenu: List<String>? = null
     private var expandableListMenu: MutableMap<String, List<String>>? = null
 
-    override fun fragment() = ProjectsFragment()
+    override fun fragment() = ListingsFragment()
 
     @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {

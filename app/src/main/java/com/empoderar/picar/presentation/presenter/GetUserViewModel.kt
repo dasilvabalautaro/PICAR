@@ -1,6 +1,7 @@
 package com.empoderar.picar.presentation.presenter
 
 import android.arch.lifecycle.MutableLiveData
+import com.empoderar.picar.domain.data.User
 import com.empoderar.picar.domain.interactor.GetUserUseCase
 import com.empoderar.picar.model.persistent.database.data.UserData
 import com.empoderar.picar.presentation.plataform.BaseViewModel
@@ -8,7 +9,7 @@ import javax.inject.Inject
 
 class GetUserViewModel @Inject constructor(private val getUserUseCase:
                                            GetUserUseCase): BaseViewModel() {
-    var result: MutableLiveData<UserData> = MutableLiveData()
+    var result: MutableLiveData<User> = MutableLiveData()
 
     var list: List<String>? = null
 
@@ -16,7 +17,7 @@ class GetUserViewModel @Inject constructor(private val getUserUseCase:
         it.either(::handleFailure, ::handleResult)
     }
 
-    private fun handleResult(value: UserData){
+    private fun handleResult(value: User){
         result.value = value
 
     }
