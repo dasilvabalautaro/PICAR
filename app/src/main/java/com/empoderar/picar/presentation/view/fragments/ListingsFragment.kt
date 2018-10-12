@@ -60,6 +60,6 @@ class ListingsFragment: BaseFragment() {
     }
 
     private fun handleGetUnits(list: List<UnityView>?){
-
+        listUnity = list.orEmpty()
     }
 }

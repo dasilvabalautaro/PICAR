@@ -14,11 +14,22 @@ import com.empoderar.picar.App
 import com.empoderar.picar.R
 import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.model.exception.Failure
+import com.empoderar.picar.presentation.data.MunicipalityView
+import com.empoderar.picar.presentation.data.UnityView
+import com.empoderar.picar.presentation.data.UserView
 import com.empoderar.picar.presentation.extension.viewContainer
 import kotlinx.android.synthetic.main.toolbar.*
+import java.util.LinkedHashMap
 import javax.inject.Inject
 
 abstract class BaseFragment: Fragment() {
+    companion object Factory {
+        //val mapImage: LinkedHashMap<String, ProxyBitmap> = LinkedHashMap()
+        var listMunicipality : List<MunicipalityView>? = null
+        var userMain: UserView? = null
+        var listUnity: List<UnityView>? = null
+    }
+
     abstract fun layoutId(): Int
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {

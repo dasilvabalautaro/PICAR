@@ -39,4 +39,16 @@ abstract class ViewModelModule {
     @ViewModelKey(GetUnitsViewModel::class)
     abstract fun bindsGetUnitsViewModel(getUnitsViewModel: GetUnitsViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetMunicipalitiesViewModel::class)
+    abstract fun bindsGetMunicipalitiesViewModel(getMunicipalitiesViewModel:
+                                                     GetMunicipalitiesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetUserViewModel::class)
+    abstract fun bindsGetUserViewModel(getUserViewModel:
+                                           GetUserViewModel): ViewModel
+
 }

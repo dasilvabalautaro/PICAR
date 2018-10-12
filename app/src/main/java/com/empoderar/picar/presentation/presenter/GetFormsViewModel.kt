@@ -14,10 +14,10 @@ class GetFormsViewModel @Inject constructor(private val getFormsUseCase:
     var result: MutableLiveData<List<FormView>> = MutableLiveData()
 
     fun loadForms() = getFormsUseCase(UseCase.None()){
-        it.either(::handleFailure, ::handleUserList)
+        it.either(::handleFailure, ::handleFormList)
     }
 
-    private fun handleUserList(forms: List<Form>) {
+    private fun handleFormList(forms: List<Form>) {
         this.result.value = forms.map { FormView(it.id, it.unit, it.user,
                 it.dateForm, it.lat, it.lon, it.variable1, it.variable2,
                 it.variable3, it.variable4, it.comment1, it.comment2, it.comment3,

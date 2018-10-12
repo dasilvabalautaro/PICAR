@@ -15,7 +15,9 @@ abstract class BaseActivity: AppCompatActivity() {
         setContentView(layout.activity_task)
         navList.visibility = View.INVISIBLE
         addFragment(savedInstanceState)
-
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
     }
 
 

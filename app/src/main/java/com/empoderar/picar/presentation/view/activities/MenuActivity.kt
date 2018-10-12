@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import com.empoderar.picar.App
 import com.empoderar.picar.R
 import com.empoderar.picar.di.ApplicationComponent
@@ -38,6 +40,7 @@ class MenuActivity : BaseActivity(){
     private var menuExpandableListAdapter: MenuExpandableAdapter? = null
     private var expandableHeaderMenu: List<String>? = null
     private var expandableListMenu: MutableMap<String, List<String>>? = null
+    private var toggle: ActionBarDrawerToggle? = null
 
     override fun fragment() = ListingsFragment()
 
@@ -45,10 +48,11 @@ class MenuActivity : BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-        val toggle = ActionBarDrawerToggle(
+        navList.visibility = View.VISIBLE
+        toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+        drawer_layout.addDrawerListener(toggle!!)
+        toggle!!.syncState()
         navList.addHeaderView(layoutInflater.inflate(R.layout.nav_header_main,
                 null, false))
         this.expandableListMenu = ExpandableListMenu().getListMenu(this)
@@ -80,4 +84,12 @@ class MenuActivity : BaseActivity(){
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (toggle!!.onOptionsItemSelected(item)){
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+
+    }
 }

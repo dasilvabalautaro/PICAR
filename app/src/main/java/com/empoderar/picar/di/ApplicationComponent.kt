@@ -4,10 +4,7 @@ import com.empoderar.picar.App
 import com.empoderar.picar.di.viewmodel.ViewModelModule
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import com.empoderar.picar.presentation.view.activities.RouteActivity
-import com.empoderar.picar.presentation.view.fragments.FormsFragment
-import com.empoderar.picar.presentation.view.fragments.ListingsFragment
-import com.empoderar.picar.presentation.view.fragments.ProjectsFragment
-import com.empoderar.picar.presentation.view.fragments.SplashFragment
+import com.empoderar.picar.presentation.view.fragments.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -21,4 +18,6 @@ interface ApplicationComponent {
     fun inject(projectsFragment: ProjectsFragment)
     fun inject(formsFragment: FormsFragment)
     fun inject(listingsFragment: ListingsFragment)
+    fun inject(optionAccessFragment: OptionAccessFragment)
+    fun inject(loginFragment: LoginFragment)
 }

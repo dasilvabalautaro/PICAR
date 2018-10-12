@@ -34,6 +34,7 @@
         <activity android:name=".presentation.view.activities.SplashActivity" />
         <activity android:name=".presentation.view.activities.OptionAccessActivity" />
         <activity android:name=".presentation.view.activities.MenuActivity"/>
+        <activity android:name=".presentation.view.activities.LoginActivity" />
 
     </application>
 
