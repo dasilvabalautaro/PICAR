@@ -29,6 +29,7 @@ class DriveRepository @Inject constructor(private val permissionUtils:
     private val cameraPermissionsRequest = 3
     private val galleryImageRequest = 4
     private val cameraImageRequest = 5
+    private val accessFineLocation = 6
     private val directoryWork = "picar"
     private val imageFile = "temp.jpg"
 
@@ -83,6 +84,20 @@ class DriveRepository @Inject constructor(private val permissionUtils:
         }
         return null
     }
+
+    fun permissionServiceLocation(activity: Activity): Boolean{
+        when {
+            ContextCompat.checkSelfPermission(activity,
+                    Manifest.permission.ACCESS_FINE_LOCATION) !=
+                    PackageManager.PERMISSION_GRANTED -> permissionUtils
+                    .requestPermission(activity,
+                            accessFineLocation,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+            else -> return true
+        }
+        return false
+    }
+
 
     private fun getBitmap(file: String, activity: Activity): Bitmap?{
         var bitmap: Bitmap? = null
@@ -197,6 +212,12 @@ class DriveRepository @Inject constructor(private val permissionUtils:
                 println("Permission Ok")
             }
 
+            accessFineLocation -> if (permissionUtils
+                            .permissionGranted(requestCode,
+                                    accessFineLocation,
+                                    grantResults)) {
+                println("Permission Ok")
+            }
 
         }
 

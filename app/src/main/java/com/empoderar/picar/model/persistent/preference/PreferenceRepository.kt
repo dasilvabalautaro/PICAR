@@ -5,6 +5,9 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
 object PreferenceRepository {
+    const val latitude = "latitude"
+    const val longitude = "longitude"
+    const val preferenceApp = "com.empoderar.picar"
 
     fun defaultPrefs(context: Context): SharedPreferences
             = PreferenceManager.getDefaultSharedPreferences(context)
