@@ -19,6 +19,7 @@ import android.arch.lifecycle.ViewModel
 import dagger.MapKey
 import kotlin.reflect.KClass
 
+//Define key for every ViewModel. The tag @MapKey is use for injected ViewModel and Provider.
 @MapKey
 @Target(AnnotationTarget.FUNCTION,
         AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)

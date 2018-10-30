@@ -8,6 +8,7 @@ import com.empoderar.picar.presentation.view.fragments.*
 import dagger.Component
 import javax.inject.Singleton
 
+//Interface for Inject dependencies, all the Classes injected. One only Instance.
 @Singleton
 @Component(modules = [ApplicationModule::class, ViewModelModule::class])
 interface ApplicationComponent {

@@ -7,6 +7,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
+// The key binds provider and ViewModel.
+
 @Module
 abstract class ViewModelModule {
     @Binds

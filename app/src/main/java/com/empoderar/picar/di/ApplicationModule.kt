@@ -14,6 +14,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+//Repository of Inject
 @Module
 class ApplicationModule(private val app: App) {
     private val databaseName = "picar_db"
@@ -22,6 +23,7 @@ class ApplicationModule(private val app: App) {
     @Singleton
     fun provideApplicationContext(): Context = app
 
+//    Provide to all application operations Rest
     @Provides @Singleton fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl("https://www.hiddenodds.com/")
@@ -30,6 +32,7 @@ class ApplicationModule(private val app: App) {
                 .build()
     }
 
+//    Interceptor of Head Rest
     private fun createClient(): OkHttpClient {
         val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
@@ -39,11 +42,13 @@ class ApplicationModule(private val app: App) {
         return okHttpClientBuilder.build()
     }
 
+//    Provide access the database
     @Provides fun provideAppDatabase(context: Context): AppDatabase =
             Room.databaseBuilder(context,
                     AppDatabase::class.java,
                     databaseName).allowMainThreadQueries().build()
 
+//    Provide access the table User
     @Provides
     fun provideUserDao(database: AppDatabase) = database.userDao()
 
@@ -62,6 +67,7 @@ class ApplicationModule(private val app: App) {
     @Provides
     fun provideFormDao(database: AppDatabase) = database.formDao()
 
+//    Manage the operations Rest of User
     @Provides
     @Singleton
     fun provideUsersRepository(dataSource: UsersRepository.UsersNetwork):

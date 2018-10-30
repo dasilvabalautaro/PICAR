@@ -2,19 +2,21 @@ package com.empoderar.picar.domain.interactor
 
 import com.empoderar.picar.domain.functional.Either
 import com.empoderar.picar.model.exception.Failure
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.*
+
+
+//Execute function async and return value or fail.
 
 abstract class UseCase<out Type, in Params> where Type : Any {
-
     abstract suspend fun run(params: Params): Either<Failure, Type>
 
-    operator fun invoke(params: Params, onResult: (Either<Failure, Type>) -> Unit = {}) {
-        val job = async(CommonPool) { run(params) }
-        launch(UI) { onResult(job.await()) }
+    operator fun invoke(params: Params,
+                       onResult: (Either<Failure, Type>) -> Unit = {}) = runBlocking<Unit> {
+
+       val job = async{ run(params) }
+       launch (Dispatchers.Main) { onResult(job.await()) }
     }
+
 
     class None
 }

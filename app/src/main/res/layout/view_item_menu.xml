@@ -12,5 +12,6 @@
         android:paddingTop="@dimen/layout_padding_default"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingRight="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:textStyle="bold"
         android:textColor="@color/colorSecondaryDark"/>
 </LinearLayout>
