@@ -5,7 +5,7 @@ apply from: 'buildsystem/dependencies.gradle'
 
 buildscript {
     ext.kotlin_version = '1.3.0'
-    ext.gradle_tools = '3.2.1'
+    ext.gradle_tools = '3.3.0'
     ext.build_tools = '28.0.3'
     ext.compile_sdk = 27
     ext.target_sdk = 27
