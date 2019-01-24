@@ -37,10 +37,9 @@
         <activity android:name=".presentation.view.activities.MenuActivity"/>
         <activity android:name=".presentation.view.activities.LoginActivity" />
 
-        <service android:name=".model.persistent.network.services.LocationService"
-            android:enabled="true"
+        <service android:name=".model.persistent.network.services.JobLocationService"
             android:exported="true"
-            android:permission="true"/>
+            android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
 </manifest>

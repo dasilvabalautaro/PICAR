@@ -28,4 +28,13 @@
     <string name="item_menu_1">Action 1</string>
     <string name="item_menu_2">Action 2</string>
     <string name="item_menu_3">Action 3</string>
+    <string name="not_permission_location">Not access location</string>
+    <string name="not_permission_camera">Not photo</string>
+    <string name="not_permission_read_external">Not Read External Storage</string>
+    <string name="not_permission_write_external">Not Write External Storage</string>
+    <string name="not_permission_read_phone">Not Read Phone State</string>
+    <string name="not_permission_read_calendar">Not read calendar</string>
+    <string name="not_permission_write_calendar">Not write_calendar</string>
+    <string name="value_null">Cannot transform a null value</string>
+    <string name="select_image">Select image</string>
 </resources>

@@ -10,7 +10,7 @@ import org.robolectric.annotation.Config
 
 //@Config(manifest= Config.NONE)
 class FileTest: AndroidTest() {
-    private lateinit var permissionUtils: PermissionUtils
+    /*private lateinit var permissionUtils: PermissionUtils
     private lateinit var driveRepository: DriveRepository
 
     @Before
@@ -28,5 +28,5 @@ class FileTest: AndroidTest() {
     fun fileExist(){
         val result = driveRepository.isFileExist("log.txt")
         Assert.assertEquals("The file not exist.", false, result)
-    }
+    }*/
 }

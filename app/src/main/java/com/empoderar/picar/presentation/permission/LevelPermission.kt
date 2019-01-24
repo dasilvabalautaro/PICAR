@@ -1,4 +1,4 @@
-package com.empoderar.picar.model.persistent.drive
+package com.empoderar.picar.presentation.permission
 
 import android.app.Activity
 import android.content.pm.PackageManager
@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PermissionUtils @Inject constructor() {
+class LevelPermission @Inject constructor(){
 
     fun requestPermission(
             activity: Activity, requestCode: Int,
