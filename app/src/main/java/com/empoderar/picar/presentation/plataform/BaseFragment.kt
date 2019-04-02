@@ -18,6 +18,7 @@ import com.empoderar.picar.presentation.data.MunicipalityView
 import com.empoderar.picar.presentation.data.UnityView
 import com.empoderar.picar.presentation.data.UserView
 import com.empoderar.picar.presentation.extension.viewContainer
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.toolbar.*
 import java.util.LinkedHashMap
 import javax.inject.Inject
@@ -31,7 +32,7 @@ abstract class BaseFragment: Fragment() {
     }
 
     abstract fun layoutId(): Int
-
+    internal var disposable: CompositeDisposable = CompositeDisposable()
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (activity?.application as App).appComponent
     }

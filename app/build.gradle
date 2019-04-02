@@ -72,7 +72,7 @@ dependencies {
     implementation applicationDependencies.rxandroid
     implementation applicationDependencies.room
     implementation applicationDependencies.anko
-
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.kotlin
     testImplementation unitTestDependencies.kotlinTest
@@ -92,4 +92,8 @@ dependencies {
     debugImplementation developmentDependencies.leakCanary
     releaseImplementation developmentDependencies.leakCanaryNoop
     testImplementation developmentDependencies.leakCanaryNoop
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

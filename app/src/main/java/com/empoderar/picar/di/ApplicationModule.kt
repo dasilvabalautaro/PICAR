@@ -18,6 +18,7 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(private val app: App) {
     private val databaseName = "picar_db"
+    private val domainSecursos = "https://www.hiddenodds.com/"
 
     @Provides
     @Singleton
@@ -26,7 +27,7 @@ class ApplicationModule(private val app: App) {
 //    Provide to all application operations Rest
     @Provides @Singleton fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://www.hiddenodds.com/")
+                .baseUrl(domainSecursos)
                 .client(createClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

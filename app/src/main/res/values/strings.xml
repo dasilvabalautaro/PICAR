@@ -37,4 +37,5 @@
     <string name="not_permission_write_calendar">Not write_calendar</string>
     <string name="value_null">Cannot transform a null value</string>
     <string name="select_image">Select image</string>
+    <string name="title_my_location">My Location</string>
 </resources>

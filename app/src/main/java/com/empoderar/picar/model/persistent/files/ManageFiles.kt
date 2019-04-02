@@ -106,6 +106,16 @@ class ManageFiles @Inject constructor(private val context: Context) {
     }
 
     private fun scaleBitmapDown(bitmap: Bitmap): Bitmap {
+        return if (this.screenWidth < bitmap.width){
+            val diffRelationSize = this.screenWidth.toFloat() / bitmap.width.toFloat()
+            Bitmap.createScaledBitmap(bitmap,
+                    (bitmap.width * diffRelationSize).toInt(),
+                    (bitmap.height * diffRelationSize).toInt(), true)
+        }else{
+            bitmap
+        }
+
+/*
         if (this.screenWidth < bitmap.width){
             val diffRelationSize = this.screenWidth.toFloat() / bitmap.width.toFloat()
             val newWidth = (bitmap.width.toFloat() * diffRelationSize).toInt()
@@ -131,6 +141,7 @@ class ManageFiles @Inject constructor(private val context: Context) {
         }else{
             return bitmap
         }
+*/
     }
 
     fun isFileExist(file: String): Boolean{
