@@ -2,6 +2,7 @@ package com.empoderar.picar.presentation.plataform
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -12,8 +13,10 @@ import com.empoderar.picar.R.id
 import com.empoderar.picar.R.layout
 import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.presentation.permission.EnablePermissions
+import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_task.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 abstract class BaseActivity: AppCompatActivity() {
@@ -29,23 +32,37 @@ abstract class BaseActivity: AppCompatActivity() {
     @Inject
     lateinit var enablePermissions: EnablePermissions
     internal var disposable: CompositeDisposable = CompositeDisposable()
-
+    private var doubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layout.activity_task)
         navList.visibility = View.INVISIBLE
         addFragment(savedInstanceState)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeButtonEnabled(true)
+
     }
 
 
     override fun onBackPressed() {
         (supportFragmentManager.findFragmentById(
                 id.fragmentContainer) as BaseFragment).onBackPressed()
-        super.onBackPressed()
+        if (this is MenuActivity){
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed()
+                android.os.Process.killProcess(android.os.Process.myPid())
+                System.exit(1)
+                return
+            }
+
+            this.doubleBackToExitPressedOnce = true
+            toast("Please click BACK again to exit")
+
+            Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false },
+                    2000)
+
+        } else{
+            super.onBackPressed()
+        }
     }
 
 

@@ -12,6 +12,10 @@ interface ProjectDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(projectData: ProjectData)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProjects(projects: List<ProjectData>)
+
+
     @Query("DELETE FROM projectData")
     fun deleteAll()
 

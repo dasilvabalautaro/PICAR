@@ -6,23 +6,21 @@ import android.arch.persistence.room.PrimaryKey
 
 
 @Entity(tableName = "formData")
-data class FormData(@PrimaryKey var id: String,
-                    @ColumnInfo(name = "project") var unit: Int,
-                    @ColumnInfo(name = "user") var user: Int,
-                    @ColumnInfo(name = "dateForm") var dateForm: Long?,
-                    @ColumnInfo(name = "latitude") var lat: Double,
-                    @ColumnInfo(name = "longitude") var lon: Double,
-                    @ColumnInfo(name = "variable1") var variable1: Double,
-                    @ColumnInfo(name = "variable2") var variable2: Int,
-                    @ColumnInfo(name = "variable3") var variable3: Long?,
-                    @ColumnInfo(name = "variable4") var variable4: Boolean,
-                    @ColumnInfo(name = "comment1") var comment1: String,
-                    @ColumnInfo(name = "comment2") var comment2: String,
-                    @ColumnInfo(name = "comment3") var comment3: String,
-                    @ColumnInfo(name = "updateDate") var updateDate: Long?,
-                    @ColumnInfo(name = "updateUser") var updateUser: Int) {
+data class FormData(@PrimaryKey var id: Int,
+                    @ColumnInfo(name = "project") var project: Int,
+                    @ColumnInfo(name = "frmId") var frmId: String,
+                    @ColumnInfo(name = "frmNro") var frmNro: Int,
+                    @ColumnInfo(name = "title") var title: String,
+                    @ColumnInfo(name = "dateEvaluation") var dateEvaluation: String,
+                    @ColumnInfo(name = "state") var state: Int,
+                    @ColumnInfo(name = "observation") var observation: String?,
+                    @ColumnInfo(name = "userMobile") var userMobile: Int,
+                    @ColumnInfo(name = "latitudeMobile") var latitude: Double,
+                    @ColumnInfo(name = "longitudeMobile") var longitude: Double,
+                    @ColumnInfo(name = "dateCreation") var dateCreation: String,
+                    @ColumnInfo(name = "dateModification") var dateModification: String) {
 
-    constructor():this("", 0, 0, null, 0.0,
-            0.0, 0.00, 0, null,
-            false, "", "", "", null, 0)
+    constructor():this(0, 0, "", 0, "",
+            "", 0, "", 0,
+            0.0, 0.0, "", "")
 }

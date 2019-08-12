@@ -9,6 +9,7 @@ object PreferenceRepository {
     const val longitude = "longitude"
     const val preferenceApp = "com.empoderar.picar"
 
+
     fun defaultPrefs(context: Context): SharedPreferences
             = PreferenceManager.getDefaultSharedPreferences(context)
 

@@ -6,7 +6,7 @@ import com.empoderar.picar.model.exception.Failure
 import com.empoderar.picar.model.persistent.database.interfaces.UnityDataDao
 import javax.inject.Inject
 
-class GetUnitsUseCase @Inject constructor(private val unityDataDao:
+class GetUnitsDatabaseUseCase @Inject constructor(private val unityDataDao:
                                           UnityDataDao):
         UseCase<List<Unity>, UseCase.None>() {
 
@@ -15,9 +15,9 @@ class GetUnitsUseCase @Inject constructor(private val unityDataDao:
 
             val listData = unityDataDao.getAll()
             val list = listData.map { Unity(it.id, it.name,
-                    it.phone, it.address) }
+                    it.short) }
 
-            when(!list.isEmpty()){
+            when(list.isNotEmpty()){
                 true -> Either.Right(list)
                 false -> Either.Left(Failure.DatabaseError())
             }

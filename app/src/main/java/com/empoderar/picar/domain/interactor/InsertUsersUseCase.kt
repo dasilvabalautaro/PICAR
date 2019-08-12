@@ -15,7 +15,7 @@ class InsertUsersUseCase @Inject constructor(private val userDataDao:
         return try {
             val list = transformList(params)
 
-            when (!list.isEmpty()){
+            when (list.isNotEmpty()){
                 true -> {
                     userDataDao.insertUsers(list)
                     Either.Right(true)
@@ -31,7 +31,7 @@ class InsertUsersUseCase @Inject constructor(private val userDataDao:
     private fun transformList(list: List<UserView>): List<UserData>{
         val users = ArrayList<UserData>()
 
-        if (!list.isEmpty()){
+        if (list.isNotEmpty()){
             for (i in list.indices){
                 val user = UserData(list[i].id, list[i].unit, list[i].role,
                         list[i].name, list[i].phone, list[i].address)

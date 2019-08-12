@@ -31,11 +31,20 @@ class ProjectsAdapter @Inject constructor():
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(projectView: ProjectView, clickListener: (ProjectView, Navigator.Extras) -> Unit) {
-            itemView.tv_title.text = projectView.name
-            itemView.tv_title.tag = projectView.id
+            itemView.tv_id.text = projectView.id.toString()
+            itemView.tv_unity.text = projectView.unity.toString()
+            itemView.tv_code_project.text = projectView.codeProject
+            itemView.tv_name_project.text = projectView.nameProject
+            itemView.tv_id.tag = projectView.id
+            itemView.tv_latitude.text = projectView.latitude.toString()
+            itemView.tv_longitude.text = projectView.longitude.toString()
+            itemView.tv_state.text = projectView.state
+            itemView.tv_date_presentation.text = projectView.datePresentation
+            itemView.tv_date_init_agreement.text = projectView.dateInitAgreement
+            itemView.tv_date_end_agreement.text = projectView.dateEndAgreement
             itemView.setOnClickListener {
                 clickListener(projectView,
-                        Navigator.Extras(itemView.tv_title))
+                        Navigator.Extras(itemView.tv_id))
 
             }
         }

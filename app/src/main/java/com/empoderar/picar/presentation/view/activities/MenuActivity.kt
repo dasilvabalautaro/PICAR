@@ -69,13 +69,16 @@ class MenuActivity : BaseActivity(){
         val hearLocation = locationChangeObserver.observableLocation.map { l -> l }
         disposable.add(hearLocation.observeOn(Schedulers.newThread())
                 .subscribe { l ->
-                    kotlin.run {
+                    run {
                         Variables.locationUser.lat= l.latitude
                         Variables.locationUser.lon = l.longitude
 
 
                     }
                 })
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeButtonEnabled(true)
 
         navList.visibility = View.VISIBLE
         toggle = ActionBarDrawerToggle(

@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_title"
             android:text="@string/lbl_title_login"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:textColor="@color/colorSecondaryText"
             android:textSize="30sp"
             android:textAlignment="center"
@@ -143,17 +143,54 @@
             app:layout_constraintLeft_toLeftOf="@+id/right_three_guideline"
             app:layout_constraintTop_toBottomOf="@+id/et_user"/>
 
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_email"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorSecondaryText"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:hint="@string/hint_email"
+            android:background="@drawable/back_login_edit"
+            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/et_password"
+            tools:ignore="Autofill"
+            android:inputType="textEmailAddress" />
+
+        <ImageView
+            android:id="@+id/iv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_email"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/lbl_image"
+            app:layout_constraintLeft_toLeftOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/et_password"/>
+        <Button
+            android:id="@+id/bt_change_user"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@null"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="textEnd"
+            android:text="@string/lbl_change_user"
+            app:layout_constraintLeft_toLeftOf="@+id/left_three_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/et_email"/>
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:id="@+id/ib_access"
             android:background="@drawable/btn_inside"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="15dp"
             android:contentDescription="@string/lbl_image"
             app:layout_constraintDimensionRatio="H,9:2"
             app:layout_constraintLeft_toLeftOf="@+id/left_three_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/et_password"/>
+            app:layout_constraintTop_toBottomOf="@+id/bt_change_user"/>
 
     </android.support.constraint.ConstraintLayout>
 

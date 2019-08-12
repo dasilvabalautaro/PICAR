@@ -4,51 +4,47 @@ import android.os.Parcel
 import com.empoderar.picar.presentation.plataform.*
 import java.util.*
 
-data class FormView(var id: String,
-                    var unit: Int,
-                    var user: Int,
-                    var dateForm: Date?,
-                    var lat: Double,
-                    var lon: Double,
-                    var variable1: Double,
-                    var variable2: Int,
-                    var variable3: Date?,
-                    var variable4: Boolean,
-                    var comment1: String,
-                    var comment2: String,
-                    var comment3: String,
-                    var updateDate: Date?,
-                    var updateUser: Int): KParcelable {
+data class FormView(var id: Int,
+                    var project: Int,
+                    var frmId: String,
+                    var frmNro: Int,
+                    var title: String,
+                    var dateEvaluation: String,
+                    var state: Int,
+                    var observation: String?,
+                    var userMobile: Int,
+                    var latitude: Double,
+                    var longitude: Double,
+                    var dateCreation: String,
+                    var dateModification: String): KParcelable {
 
     companion object {
         @JvmField val CREATOR = parcelableCreator(
                 ::FormView)
     }
 
-    constructor(parcel: Parcel) : this(parcel.readString(), parcel.readInt(),
-            parcel.readInt(), parcel.readDate(),
-            parcel.readDouble(), parcel.readDouble(), parcel.readDouble(),
-            parcel.readInt(), parcel.readDate(), parcel.readBoolean(),
-            parcel.readString(), parcel.readString(), parcel.readString(),
-            parcel.readDate(), parcel.readInt())
+    constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readInt(),
+            parcel.readString(), parcel.readInt(),
+            parcel.readString(), parcel.readString(), parcel.readInt(),
+            parcel.readString(), parcel.readInt(), parcel.readDouble(),
+            parcel.readDouble(), parcel.readString(), parcel.readString())
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         with(dest) {
-            writeString(id)
-            writeInt(unit)
-            writeInt(user)
-            writeDate(dateForm)
-            writeDouble(lat)
-            writeDouble(lon)
-            writeDouble(variable1)
-            writeInt(variable2)
-            writeDate(variable3)
-            writeBoolean(variable4)
-            writeString(comment1)
-            writeString(comment2)
-            writeString(comment3)
-            writeDate(updateDate)
-            writeInt(updateUser)
+            writeInt(id)
+            writeInt(project)
+            writeString(frmId)
+            writeInt(frmNro)
+            writeString(title)
+            writeString(dateEvaluation)
+            writeInt(state)
+            writeString(observation)
+            writeInt(userMobile)
+            writeDouble(latitude)
+            writeDouble(longitude)
+            writeString(dateCreation)
+            writeString(dateModification)
+
         }
     }
 }

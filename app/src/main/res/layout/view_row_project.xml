@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_one_guideline"
-            card_view:layout_constraintGuide_percent=".30"
+            card_view:layout_constraintGuide_percent=".40"
             android:orientation="vertical"/>
 
         <android.support.constraint.Guideline
@@ -49,10 +49,10 @@
             android:orientation="horizontal"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_lbl_title"
-            android:text="@string/lbl_name"
+            android:id="@+id/tv_lbl_id"
+            android:text="@string/lbl_id"
             android:textStyle="bold"
             android:textColor="@color/colorSecondaryText"
             card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
@@ -60,32 +60,200 @@
             card_view:layout_constraintTop_toTopOf="@+id/top_guideline"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/tv_lbl_title"
-            android:id="@+id/tv_title"
-            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_title"
-            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            android:layout_toEndOf="@+id/tv_lbl_id"
+            android:id="@+id/tv_id"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_id"
+            card_view:layout_constraintLeft_toRightOf="@+id/right_one_guideline"
             card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_lbl_description"
-            android:text="@string/lbl_description"
+            android:id="@+id/tv_lbl_unity"
+            android:text="@string/lbl_unity"
             android:textStyle="bold"
             android:textColor="@color/colorSecondaryText"
             android:layout_marginTop="5dp"
             card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_title"/>
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_id"/>
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:id="@+id/tv_description"
-            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_description"
+            android:layout_below="@+id/tv_id"
+            android:id="@+id/tv_unity"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_unity"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_code_project"
+            android:text="@string/lbl_codeProject"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_unity"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_unity"
+            android:id="@+id/tv_code_project"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_code_project"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_name_project"
+            android:text="@string/lbl_nameProject"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_code_project"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_code_project"
+            android:id="@+id/tv_name_project"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_name_project"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_latitude"
+            android:text="@string/lbl_latitude"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_name_project"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name_project"
+            android:id="@+id/tv_latitude"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_latitude"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_longitude"
+            android:text="@string/lbl_longitude"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_latitude"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_latitude"
+            android:id="@+id/tv_longitude"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_longitude"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_state"
+            android:text="@string/lbl_state"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_longitude"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_longitude"
+            android:id="@+id/tv_state"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_state"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_date_presentation"
+            android:text="@string/lbl_datePresentation"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_state"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_state"
+            android:id="@+id/tv_date_presentation"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_date_presentation"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_date_init_agreement"
+            android:text="@string/lbl_dateInitAgreement"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_date_presentation"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_date_presentation"
+            android:id="@+id/tv_date_init_agreement"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_date_init_agreement"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_date_end_agreement"
+            android:text="@string/lbl_dateEndAgreement"
+            android:textStyle="bold"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_date_init_agreement"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_date_init_agreement"
+            android:id="@+id/tv_date_end_agreement"
+            card_view:layout_constraintTop_toTopOf="@+id/tv_lbl_date_end_agreement"
             card_view:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
             card_view:layout_constraintRight_toRightOf="@+id/right_guideline"/>
 

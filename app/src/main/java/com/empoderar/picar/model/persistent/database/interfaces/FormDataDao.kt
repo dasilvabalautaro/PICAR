@@ -11,6 +11,9 @@ interface FormDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(formData: FormData)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertForms(forms: List<FormData>)
+
     @Query("DELETE FROM formData")
     fun deleteAll()
 

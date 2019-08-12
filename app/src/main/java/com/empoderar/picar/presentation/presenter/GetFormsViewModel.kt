@@ -18,10 +18,9 @@ class GetFormsViewModel @Inject constructor(private val getFormsUseCase:
     }
 
     private fun handleFormList(forms: List<Form>) {
-        this.result.value = forms.map { FormView(it.id, it.unit, it.user,
-                it.dateForm, it.lat, it.lon, it.variable1, it.variable2,
-                it.variable3, it.variable4, it.comment1, it.comment2, it.comment3,
-                it.updateDate, it.updateUser) }
+        this.result.value = forms.map { FormView(it.id, it.project, it.frmId,
+                it.frmNro, it.title, it.dateEvaluation, it.state, it.observation,
+                it.userMobile, it.latitude, it.longitude, it.dateCreation, it.dateModification) }
     }
 
 }

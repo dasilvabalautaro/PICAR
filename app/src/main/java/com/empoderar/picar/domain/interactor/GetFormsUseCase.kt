@@ -14,12 +14,12 @@ class GetFormsUseCase @Inject constructor(private val formDataDao:
     override suspend fun run(params: None): Either<Failure, List<Form>> {
         return try {
             val listData = formDataDao.getAll()
-            val list = listData.map { Form(it.id, it.unit, it.user,
-                    Date(it.dateForm?:0), it.lat, it.lon, it.variable1, it.variable2,
-                    Date(it.variable3?:0), it.variable4, it.comment1, it.comment2,
-                    it.comment3, Date(it.updateDate?:0), it.updateUser) }
+            val list = listData.map { Form(it.id, it.project, it.frmId,
+                    it.frmNro, it.title, it.dateEvaluation, it.state, it.observation,
+                    it.userMobile, it.latitude, it.longitude, it.dateCreation,
+                    it.dateModification) }
 
-            when(!list.isEmpty()){
+            when(list.isNotEmpty()){
                 true -> Either.Right(list)
                 false -> Either.Left(Failure.DatabaseError())
             }

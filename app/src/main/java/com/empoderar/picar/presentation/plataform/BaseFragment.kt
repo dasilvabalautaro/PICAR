@@ -13,10 +13,9 @@ import android.widget.Toast
 import com.empoderar.picar.App
 import com.empoderar.picar.R
 import com.empoderar.picar.di.ApplicationComponent
+import com.empoderar.picar.domain.data.Unity
 import com.empoderar.picar.model.exception.Failure
-import com.empoderar.picar.presentation.data.MunicipalityView
-import com.empoderar.picar.presentation.data.UnityView
-import com.empoderar.picar.presentation.data.UserView
+import com.empoderar.picar.presentation.data.*
 import com.empoderar.picar.presentation.extension.viewContainer
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.toolbar.*
@@ -28,7 +27,11 @@ abstract class BaseFragment: Fragment() {
         //val mapImage: LinkedHashMap<String, ProxyBitmap> = LinkedHashMap()
         var listMunicipality : List<MunicipalityView>? = null
         var userMain: UserView? = null
-        var listUnity: List<UnityView>? = null
+        var listUnity: List<Unity>? = null
+        var listProject: List<ProjectView>? = null
+        var proyectView: ProjectView? = null
+        var listForm: List<FormView>? = null
+
     }
 
     abstract fun layoutId(): Int

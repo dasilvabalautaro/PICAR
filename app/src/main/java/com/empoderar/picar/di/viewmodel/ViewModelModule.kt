@@ -2,6 +2,7 @@ package com.empoderar.picar.di.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.empoderar.picar.presentation.presenter.GetProjectsCloudViewModel
 import com.empoderar.picar.presentation.presenter.*
 import dagger.Binds
 import dagger.Module
@@ -33,13 +34,13 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(GetProjectsViewModel::class)
-    abstract fun bindsGetProjectsViewModel(getProjectsViewModel: GetProjectsViewModel): ViewModel
+    @ViewModelKey(GetProjectsDatabaseViewModel::class)
+    abstract fun bindsGetProjectsViewModel(getProjectsViewModel: GetProjectsDatabaseViewModel): ViewModel
 
     @Binds
     @IntoMap
-    @ViewModelKey(GetUnitsViewModel::class)
-    abstract fun bindsGetUnitsViewModel(getUnitsViewModel: GetUnitsViewModel): ViewModel
+    @ViewModelKey(GetUnitsDatabaseViewModel::class)
+    abstract fun bindsGetUnitsViewModel(getUnitsViewModel: GetUnitsDatabaseViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -52,5 +53,43 @@ abstract class ViewModelModule {
     @ViewModelKey(GetUserViewModel::class)
     abstract fun bindsGetUserViewModel(getUserViewModel:
                                            GetUserViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PermissionViewModel::class)
+    abstract fun bindsPermissionViewModel(permissionViewModel:
+                                              PermissionViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetUnitsCloudViewModel::class)
+    abstract fun bindsGetUnitsCloudViewModel(getUnitsCloudViewModel:
+                                                 GetUnitsCloudViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetProjectsCloudViewModel::class)
+    abstract fun bindsGetProjectsCloudViewModel(getProjectsCloudViewModel:
+                                                GetProjectsCloudViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertProjectsViewModel::class)
+    abstract fun bindsInsertProjectsViewModel(insertProjectsViewModel:
+                                                  InsertProjectsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetFormsCloudViewModel::class)
+    abstract fun bindsGetFormsCloudViewModel(getFormsCloudViewModel:
+                                                 GetFormsCloudViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertFormsViewModel::class)
+    abstract fun bindsInsertFormsViewModel(insertFormsViewModel:
+                                               InsertFormsViewModel): ViewModel
+
 
 }

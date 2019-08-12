@@ -5,44 +5,38 @@ import com.empoderar.picar.presentation.plataform.KParcelable
 import com.empoderar.picar.presentation.plataform.parcelableCreator
 
 data class ProjectView(var id: Int,
-                       var unit: Int,
-                       var municipality: String,
-                       var type: Int,
-                       var code: String,
-                       var name: String,
-                       var lat: Double,
-                       var lon: Double,
-                       var mount: Double,
-                       var counterpart: Double,
-                       var notFinance: Double,
-                       var other: Double,
-                       var total: Double): KParcelable {
+                       var unity: Int,
+                       var codeProject: String,
+                       var nameProject: String,
+                       var latitude: Double,
+                       var longitude: Double,
+                       var state: String,
+                       var datePresentation: String,
+                       var dateInitAgreement: String,
+                       var dateEndAgreement: String): KParcelable {
     companion object {
         @JvmField val CREATOR = parcelableCreator(
                 ::ProjectView)
     }
 
     constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readInt(),
-            parcel.readString(), parcel.readInt(),
-            parcel.readString(), parcel.readString(), parcel.readDouble(),
-            parcel.readDouble(), parcel.readDouble(), parcel.readDouble(),
-            parcel.readDouble(), parcel.readDouble(), parcel.readDouble())
+            parcel.readString(), parcel.readString(),
+            parcel.readDouble(), parcel.readDouble(), parcel.readString(),
+            parcel.readString(), parcel.readString(), parcel.readString())
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         with(dest) {
             writeInt(id)
-            writeInt(unit)
-            writeString(municipality)
-            writeInt(type)
-            writeString(code)
-            writeString(name)
-            writeDouble(lat)
-            writeDouble(lon)
-            writeDouble(mount)
-            writeDouble(counterpart)
-            writeDouble(notFinance)
-            writeDouble(other)
-            writeDouble(total)
+            writeInt(unity)
+            writeString(codeProject)
+            writeString(nameProject)
+            writeDouble(latitude)
+            writeDouble(longitude)
+            writeString(state)
+            writeString(datePresentation)
+            writeString(dateInitAgreement)
+            writeString(dateEndAgreement)
+
         }
     }
 }

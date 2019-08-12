@@ -1,25 +1,22 @@
 package com.empoderar.picar.model.persistent.network.entity
 
 import com.empoderar.picar.domain.data.Form
-import java.util.*
 
-data class FormEntity(private var id: String,
-                      private var unit: Int,
-                      private var user: Int,
-                      private var dateForm: Date?,
-                      private var lat: Double,
-                      private var lon: Double,
-                      private var variable1: Double,
-                      private var variable2: Int,
-                      private var variable3: Date?,
-                      private var variable4: Boolean,
-                      private var comment1: String,
-                      private var comment2: String,
-                      private var comment3: String,
-                      private var updateDate: Date?,
-                      private var updateUser: Int) {
+data class FormEntity(private var id: Int,
+                      private var project: Int,
+                      private var frmId: String,
+                      private var frmNro: Int,
+                      private var titulo: String,
+                      private var dateEvaluation: String,
+                      private var state: Int,
+                      private var observation: String?,
+                      private var userMobile: Int,
+                      private var latitudeMobile: Double,
+                      private var longitudeMobile: Double,
+                      private var dateCreation: String,
+                      private var dateModification: String) {
 
-    fun toForm() = Form(id, unit, user, dateForm, lat, lon,
-            variable1, variable2, variable3, variable4, comment1,
-            comment2, comment3, updateDate, updateUser)
+    fun toForm() = Form(id, project, frmId, frmNro, titulo, dateEvaluation,
+            state, observation, userMobile, latitudeMobile, longitudeMobile,
+            dateCreation, dateModification)
 }

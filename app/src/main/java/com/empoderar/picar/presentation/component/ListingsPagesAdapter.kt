@@ -8,8 +8,7 @@ import com.empoderar.picar.presentation.view.fragments.FormsFragment
 import com.empoderar.picar.presentation.view.fragments.ProjectsFragment
 
 class ListingsPagesAdapter(manager: FragmentManager, pager: ViewPager):
-        FragmentStatePagerAdapter(manager) {
-
+        FragmentStatePagerAdapter(manager){
     var projects: ProjectsFragment? = null
     var forms: FormsFragment? = null
 
@@ -24,6 +23,7 @@ class ListingsPagesAdapter(manager: FragmentManager, pager: ViewPager):
 
             1 -> {
                 if (forms == null) forms = FormsFragment()
+
             }
         }
         return forms!!

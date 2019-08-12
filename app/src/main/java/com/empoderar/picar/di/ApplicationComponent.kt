@@ -1,5 +1,6 @@
 package com.empoderar.picar.di
 
+import android.content.Context
 import com.empoderar.picar.App
 import com.empoderar.picar.di.viewmodel.ViewModelModule
 import com.empoderar.picar.model.persistent.network.LocationListener
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 @Component(modules = [ApplicationModule::class, ViewModelModule::class])
 interface ApplicationComponent {
     fun inject(app: App)
+    fun context(): Context
     fun inject(routeActivity: RouteActivity)
     fun inject(menuActivity: MenuActivity)
     fun inject(splashFragment: SplashFragment)

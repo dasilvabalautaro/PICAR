@@ -73,6 +73,7 @@ dependencies {
     implementation applicationDependencies.room
     implementation applicationDependencies.anko
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation applicationDependencies.digestUtil
     //Unit/Integration tests dependencies
     testImplementation unitTestDependencies.kotlin
     testImplementation unitTestDependencies.kotlinTest

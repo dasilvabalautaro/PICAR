@@ -3,26 +3,23 @@ package com.empoderar.picar.domain.data
 import com.empoderar.picar.presentation.extension.empty
 import java.util.*
 
-data class Form(var id: String,
-                var unit: Int,
-                var user: Int,
-                var dateForm: Date?,
-                var lat: Double,
-                var lon: Double,
-                var variable1: Double,
-                var variable2: Int,
-                var variable3: Date?,
-                var variable4: Boolean,
-                var comment1: String,
-                var comment2: String,
-                var comment3: String,
-                var updateDate: Date?,
-                var updateUser: Int) {
+data class Form(var id: Int,
+                var project: Int,
+                var frmId: String,
+                var frmNro: Int,
+                var title: String,
+                var dateEvaluation: String,
+                var state: Int,
+                var observation: String?,
+                var userMobile: Int,
+                var latitude: Double,
+                var longitude: Double,
+                var dateCreation: String,
+                var dateModification: String) {
 
     companion object {
-        fun empty() = Form(String.empty(), 0, 0, null, 0.0,
-                0.0, 0.00, 0, null,
-                false, String.empty(), String.empty(), String.empty(),
-                null, 0)
+        fun empty() = Form(0, 0, String.empty(), 0, String.empty(),
+                String.empty(), 0, null, 0,
+                0.0, 0.0, String.empty(), String.empty())
     }
 }

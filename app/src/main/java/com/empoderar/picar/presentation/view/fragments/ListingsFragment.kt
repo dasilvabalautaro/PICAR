@@ -1,35 +1,40 @@
 package com.empoderar.picar.presentation.view.fragments
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.view.View
 import com.empoderar.picar.R
+import com.empoderar.picar.domain.data.Unity
 import com.empoderar.picar.presentation.component.ListingsPagesAdapter
-import com.empoderar.picar.presentation.data.UnityView
 import com.empoderar.picar.presentation.extension.failure
 import com.empoderar.picar.presentation.extension.observe
 import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
-import com.empoderar.picar.presentation.presenter.GetUnitsViewModel
+import com.empoderar.picar.presentation.presenter.GetUnitsDatabaseViewModel
 import kotlinx.android.synthetic.main.view_listings.*
 import javax.inject.Inject
 
-class ListingsFragment: BaseFragment() {
+
+
+
+class ListingsFragment: BaseFragment(){
+
     @Inject
     lateinit var navigator: Navigator
 
-    private lateinit var getUnitsViewModel: GetUnitsViewModel
+    //private lateinit var getUnitsViewModel: GetUnitsDatabaseViewModel
 
     override fun layoutId() = R.layout.view_listings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-        getUnitsViewModel = viewModel(viewModelFactory) {
+        /*getUnitsViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleGetUnits)
             failure(failure, ::handleFailure)
         }
-
+        loadUnitsList()*/
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +46,6 @@ class ListingsFragment: BaseFragment() {
         tl_options!!.getTabAt(0)!!.text = getString(R.string.lbl_tab_projects)
         tl_options!!.getTabAt(1)!!.text = getString(R.string.lbl_tab_forms)
 
-        loadFormsList()
     }
 
     override fun onResume() {
@@ -54,12 +58,16 @@ class ListingsFragment: BaseFragment() {
         notify(message)
     }
 
-    private fun loadFormsList(){
+    /*private fun loadUnitsList(){
         getUnitsViewModel.loadUnities()
 
     }
 
-    private fun handleGetUnits(list: List<UnityView>?){
+    private fun handleGetUnits(list: List<Unity>?){
         listUnity = list.orEmpty()
-    }
+
+    }*/
+
+
+
 }

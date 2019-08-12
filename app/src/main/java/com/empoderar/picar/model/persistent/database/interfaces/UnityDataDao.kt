@@ -12,6 +12,9 @@ interface UnityDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(unityData: UnityData)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUnities(users: List<UnityData>)
+
     @Query("DELETE FROM unityData")
     fun deleteAll()
 

@@ -11,6 +11,7 @@ import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.DownUserViewModel
 import com.empoderar.picar.presentation.presenter.InsertUsersViewModel
+import com.empoderar.picar.presentation.view.activities.SplashActivity
 import javax.inject.Inject
 
 
@@ -36,6 +37,7 @@ class SplashFragment: BaseFragment() {
 
         Handler().postDelayed({
             navigator.showOptions(activity!!)
+            (activity!! as SplashActivity).finish()
         }, 3000)
     }
 

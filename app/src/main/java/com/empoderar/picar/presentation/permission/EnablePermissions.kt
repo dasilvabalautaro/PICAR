@@ -213,38 +213,38 @@ class EnablePermissions @Inject constructor(private val levelPermission:
                             .permissionGranted(requestCode,
                                     accessCamera,
                                     grantResults)) {
-                println("Permission Ok")
+                println("PermissionEntity Ok")
             }
             accessFineLocation -> if (levelPermission
                             .permissionGranted(requestCode,
                                     accessFineLocation,
                                     grantResults)) {
-                println("Permission Ok")
+                println("PermissionEntity Ok")
             }
             accessReadExternal -> if (levelPermission
                             .permissionGranted(requestCode,
                                     accessReadExternal,
                                     grantResults)) {
-                println("Permission Ok")
+                println("PermissionEntity Ok")
             }
             accessWriteExternal -> if (levelPermission
                             .permissionGranted(requestCode,
                                     accessWriteExternal,
                                     grantResults)) {
-                println("Permission Ok")
+                println("PermissionEntity Ok")
             }
             accessReadCalendar -> if (levelPermission
                             .permissionGranted(requestCode,
                                     accessReadCalendar,
                                     grantResults)) {
-                println("Permission Ok")
+                println("PermissionEntity Ok")
             }
 
             accessWriteCalendar -> if (levelPermission
                             .permissionGranted(requestCode,
                                     accessWriteCalendar,
                                     grantResults)) {
-                println("Permission Ok")
+                println("PermissionEntity Ok")
             }
 
 
@@ -252,7 +252,7 @@ class EnablePermissions @Inject constructor(private val levelPermission:
                             .permissionGranted(requestCode,
                                     accessReadPhoneState,
                                     grantResults)) {
-                println("Permission Ok")
+                println("PermissionEntity Ok")
             }
 
         }

@@ -10,6 +10,7 @@
     <string name="lbl_title_login">Sign In</string>
     <string name="hint_user">User name</string>
     <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -20,9 +21,19 @@
     <string name="lbl_select_unit">Select Unit</string>
     <string name="lbl_select_project">Select Project</string>
     <string name="lbl_name">Name</string>
+    <string name="lbl_change_user">Change user</string>
     <string name="lbl_description">Description</string>
     <string name="lbl_date">Date</string>
-    <string name="lbl_state">State</string>
+    <string name="lbl_state">State:</string>
+    <string name="lbl_id">Id:</string>
+    <string name="lbl_unity">Unity:</string>
+    <string name="lbl_codeProject">Code Project:</string>
+    <string name="lbl_nameProject">Name Project:</string>
+    <string name="lbl_longitude">Longitude:</string>
+    <string name="lbl_latitude">Latitude:</string>
+    <string name="lbl_datePresentation">Date Presentation:</string>
+    <string name="lbl_dateInitAgreement">Date Init Agreement:</string>
+    <string name="lbl_dateEndAgreement">Date End Agreement:</string>
     <string name="lbl_tab_projects">Projects</string>
     <string name="lbl_tab_forms">Forms</string>
     <string name="item_menu_1">Action 1</string>
@@ -38,4 +49,7 @@
     <string name="value_null">Cannot transform a null value</string>
     <string name="select_image">Select image</string>
     <string name="title_my_location">My Location</string>
+    <string name="msg_email_not_found">Email not found</string>
+    <string name="msg_user_not_found">User not found</string>
+    <string name="new_filter">New Filter</string>
 </resources>
