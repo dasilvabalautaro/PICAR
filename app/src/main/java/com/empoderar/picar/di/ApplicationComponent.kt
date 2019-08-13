@@ -26,4 +26,5 @@ interface ApplicationComponent {
     fun inject(loginFragment: LoginFragment)
     fun inject(locationListener: LocationListener)
     fun inject(mapFragment: MapFragment)
+    fun inject(newFormFragment: NewFormFragment)
 }

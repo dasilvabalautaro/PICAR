@@ -44,7 +44,7 @@ class ManageFiles @Inject constructor(private val context: Context) {
                 if (!file.exists()){
                     file.createNewFile()
                 }
-                val out = BufferedWriter(FileWriter(file, true) as Writer?, 1024)
+                val out = BufferedWriter(FileWriter(file, true) as Writer, 1024)
                 out.write(data)
                 out.newLine()
                 out.close()

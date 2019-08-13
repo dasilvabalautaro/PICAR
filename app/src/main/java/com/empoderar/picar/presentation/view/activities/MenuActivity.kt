@@ -1,10 +1,13 @@
 package com.empoderar.picar.presentation.view.activities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.FileProvider
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
@@ -16,6 +19,7 @@ import com.empoderar.picar.R
 import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.model.observer.LocationChangeObserver
 import com.empoderar.picar.model.persistent.caching.Variables
+import com.empoderar.picar.model.persistent.files.ManageFiles
 import com.empoderar.picar.model.persistent.network.ManagerLocation
 import com.empoderar.picar.presentation.component.ExpandableListMenu
 import com.empoderar.picar.presentation.component.MenuExpandableAdapter
@@ -25,7 +29,10 @@ import kotlinx.android.synthetic.main.toolbar.*
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.view.fragments.ListingsFragment
 import com.empoderar.picar.presentation.view.fragments.MapFragment
+import com.empoderar.picar.presentation.view.fragments.NewFormFragment
 import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.Subject
 import javax.inject.Inject
 
 class MenuActivity : BaseActivity(){
@@ -35,6 +42,8 @@ class MenuActivity : BaseActivity(){
                 MenuActivity::class.java)
     }
 
+    @Inject
+    lateinit var manageFiles: ManageFiles
     @Inject
     internal lateinit var navigator: Navigator
     @Inject
@@ -46,6 +55,9 @@ class MenuActivity : BaseActivity(){
     private var expandableHeaderMenu: List<String>? = null
     private var expandableListMenu: MutableMap<String, List<String>>? = null
     private var toggle: ActionBarDrawerToggle? = null
+    private lateinit var mainMenu: Menu
+    var image: Bitmap? = null
+    var observableImage: Subject<Bitmap> = PublishSubject.create()
 
     override fun fragment() = ListingsFragment()
 
@@ -54,6 +66,7 @@ class MenuActivity : BaseActivity(){
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         enablePermissions.permissionServiceLocation(this)
+        enablePermissions.permissionCamera(this)
         if (networkHandler.isConnected == null || !networkHandler.isConnected!!){
             Toast.makeText(this,
                     getString(R.string.failure_network_connection),
@@ -109,14 +122,44 @@ class MenuActivity : BaseActivity(){
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == enablePermissions.accessReadExternal &&
+                resultCode == Activity.RESULT_OK && data != null) {
+            this.image = manageFiles.getBitmap(data.data)
+            if (this.image != null){
+                this.observableImage.onNext(this.image!!)
+            }
+
+        } else if (requestCode == enablePermissions.accessCamera &&
+                resultCode == Activity.RESULT_OK) {
+
+            val photoUri = FileProvider.getUriForFile(this,
+                    applicationContext.packageName +
+                            ".provider", manageFiles
+                    .getCameraFile())
+            this.image = manageFiles.getBitmap(photoUri)
+            if (this.image != null){
+                this.observableImage.onNext(this.image!!)
+            }
+
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+        menu.findItem(R.id.action_new_form).isVisible = false
+        mainMenu = menu
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        val id = item!!.itemId
+        if (id == R.id.action_new_form){
+            val newForm = NewFormFragment()
+            addFragment(newForm)
+        }
         if (toggle!!.onOptionsItemSelected(item)){
             return true
         }
@@ -161,4 +204,18 @@ class MenuActivity : BaseActivity(){
         println("DESTROY OBJECTS")
         super.onDestroy()
     }
+
+    fun setMenuAddForm(option: Boolean){
+        mainMenu.findItem(R.id.action_new_form).isVisible = option
+    }
+
+    fun gallery(){
+        enablePermissions.startGalleryChooser(this)
+    }
+
+    fun camera(){
+
+        enablePermissions.startCamera(this)
+    }
+
 }

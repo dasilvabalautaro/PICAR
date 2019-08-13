@@ -12,6 +12,7 @@ import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetUnitsDatabaseViewModel
+import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_listings.*
 import javax.inject.Inject
 
@@ -45,6 +46,21 @@ class ListingsFragment: BaseFragment(){
         tl_options!!.setupWithViewPager(vp_list)
         tl_options!!.getTabAt(0)!!.text = getString(R.string.lbl_tab_projects)
         tl_options!!.getTabAt(1)!!.text = getString(R.string.lbl_tab_forms)
+
+        vp_list?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+            override fun onPageSelected(position: Int) {
+                if (position == 0) (activity as MenuActivity).setMenuAddForm(false)
+                if (position == 1) (activity as MenuActivity).setMenuAddForm(true)
+            }
+
+        })
 
     }
 

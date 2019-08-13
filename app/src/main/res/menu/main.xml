@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.view.activities.MenuActivity">
+    tools:context=".presentation.view.activities.MenuActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_new_form"
+        android:title="@string/lbl_new_form"
+        android:icon="@drawable/ic_menu_add"
+        app:showAsAction="ifRoom" />
 </menu>

@@ -38,6 +38,7 @@ class Navigator @Inject constructor() {
                      projectView: ProjectView, navigationExtras: Extras){
         val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
         BaseFragment.proyectView = projectView
+
         viewPager.currentItem = 1
 
     }

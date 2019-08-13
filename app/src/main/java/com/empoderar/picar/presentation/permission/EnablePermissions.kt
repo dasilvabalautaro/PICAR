@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -14,6 +15,7 @@ import com.empoderar.picar.model.persistent.files.ManageFiles
 import javax.inject.Inject
 import javax.inject.Singleton
 import org.jetbrains.anko.toast
+import java.io.File
 import java.lang.Exception
 
 @Singleton
@@ -23,9 +25,9 @@ class EnablePermissions @Inject constructor(private val levelPermission:
                                             private val context: Context):
         ActivityCompat.OnRequestPermissionsResultCallback {
 
-    private val accessCamera = 1
+    val accessCamera = 1
     private val accessFineLocation = 2
-    private val accessReadExternal = 3
+    val accessReadExternal = 3
     private val accessWriteExternal = 4
     private val accessReadCalendar = 5
     private val accessWriteCalendar = 6
@@ -55,6 +57,7 @@ class EnablePermissions @Inject constructor(private val levelPermission:
 
         }
     }
+
 
     fun startGalleryChooser(activity: Activity) {
         if (levelPermission.requestPermission(activity,

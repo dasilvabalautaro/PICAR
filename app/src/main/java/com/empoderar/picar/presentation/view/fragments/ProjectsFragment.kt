@@ -20,6 +20,7 @@ import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.*
+import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -99,6 +100,7 @@ class ProjectsFragment: BaseFragment() {
                 }
                 .subscribe { result -> println(result)})
     }
+
 
     private fun handleProjectsCloud(list: List<Project>?){
         if (list != null && list.isNotEmpty()){

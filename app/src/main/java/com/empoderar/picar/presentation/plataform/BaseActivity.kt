@@ -18,6 +18,7 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_task.*
 import org.jetbrains.anko.toast
 import javax.inject.Inject
+import kotlin.system.exitProcess
 
 abstract class BaseActivity: AppCompatActivity() {
 
@@ -50,7 +51,7 @@ abstract class BaseActivity: AppCompatActivity() {
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()
                 android.os.Process.killProcess(android.os.Process.myPid())
-                System.exit(1)
+                exitProcess(1)
                 return
             }
 
@@ -74,14 +75,14 @@ abstract class BaseActivity: AppCompatActivity() {
 
     @SuppressLint("PrivateResource")
     fun addFragment(newFragment: BaseFragment) {
-        /*supportFragmentManager
+        supportFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.design_bottom_sheet_slide_in,
                         R.anim.design_bottom_sheet_slide_out)
-                .replace(R.id.fragmentContainer, newFragment, newFragment.javaClass.simpleName)
-                .commit()*/
+                .replace(id.fragmentContainer, newFragment, newFragment.javaClass.simpleName)
+                .commit()
 
-        supportFragmentManager.inTransaction { add(
-                id.fragmentContainer, newFragment) }
+        /*supportFragmentManager.inTransaction { add(
+                id.fragmentContainer, newFragment) }*/
     }
 }

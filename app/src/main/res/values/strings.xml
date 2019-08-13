@@ -8,7 +8,9 @@
     <string name="msg_users_saved">Users saved</string>
     <string name="select_photo">Select a photo</string>
     <string name="lbl_title_login">Sign In</string>
+    <string name="lbl_new_form">New Form</string>
     <string name="hint_user">User name</string>
+    <string name="hint_title">Title Form</string>
     <string name="hint_password">Password</string>
     <string name="hint_email">Email</string>
     <string name="title_activity_main">MainActivity</string>
@@ -21,6 +23,7 @@
     <string name="lbl_select_unit">Select Unit</string>
     <string name="lbl_select_project">Select Project</string>
     <string name="lbl_name">Name</string>
+    <string name="lbl_title">Title</string>
     <string name="lbl_change_user">Change user</string>
     <string name="lbl_description">Description</string>
     <string name="lbl_date">Date</string>

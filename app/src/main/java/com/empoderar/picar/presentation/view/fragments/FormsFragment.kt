@@ -18,6 +18,7 @@ import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetFormsCloudViewModel
 import com.empoderar.picar.presentation.presenter.GetFormsViewModel
 import com.empoderar.picar.presentation.presenter.InsertFormsViewModel
+import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_list_form.*
 
 import javax.inject.Inject
@@ -60,6 +61,7 @@ class FormsFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         initializeView()
         setupSwipeRefresh()
+
         //loadFormsList()
     }
 
