@@ -72,7 +72,7 @@ class FormsFragment: BaseFragment() {
 
     private fun getFormsOfCloud(){
         //showProgress()
-        if (proyectView != null){
+        if (proyectView != null && activity != null){
             val url = String.format(Constants.urlBase +
                     "${Constants.serviceFormsByProject}${proyectView!!.id}")
             val prefs = PreferenceRepository.customPrefs(activity!!,

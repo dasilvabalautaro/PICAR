@@ -47,6 +47,7 @@ abstract class BaseActivity: AppCompatActivity() {
     override fun onBackPressed() {
         (supportFragmentManager.findFragmentById(
                 id.fragmentContainer) as BaseFragment).onBackPressed()
+
         if (this is MenuActivity){
             if (doubleBackToExitPressedOnce) {
                 super.onBackPressed()

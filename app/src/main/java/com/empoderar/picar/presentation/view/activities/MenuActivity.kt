@@ -173,7 +173,8 @@ class MenuActivity : BaseActivity(){
             0 -> {
                 when(childPosition){
                     0 -> {
-
+                        val listFragment = ListingsFragment()
+                        addFragment(listFragment )
                     }
 
                     1 -> {
