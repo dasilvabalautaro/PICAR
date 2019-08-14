@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 
 
 @Entity(tableName = "formData")
-data class FormData(@PrimaryKey var id: Int,
+data class FormData(@PrimaryKey(autoGenerate = true) var id: Int,
                     @ColumnInfo(name = "project") var project: Int,
                     @ColumnInfo(name = "frmId") var frmId: String,
                     @ColumnInfo(name = "frmNro") var frmNro: Int,

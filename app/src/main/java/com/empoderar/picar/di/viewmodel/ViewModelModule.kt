@@ -91,5 +91,11 @@ abstract class ViewModelModule {
     abstract fun bindsInsertFormsViewModel(insertFormsViewModel:
                                                InsertFormsViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertOneFormViewModel::class)
+    abstract fun bindsInsertOneFormViewModel(insertOneFormViewModel:
+                                                 InsertOneFormViewModel): ViewModel
+
 
 }

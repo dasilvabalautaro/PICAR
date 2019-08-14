@@ -9,7 +9,7 @@ interface FormDataDao {
     fun getAll(): List<FormData>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(formData: FormData)
+    fun insert(formData: FormData): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertForms(forms: List<FormData>)

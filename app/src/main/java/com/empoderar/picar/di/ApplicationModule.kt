@@ -101,7 +101,10 @@ class ApplicationModule(private val app: App) {
     @Provides
     fun provideFormDao(database: AppDatabase) = database.formDao()
 
-//    Manage the operations Rest
+    @Provides
+    fun provideImageDao(database: AppDatabase)=database.imageDao()
+
+    //    Manage the operations Rest
     @Provides
     @Singleton
     fun provideUsersRepository(dataSource: UsersRepository.UsersNetwork):

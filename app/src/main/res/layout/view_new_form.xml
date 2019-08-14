@@ -189,6 +189,16 @@
             app:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
             app:layout_constraintTop_toTopOf="@+id/tv_lbl_image"/>
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ib_save"
+            android:src="@drawable/ic_add"
+            android:background="@null"
+            android:contentDescription="@string/lbl_image"
+            app:layout_constraintRight_toLeftOf="@+id/right_guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_lbl_image"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_photos"
             android:layout_width="0dp"
