@@ -130,8 +130,8 @@ class FormsFragment: BaseFragment() {
                 LinearLayoutManager.VERTICAL, false)
         addDecorationRecycler(rv_forms, context!!)
         rv_forms.adapter = formsAdapter
-        /* projectsAdapter.clickListener = { project, navigationExtras ->
-             navigator.showMovieDetails(activity!!, project, navigationExtras) }*/
+        formsAdapter.clickListener = { form, navigationExtras ->
+             navigator.showDetailForm(activity!!, form, navigationExtras) }
     }
 
     override fun renderFailure(message: Int) {

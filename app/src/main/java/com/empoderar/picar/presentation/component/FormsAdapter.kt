@@ -19,7 +19,7 @@ class FormsAdapter @Inject constructor():
         _, _, _ -> notifyDataSetChanged()
     }
 
-    private var clickListener: (FormView, Navigator.Extras) -> Unit = { _, _ -> }
+    internal var clickListener: (FormView, Navigator.Extras) -> Unit = { _, _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
             ViewHolder(parent.inflate(R.layout.view_row_form))

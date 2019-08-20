@@ -97,5 +97,17 @@ abstract class ViewModelModule {
     abstract fun bindsInsertOneFormViewModel(insertOneFormViewModel:
                                                  InsertOneFormViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertImagesViewModel::class)
+    abstract fun bindsInsertImagesViewModel(insertImagesViewModel:
+                                                InsertImagesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetImagesByFormViewModel::class)
+    abstract fun bindsGetImagesByFormViewModel(getImagesByFormViewModel:
+                                                   GetImagesByFormViewModel): ViewModel
+
 
 }

@@ -41,6 +41,7 @@ class ProjectsFragment: BaseFragment() {
     private lateinit var getProjectsCloudViewModel: GetProjectsCloudViewModel
     private lateinit var insertProjectsViewModel: InsertProjectsViewModel
     private var idUnityTemp = -1
+    private var flagCheckProject = false
 
     override fun layoutId() = R.layout.view_list_project
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,8 +71,9 @@ class ProjectsFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        getProjectsOfCloud()
+
         loadUnitsDatabase()
+        loadProjectList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,8 +125,15 @@ class ProjectsFragment: BaseFragment() {
     }
 
     private fun handleGetProjects(list: List<ProjectView>?){
+
         listProject = list.orEmpty()
-        projectsAdapter.collection = list.orEmpty()
+        if (listProject!!.isEmpty() && !flagCheckProject){
+            flagCheckProject = true
+            getProjectsOfCloud()
+        }else{
+            projectsAdapter.collection = list!!
+        }
+
 
     }
 
@@ -232,6 +241,10 @@ class ProjectsFragment: BaseFragment() {
         val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(context!!,
                 android.R.layout.simple_list_item_1, this.namesUnits)
         sp_select!!.adapter = spinnerAdapter
+        if (sp_select!!.adapter != null){
+            sp_select!!.refreshDrawableState()
+        }
+
 
     }
 

@@ -5,12 +5,14 @@ import android.support.v4.app.FragmentActivity
 import android.support.v4.view.ViewPager
 import android.view.View
 import com.empoderar.picar.R
+import com.empoderar.picar.presentation.data.FormView
 import com.empoderar.picar.presentation.data.ProjectView
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.view.activities.LoginActivity
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import com.empoderar.picar.presentation.view.activities.OptionAccessActivity
 import com.empoderar.picar.presentation.view.activities.SplashActivity
+import com.empoderar.picar.presentation.view.fragments.NewFormFragment
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -42,6 +44,15 @@ class Navigator @Inject constructor() {
         viewPager.currentItem = 1
 
     }
+
+    fun showDetailForm(activity: FragmentActivity,
+                       formView: FormView, navigationExtras: Extras){
+        val newForm = NewFormFragment()
+        newForm.flagNewForm = false
+        newForm.formView = formView
+        (activity as MenuActivity).addFragment(newForm)
+    }
+
 
     class Extras(val transitionSharedElement: View)
 }

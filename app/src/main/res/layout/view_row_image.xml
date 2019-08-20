@@ -52,8 +52,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:id="@+id/iv_photo"
+            android:src="@drawable/logo_picar"
             android:contentDescription="@string/lbl_image"
-            card_view:layout_constraintDimensionRatio="H,4:2"
+            card_view:layout_constraintDimensionRatio="H,6:2"
             card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             card_view:layout_constraintRight_toRightOf="@+id/right_guideline"
             card_view:layout_constraintTop_toTopOf="@+id/top_guideline"/>

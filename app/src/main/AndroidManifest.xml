@@ -48,7 +48,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".presentation.view.activities.OptionAccessActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".presentation.view.activities.MenuActivity"/>
+        <activity android:name=".presentation.view.activities.MenuActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
         <activity android:name=".presentation.view.activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 

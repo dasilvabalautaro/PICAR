@@ -158,6 +158,7 @@ class MenuActivity : BaseActivity(){
         val id = item!!.itemId
         if (id == R.id.action_new_form){
             val newForm = NewFormFragment()
+            newForm.flagNewForm = true
             addFragment(newForm)
         }
         if (toggle!!.onOptionsItemSelected(item)){

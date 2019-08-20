@@ -5,6 +5,7 @@ import android.graphics.*
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.DisplayMetrics
 import com.empoderar.picar.R
 import kotlinx.coroutines.GlobalScope
@@ -21,6 +22,7 @@ class ManageFiles @Inject constructor(private val context: Context) {
     private var screenWidth = 0
     private var screenHeight = 0
     private val imageFile = "temp.jpg"
+    private val quality = 100
 
     init {
         context.windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -190,4 +192,11 @@ class ManageFiles @Inject constructor(private val context: Context) {
 
     fun writeFileDirectly(file: String, fileContent: String) =
             File(getStorageDirectory(), file).writeText(fileContent + "\n")
+
+    fun base641EncodedImage(bitmap: Bitmap): String{
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream)
+        val imageBytes = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
+    }
 }
