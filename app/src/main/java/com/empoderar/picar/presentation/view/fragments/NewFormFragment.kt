@@ -42,6 +42,7 @@ class NewFormFragment: BaseFragment() {
 
     var flagNewForm = true
     var formView: FormView? = null
+    private var numberPhotos = 0
 
     private lateinit var insertOneFormViewModel: InsertOneFormViewModel
     private lateinit var insertImagesViewModel: InsertImagesViewModel
@@ -99,10 +100,12 @@ class NewFormFragment: BaseFragment() {
 
         if (id != null){
             val list = ArrayList<Image>()
-            for (photo:Photo in listPhoto){
-                val base64 = manageFiles.base641EncodedImage(photo.image!!)
-                val img = Image(0, id.toInt(), base64, photo.date)
+            for (i in this.numberPhotos until this.listPhoto.count()){
+                val base64 = manageFiles
+                        .base641EncodedImage(this.listPhoto[i].image!!)
+                val img = Image(0, id.toInt(), base64, this.listPhoto[i].date)
                 list.add(img)
+
             }
             if (!list.isNullOrEmpty()){
                 insertImagesViewModel.list = list.toList()
@@ -118,8 +121,17 @@ class NewFormFragment: BaseFragment() {
     }
 
     private fun handleGetImages(list: List<ImageView>?){
-
+        if (!list.isNullOrEmpty()){
+            for (imv: ImageView in list){
+                val bitmap = manageFiles.base64DecodeImage(imv.base64)
+                val photo = Photo(bitmap, imv.date)
+                this.listPhoto.add(photo)
+            }
+            this.numberPhotos = this.listPhoto.count()
+            photoAdapter.collection = listPhoto.toList()
+        }
     }
+
     override fun renderFailure(message: Int) {
         notify(message)
     }
@@ -149,7 +161,8 @@ class NewFormFragment: BaseFragment() {
         tv_latitude.text = formView!!.latitude.toString()
         tv_longitude.text = formView!!.longitude.toString()
         tv_title!!.text = formView!!.title
-
+        getImagesByFormViewModel.idForm = formView!!.id
+        getImagesByFormViewModel.loadImages()
     }
 
     private fun fillDataControl(){

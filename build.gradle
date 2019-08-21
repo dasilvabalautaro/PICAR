@@ -6,7 +6,7 @@ apply from: 'buildsystem/dependencies.gradle'
 buildscript {
     ext.kotlin_version = '1.3.21'
 //    ext.kotlin_version = '1.3.20'
-    ext.gradle_tools = '3.4.2'
+    ext.gradle_tools = '3.5.0'
     ext.build_tools = '28.0.3'
     ext.compile_sdk = 27
     ext.target_sdk = 27

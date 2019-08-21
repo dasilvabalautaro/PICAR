@@ -199,4 +199,10 @@ class ManageFiles @Inject constructor(private val context: Context) {
         val imageBytes = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
+
+    fun base64DecodeImage(baseString: String): Bitmap{
+        val decode: ByteArray = Base64.decode(baseString, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decode,
+                0, decode.size)
+    }
 }
