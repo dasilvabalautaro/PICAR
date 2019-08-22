@@ -50,7 +50,9 @@ class Navigator @Inject constructor() {
         val newForm = NewFormFragment()
         newForm.flagNewForm = false
         newForm.formView = formView
-        (activity as MenuActivity).addFragment(newForm)
+        (activity as MenuActivity).setMenuAddForm(false)
+        activity.addFragment(newForm)
+
     }
 
 

@@ -160,7 +160,8 @@ class NewFormFragment: BaseFragment() {
         tv_date!!.text = formView!!.dateCreation
         tv_latitude.text = formView!!.latitude.toString()
         tv_longitude.text = formView!!.longitude.toString()
-        tv_title!!.text = formView!!.title
+        et_title!!.setText(formView!!.title)
+        tv_title!!.text = resources.getString(R.string.lbl_update_form)
         getImagesByFormViewModel.idForm = formView!!.id
         getImagesByFormViewModel.loadImages()
     }
@@ -174,12 +175,32 @@ class NewFormFragment: BaseFragment() {
     }
 
     private fun insertForm(){
+        if (flagNewForm){
+            insertNewForm()
+        }else{
+            updateForm()
+        }
 
+    }
+
+    private fun insertNewForm(){
         val form = Form(0, proyectView!!.id, "053", 1,
                 et_title.text.toString(), "", 1, "",
                 123, Variables.locationUser.lat,
                 Variables.locationUser.lon, tv_date.text.toString(), "")
         insertOneFormViewModel.form = form
         insertOneFormViewModel.insertForm()
+
+    }
+
+    private fun updateForm(){
+        val form = Form(formView!!.id, formView!!.project, formView!!.frmId,
+                formView!!.frmNro, et_title.text.toString(), "",
+                formView!!.state, "", formView!!.userMobile,
+                formView!!.latitude, formView!!.longitude, formView!!.dateCreation,
+                "")
+        insertOneFormViewModel.form = form
+        insertOneFormViewModel.insertForm()
+
     }
 }

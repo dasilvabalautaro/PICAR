@@ -9,6 +9,7 @@
     <string name="select_photo">Select a photo</string>
     <string name="lbl_title_login">Sign In</string>
     <string name="lbl_new_form">New Form</string>
+    <string name="lbl_update_form">Update Form</string>
     <string name="hint_user">User name</string>
     <string name="hint_title">Title Form</string>
     <string name="hint_password">Password</string>
