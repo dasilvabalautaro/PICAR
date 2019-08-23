@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.empoderar.picar.App
 import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.model.observer.LocationChangeObserver
+import com.empoderar.picar.model.persistent.caching.Variables
 import javax.inject.Inject
 
 class LocationListener (provider: String, private val context: Context):
@@ -32,6 +33,8 @@ class LocationListener (provider: String, private val context: Context):
         locationChangeObserver.location = lastLocation
         locationChangeObserver.observableLocation.onNext(locationChangeObserver
                 .location!!)
+        Variables.locationUser.lat =  lastLocation!!.latitude
+        Variables.locationUser.lon = lastLocation!!.longitude
         println("LastLocation: " + lastLocation!!.latitude.toString() +
                 "  " + lastLocation!!.longitude.toString())
     }

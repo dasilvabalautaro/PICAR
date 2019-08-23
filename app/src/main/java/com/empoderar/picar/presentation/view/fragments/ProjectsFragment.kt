@@ -1,5 +1,6 @@
 package com.empoderar.picar.presentation.view.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.empoderar.picar.domain.data.Project
 import com.empoderar.picar.domain.data.Unity
 import com.empoderar.picar.model.persistent.caching.Constants
 import com.empoderar.picar.model.persistent.preference.PreferenceRepository
+import com.empoderar.picar.model.persistent.preference.PreferenceRepository.set
 import com.empoderar.picar.presentation.component.ProjectsAdapter
 import com.empoderar.picar.presentation.data.ProjectView
 import com.empoderar.picar.presentation.extension.addDecorationRecycler
@@ -41,7 +43,8 @@ class ProjectsFragment: BaseFragment() {
     private lateinit var getProjectsCloudViewModel: GetProjectsCloudViewModel
     private lateinit var insertProjectsViewModel: InsertProjectsViewModel
     private var idUnityTemp = -1
-    private var flagCheckProject = false
+    private lateinit var prefs: SharedPreferences
+
 
     override fun layoutId() = R.layout.view_list_project
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,9 +74,11 @@ class ProjectsFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
+        this.prefs = PreferenceRepository.customPrefs(activity!!,
+                Constants.preference_picar)
 
-        loadUnitsDatabase()
-        loadProjectList()
+        verifyLoadOfUnities()
+        verifyLoadOfProjects()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +86,7 @@ class ProjectsFragment: BaseFragment() {
         ib_refresh.setOnClickListener { getUnitsOfCloud() }
         initializeView()
         setupSwipeRefresh()
-        //loadProjectList()
+
     }
 
     override fun onStart() {
@@ -103,6 +108,24 @@ class ProjectsFragment: BaseFragment() {
                 .subscribe { result -> println(result)})
     }
 
+    private fun verifyLoadOfUnities(){
+        val isDown = this.prefs.getInt(Constants.prefIsUnitiesDownload, 0)
+        if (isDown == 0){
+            getUnitsOfCloud()
+        }else{
+            loadUnitsDatabase()
+        }
+    }
+
+    private fun verifyLoadOfProjects(){
+        val isDown = this.prefs.getInt(Constants.prefIsProjectsDownload, 0)
+        if (isDown == 0){
+            getProjectsOfCloud()
+        }else{
+            loadProjectList()
+        }
+
+    }
 
     private fun handleProjectsCloud(list: List<Project>?){
         if (list != null && list.isNotEmpty()){
@@ -114,6 +137,7 @@ class ProjectsFragment: BaseFragment() {
     private fun handleInsertProjects(value: Boolean?){
         //hideProgress()
         if (value != null && value){
+            this.prefs[Constants.prefIsProjectsDownload] = 1
             loadProjectList()
 
         }
@@ -127,13 +151,7 @@ class ProjectsFragment: BaseFragment() {
     private fun handleGetProjects(list: List<ProjectView>?){
 
         listProject = list.orEmpty()
-        if (listProject!!.isEmpty() && !flagCheckProject){
-            flagCheckProject = true
-            getProjectsOfCloud()
-        }else{
-            projectsAdapter.collection = list!!
-        }
-
+        projectsAdapter.collection = list.orEmpty()
 
     }
 
@@ -164,6 +182,7 @@ class ProjectsFragment: BaseFragment() {
         //hideProgress()
         if (value != null && value){
             Thread.sleep(1000)
+            this.prefs[Constants.prefIsUnitiesDownload] = 1
             loadUnitsDatabase()
         }
     }
@@ -171,9 +190,7 @@ class ProjectsFragment: BaseFragment() {
     private fun getUnitsOfCloud(){
         //showProgress()
         val url = String.format("${Constants.urlBase}${Constants.serviceUnit}")
-        val prefs = PreferenceRepository.customPrefs(activity!!,
-                Constants.preference_picar)
-        val token = "Bearer " + prefs.getString(Constants.prefToken, "")
+        val token = "Bearer " + this.prefs.getString(Constants.prefToken, "")
         getUnitsCloudViewModel.url = url
         getUnitsCloudViewModel.token = token
         if (getUnitsCloudViewModel.verifyInput()){
@@ -184,9 +201,7 @@ class ProjectsFragment: BaseFragment() {
     private fun getProjectsOfCloud(){
         //showProgress()
         val url = String.format("${Constants.urlBase}${Constants.serviceProjectsByUnit}")
-        val prefs = PreferenceRepository.customPrefs(activity!!,
-                Constants.preference_picar)
-        val token = "Bearer " + prefs.getString(Constants.prefToken, "")
+        val token = "Bearer " + this.prefs.getString(Constants.prefToken, "")
         getProjectsCloudViewModel.url = url
         getProjectsCloudViewModel.token = token
         if (getProjectsCloudViewModel.verifyInput()){

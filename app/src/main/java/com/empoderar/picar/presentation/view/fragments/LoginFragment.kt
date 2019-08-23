@@ -59,6 +59,7 @@ class LoginFragment: BaseFragment() {
         et_password.setText("It@p@llu1962")
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun verifyEmail(){
         this.email = this.prefs.getString(Constants.prefEmail, "")
         if (email.isEmpty()){
