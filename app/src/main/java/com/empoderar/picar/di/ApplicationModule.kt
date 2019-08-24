@@ -34,9 +34,18 @@ class ApplicationModule(private val app: App) {
     @Provides @Singleton fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(domainPicar)
-                .client(getUnsafeOkHttpClient().build())
+                .client(getUnsafeOkHttpClient().build()) // createClient()
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+    }
+
+    private fun createClient(): OkHttpClient {
+        val okHttpClientBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+            okHttpClientBuilder.addInterceptor(loggingInterceptor)
+        }
+        return okHttpClientBuilder.build()
     }
 
 //    Interceptor of Head Rest out certificate

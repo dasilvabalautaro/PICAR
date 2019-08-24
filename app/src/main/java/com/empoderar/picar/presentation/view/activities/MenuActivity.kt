@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.view.fragments.ListingsFragment
 import com.empoderar.picar.presentation.view.fragments.MapFragment
+import com.empoderar.picar.presentation.view.fragments.MapProjectsFragment
 import com.empoderar.picar.presentation.view.fragments.NewFormFragment
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
@@ -192,7 +193,8 @@ class MenuActivity : BaseActivity(){
                     }
 
                     1 -> {
-
+                        val mapProjectsFragment = MapProjectsFragment()
+                        addFragment(mapProjectsFragment)
                     }
 
                 }
