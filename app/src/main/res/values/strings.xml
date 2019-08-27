@@ -56,4 +56,8 @@
     <string name="msg_email_not_found">Email not found</string>
     <string name="msg_user_not_found">User not found</string>
     <string name="new_filter">New Filter</string>
+    <string name="lbl_code">Code</string>
+    <string name="lbl_value">Value</string>
+    <string name="lbl_cumple">Cumple</string>
+    <string name="lbl_comment">Comment</string>
 </resources>

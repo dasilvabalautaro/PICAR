@@ -79,8 +79,7 @@
             android:id="@+id/lbl_code"
             android:text="@string/lbl_code"
             android:textColor="@color/colorSecondaryText"
-            android:textAlignment="center"
-            android:textStyle="bold"
+            android:textAlignment="textStart"
             app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             app:layout_constraintRight_toRightOf="@+id/left_two_guideline"
             app:layout_constraintTop_toTopOf="@+id/top_guideline" />
@@ -91,68 +90,63 @@
             android:id="@+id/lbl_description"
             android:text="@string/lbl_description"
             android:textColor="@color/colorSecondaryText"
-            android:textAlignment="center"
-            android:textStyle="bold"
+            android:textAlignment="textStart"
             app:layout_constraintLeft_toLeftOf="@+id/left_two_guideline"
             app:layout_constraintRight_toRightOf="@+id/left_three_guideline"
             app:layout_constraintTop_toTopOf="@+id/top_guideline" />
 
-        <TextView
+        <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/lbl_value"
-            android:text="@string/lbl_value"
+            android:id="@+id/et_value"
             android:textColor="@color/colorSecondaryText"
-            android:textAlignment="center"
-            android:textStyle="bold"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             app:layout_constraintLeft_toLeftOf="@+id/left_three_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_two_guideline"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"
+            tools:ignore="Autofill"
+            android:inputType="text"/>
 
-        <TextView
+        <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/lbl_cumple"
-            android:text="@string/lbl_cumple"
+            android:id="@+id/et_cumple"
             android:textColor="@color/colorSecondaryText"
-            android:textAlignment="center"
-            android:textStyle="bold"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             app:layout_constraintLeft_toLeftOf="@+id/right_two_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"
+            tools:ignore="Autofill"
+            android:inputType="text"/>
 
-        <TextView
+        <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/lbl_date"
-            android:text="@string/lbl_date"
+            android:id="@+id/et_date"
             android:textColor="@color/colorSecondaryText"
-            android:textAlignment="center"
-            android:textStyle="bold"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             app:layout_constraintLeft_toLeftOf="@+id/right_three_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_four_guideline"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"
+            tools:ignore="Autofill"
+            android:inputType="date"/>
 
-        <TextView
+        <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/lbl_comment"
-            android:text="@string/lbl_comment"
+            android:id="@+id/et_comment"
             android:textColor="@color/colorSecondaryText"
-            android:textAlignment="center"
-            android:textStyle="bold"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             app:layout_constraintLeft_toLeftOf="@+id/right_four_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_guideline"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"
+            tools:ignore="Autofill"
+            android:inputType="text"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_body"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
-            app:layout_constraintRight_toRightOf="@+id/right_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_code"/>
     </android.support.constraint.ConstraintLayout>
 
 
