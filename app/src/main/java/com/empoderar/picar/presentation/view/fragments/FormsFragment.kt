@@ -1,5 +1,6 @@
 package com.empoderar.picar.presentation.view.fragments
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -31,8 +32,10 @@ class FormsFragment: BaseFragment() {
     lateinit var formsAdapter: FormsAdapter
 
     private lateinit var getFormsViewModel: GetFormsViewModel
-    private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
-    private lateinit var insertFormsViewModel: InsertFormsViewModel
+    /*private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
+    private lateinit var insertFormsViewModel: InsertFormsViewModel*/
+    private lateinit var prefs: SharedPreferences
+
     private var idFormTemp = -1
 
     override fun layoutId() = R.layout.view_list_form
@@ -44,7 +47,7 @@ class FormsFragment: BaseFragment() {
             observe(result, ::handleGetForms)
             failure(failure, ::handleFailure)
         }
-        getFormsCloudViewModel = viewModel(viewModelFactory) {
+        /*getFormsCloudViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleFormsCloud)
             failure(failure, ::handleFailure)
         }
@@ -52,9 +55,10 @@ class FormsFragment: BaseFragment() {
         insertFormsViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleInsertForms)
             failure(failure, ::handleFailure)
-        }
-
-
+        }*/
+        this.prefs = PreferenceRepository.customPrefs(activity!!,
+                Constants.preference_picar)
+        //verifyLoadOfForms()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,17 +71,34 @@ class FormsFragment: BaseFragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        getFormsOfCloud()
+        if (proyectView != null){
+            if (listForm.isNullOrEmpty()){
+                loadFormsList()
+            }else{
+                setListFormByProject()
+            }
+
+        }
+
     }
 
-    private fun getFormsOfCloud(){
+   /* private fun verifyLoadOfForms(){
+        val isDown = this.prefs.getInt(Constants.prefIsFormsDownload, 0)
+        if (isDown == 0){
+            getFormsOfCloud()
+        }else{
+            loadFormsList()
+        }
+    }*/
+
+   /* private fun getFormsOfCloud(){
         //showProgress()
         if (proyectView != null && activity != null){
             val url = String.format(Constants.urlBase +
                     "${Constants.serviceFormsByProject}${proyectView!!.id}")
-            val prefs = PreferenceRepository.customPrefs(activity!!,
-                    Constants.preference_picar)
-            val token = "Bearer " + prefs.getString(Constants.prefToken, "")
+            *//*val prefs = PreferenceRepository.customPrefs(activity!!,
+                    Constants.preference_picar)*//*
+            val token = "Bearer " + this.prefs.getString(Constants.prefToken, "")
             getFormsCloudViewModel.url = url
             getFormsCloudViewModel.token = token
             if (getFormsCloudViewModel.verifyInput()){
@@ -85,7 +106,7 @@ class FormsFragment: BaseFragment() {
             }
 
         }
-    }
+    }*/
 
     private fun loadFormsList(){
         getFormsViewModel.loadForms()
@@ -98,6 +119,7 @@ class FormsFragment: BaseFragment() {
     }
 
     private fun setListFormByProject(){
+
         if (!listForm.isNullOrEmpty()){
             val subList = listForm!!
                     .filter { it.project == proyectView!!.id }
@@ -108,22 +130,22 @@ class FormsFragment: BaseFragment() {
         sr_forms!!.isRefreshing = false
     }
 
-    private fun handleFormsCloud(list: List<Form>?){
+   /* private fun handleFormsCloud(list: List<Form>?){
         if (list != null && list.isNotEmpty()){
             insertFormsViewModel .list = list
             insertFormsViewModel .insertForms()
         }
 
-    }
+    }*/
 
-    private fun handleInsertForms(value: Boolean?){
+   /* private fun handleInsertForms(value: Boolean?){
         //hideProgress()
         if (value != null && value){
             loadFormsList()
 
         }
     }
-
+*/
     private fun initializeView(){
         rv_forms!!.setHasFixedSize(true)
         rv_forms!!.layoutManager = LinearLayoutManager(activity,

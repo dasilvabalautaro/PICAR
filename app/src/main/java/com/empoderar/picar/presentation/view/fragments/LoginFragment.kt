@@ -7,6 +7,7 @@ import cc.duduhuo.util.crypto.AES
 import com.empoderar.picar.R
 import com.empoderar.picar.domain.data.Permission
 import com.empoderar.picar.model.persistent.caching.Constants
+import com.empoderar.picar.model.persistent.caching.Variables
 import com.empoderar.picar.model.persistent.preference.PreferenceRepository
 import com.empoderar.picar.model.persistent.preference.PreferenceRepository.set
 import com.empoderar.picar.presentation.extension.failure
@@ -96,7 +97,10 @@ class LoginFragment: BaseFragment() {
     private fun checkPermission(){
         if (validatedInput(et_user.text.toString(),
                         et_password.text.toString())){
-            if (networkHandler.isConnected == null || !networkHandler.isConnected!!){
+
+            if ((networkHandler.isConnected == null ||
+                    !networkHandler.isConnected!! ||
+                    !Variables.isServerUp) && isRegisterPermission()){
                 checkPermissionLocal()
             }else{
                 checkPermissionCloud()
@@ -104,6 +108,11 @@ class LoginFragment: BaseFragment() {
         }else{
             notify(R.string.failure_input)
         }
+    }
+
+    private fun isRegisterPermission(): Boolean{
+        val password = this.prefs.getString(Constants.prefPassword, "")
+        return !password.isNullOrEmpty()
     }
 
     private fun checkPermissionCloud(){

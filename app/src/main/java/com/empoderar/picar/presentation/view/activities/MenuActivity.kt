@@ -27,6 +27,7 @@ import com.empoderar.picar.presentation.plataform.BaseActivity
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.android.synthetic.main.toolbar.*
 import com.empoderar.picar.presentation.navigation.Navigator
+import com.empoderar.picar.presentation.tools.Validate
 import com.empoderar.picar.presentation.view.fragments.ListingsFragment
 import com.empoderar.picar.presentation.view.fragments.MapFragment
 import com.empoderar.picar.presentation.view.fragments.MapProjectsFragment
@@ -34,6 +35,8 @@ import com.empoderar.picar.presentation.view.fragments.NewFormFragment
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MenuActivity : BaseActivity(){
@@ -104,7 +107,9 @@ class MenuActivity : BaseActivity(){
         this.expandableListMenu = ExpandableListMenu().getListMenu(this)
         this.expandableHeaderMenu = this.expandableListMenu!!.keys.toList()
         addDrawerOptions()
-
+        GlobalScope.launch{
+            checkConnectionServer()
+        }
     }
 
     private fun addDrawerOptions(){
@@ -145,6 +150,10 @@ class MenuActivity : BaseActivity(){
             }
 
         }
+    }
+
+    private fun checkConnectionServer(){
+        Variables.isServerUp = Validate.isURLReachable(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

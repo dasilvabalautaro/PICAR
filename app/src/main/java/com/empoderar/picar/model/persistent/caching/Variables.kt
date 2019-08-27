@@ -4,5 +4,5 @@ import com.empoderar.picar.domain.data.LocationObject
 
 object Variables {
     var locationUser = LocationObject.empty()
-
+    var isServerUp = false
 }

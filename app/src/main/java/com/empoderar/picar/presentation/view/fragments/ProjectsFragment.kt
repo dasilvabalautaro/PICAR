@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.empoderar.picar.R
+import com.empoderar.picar.domain.data.Form
 import com.empoderar.picar.domain.data.Project
 import com.empoderar.picar.domain.data.Unity
 import com.empoderar.picar.model.persistent.caching.Constants
@@ -28,6 +29,9 @@ import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Cancellable
 import kotlinx.android.synthetic.main.view_list_project.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProjectsFragment: BaseFragment() {
@@ -42,6 +46,8 @@ class ProjectsFragment: BaseFragment() {
     private lateinit var getProjectsViewModel: GetProjectsDatabaseViewModel
     private lateinit var getProjectsCloudViewModel: GetProjectsCloudViewModel
     private lateinit var insertProjectsViewModel: InsertProjectsViewModel
+    private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
+    private lateinit var insertFormsViewModel: InsertFormsViewModel
     private var idUnityTemp = -1
     private lateinit var prefs: SharedPreferences
 
@@ -74,6 +80,16 @@ class ProjectsFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
+        getFormsCloudViewModel = viewModel(viewModelFactory) {
+            observe(result, ::handleFormsCloud)
+            failure(failure, ::handleFailure)
+        }
+
+        insertFormsViewModel = viewModel(viewModelFactory) {
+            observe(result, ::handleInsertForms)
+            failure(failure, ::handleFailure)
+        }
+
         this.prefs = PreferenceRepository.customPrefs(activity!!,
                 Constants.preference_picar)
 
@@ -83,7 +99,7 @@ class ProjectsFragment: BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ib_refresh.setOnClickListener { getUnitsOfCloud() }
+        ib_refresh.setOnClickListener { loadUnitsDatabase() }
         initializeView()
         setupSwipeRefresh()
 
@@ -131,7 +147,20 @@ class ProjectsFragment: BaseFragment() {
         if (list != null && list.isNotEmpty()){
             insertProjectsViewModel.list = list
             insertProjectsViewModel.insertProjects()
+            getFormsOfCloud(list)
         }
+    }
+
+    private fun getFormsOfCloud(list: List<Project>){
+        GlobalScope.launch{
+            for (i in 0 until list.count()){
+                val id = list[i].id
+                getFormsOfCloud(id)
+                delay(1000)
+
+            }
+        }
+
     }
 
     private fun handleInsertProjects(value: Boolean?){
@@ -181,7 +210,7 @@ class ProjectsFragment: BaseFragment() {
     private fun handleCloudUnits(value: Boolean?){
         //hideProgress()
         if (value != null && value){
-            Thread.sleep(1000)
+            Thread.sleep(2000)
             this.prefs[Constants.prefIsUnitiesDownload] = 1
             loadUnitsDatabase()
         }
@@ -256,10 +285,10 @@ class ProjectsFragment: BaseFragment() {
         val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(context!!,
                 android.R.layout.simple_list_item_1, this.namesUnits)
         sp_select!!.adapter = spinnerAdapter
+        spinnerAdapter.notifyDataSetChanged()
         if (sp_select!!.adapter != null){
             sp_select!!.refreshDrawableState()
         }
-
 
     }
 
@@ -283,5 +312,35 @@ class ProjectsFragment: BaseFragment() {
             }
 
         }
+    }
+
+    private fun handleFormsCloud(list: List<Form>?){
+        if (list != null && list.isNotEmpty()){
+            insertFormsViewModel .list = list
+            insertFormsViewModel .insertForms()
+        }
+
+    }
+
+    private fun handleInsertForms(value: Boolean?){
+        //hideProgress()
+        if (value != null && value){
+            println("Insert Forms OK")
+        }
+    }
+
+    private fun getFormsOfCloud(id: Int){
+        //showProgress()
+
+        val url = String.format(Constants.urlBase +
+                "${Constants.serviceFormsByProject}${id}")
+        val token = "Bearer " + this.prefs.getString(Constants.prefToken, "")
+        getFormsCloudViewModel.url = url
+        getFormsCloudViewModel.token = token
+        if (getFormsCloudViewModel.verifyInput()){
+            getFormsCloudViewModel.requestForms()
+        }
+
+
     }
 }
