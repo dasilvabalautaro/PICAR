@@ -5,10 +5,7 @@ import android.content.Context
 import com.empoderar.picar.App
 import com.empoderar.picar.BuildConfig
 import com.empoderar.picar.model.persistent.database.AppDatabase
-import com.empoderar.picar.model.persistent.network.apply.LoadRequestForm
-import com.empoderar.picar.model.persistent.network.apply.LoadRequestPermission
-import com.empoderar.picar.model.persistent.network.apply.LoadRequestProject
-import com.empoderar.picar.model.persistent.network.apply.LoadRequestUnity
+import com.empoderar.picar.model.persistent.network.apply.*
 import com.empoderar.picar.model.persistent.network.repository.UsersRepository
 import dagger.Module
 import dagger.Provides
@@ -113,6 +110,9 @@ class ApplicationModule(private val app: App) {
     @Provides
     fun provideImageDao(database: AppDatabase)=database.imageDao()
 
+    @Provides
+    fun provideTypeFormDao(database: AppDatabase) = database.typeFormDao()
+
     //    Manage the operations Rest
     @Provides
     @Singleton
@@ -138,4 +138,14 @@ class ApplicationModule(private val app: App) {
     @Singleton
     fun provideLoadRequestForm(dataSource: LoadRequestForm.SendRequest):
             LoadRequestForm = dataSource
+
+    @Provides
+    @Singleton
+    fun provideLoadRequestTypeForm(dataSource: LoadRequestTypeForm.SendRequest):
+            LoadRequestTypeForm = dataSource
+
+    @Provides
+    @Singleton
+    fun provideLoadRequestContentForm(dataSource: LoadRequestContentForm.SendRequest):
+            LoadRequestContentForm = dataSource
 }

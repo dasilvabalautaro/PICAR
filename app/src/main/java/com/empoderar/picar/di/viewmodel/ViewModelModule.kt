@@ -109,5 +109,30 @@ abstract class ViewModelModule {
     abstract fun bindsGetImagesByFormViewModel(getImagesByFormViewModel:
                                                    GetImagesByFormViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetTypesFormCloudViewModel::class)
+    abstract fun bindsGetTypesFormCloudViewModel(getTypesFormCloudViewModel:
+                                                     GetTypesFormCloudViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertTypesFormViewModel::class)
+    abstract fun bindsInsertTypesFormViewModel(insertTypesFormViewModel:
+                                                   InsertTypesFormViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetTypesFormViewModel::class)
+    abstract fun bindsGetTypesFormViewModel(getTypesFormViewModel:
+                                                GetTypesFormViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetContentFormsCloudViewModel::class)
+    abstract fun bindsGetContentFormsCloudViewModel(getContentFormsCloudViewModel:
+                                                        GetContentFormsCloudViewModel): ViewModel
+
+
 
 }
