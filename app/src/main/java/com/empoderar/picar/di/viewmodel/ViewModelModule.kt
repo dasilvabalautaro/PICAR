@@ -133,6 +133,12 @@ abstract class ViewModelModule {
     abstract fun bindsGetContentFormsCloudViewModel(getContentFormsCloudViewModel:
                                                         GetContentFormsCloudViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertContentFormsViewModel::class)
+    abstract fun bindsInsertContentFormsViewModel(insertContentFormsViewModel:
+                                                      InsertContentFormsViewModel): ViewModel
+
 
 
 }

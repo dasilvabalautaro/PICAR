@@ -7,7 +7,7 @@ import com.empoderar.picar.model.persistent.database.interfaces.*
 
 @Database(entities = [UserData::class, UnityData::class,
     ProjectData::class, MunicipalityData::class, RoleData::class,
-    FormData::class, ImageData::class, TypeFormData::class],
+    FormData::class, ImageData::class, TypeFormData::class, ContentFormData::class],
         version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun userDao(): UserDataDao
@@ -18,4 +18,5 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun formDao(): FormDataDao
     abstract fun imageDao(): ImageDataDao
     abstract fun typeFormDao(): TypeFormDataDao
+    abstract fun contentFormDao(): ContentFormData
 }

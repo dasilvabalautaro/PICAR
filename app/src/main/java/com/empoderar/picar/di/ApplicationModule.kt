@@ -113,6 +113,9 @@ class ApplicationModule(private val app: App) {
     @Provides
     fun provideTypeFormDao(database: AppDatabase) = database.typeFormDao()
 
+    @Provides
+    fun provideContentFormDao(database: AppDatabase) = database.contentFormDao()
+
     //    Manage the operations Rest
     @Provides
     @Singleton
