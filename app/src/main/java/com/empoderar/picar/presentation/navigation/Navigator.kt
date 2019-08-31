@@ -8,10 +8,7 @@ import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.FormView
 import com.empoderar.picar.presentation.data.ProjectView
 import com.empoderar.picar.presentation.plataform.BaseFragment
-import com.empoderar.picar.presentation.view.activities.LoginActivity
-import com.empoderar.picar.presentation.view.activities.MenuActivity
-import com.empoderar.picar.presentation.view.activities.OptionAccessActivity
-import com.empoderar.picar.presentation.view.activities.SplashActivity
+import com.empoderar.picar.presentation.view.activities.*
 import com.empoderar.picar.presentation.view.fragments.NewFormFragment
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -35,6 +32,9 @@ class Navigator @Inject constructor() {
 
     fun showMenu(context: Context) = context
             .startActivity(MenuActivity.callingIntent(context))
+
+    fun showDownload(context: Context) = context
+            .startActivity(DownloadActivity.callingIntent(context))
 
     fun showForms(activity: FragmentActivity,
                      projectView: ProjectView, navigationExtras: Extras){

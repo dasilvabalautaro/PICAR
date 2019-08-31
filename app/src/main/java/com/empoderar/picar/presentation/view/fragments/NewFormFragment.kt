@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.ArrayAdapter
 import com.empoderar.picar.R
 import com.empoderar.picar.domain.data.Form
 import com.empoderar.picar.domain.data.Image
@@ -13,6 +14,7 @@ import com.empoderar.picar.model.persistent.files.ManageFiles
 import com.empoderar.picar.presentation.component.PhotoAdapter
 import com.empoderar.picar.presentation.data.FormView
 import com.empoderar.picar.presentation.data.ImageView
+import com.empoderar.picar.presentation.data.TypeFormView
 import com.empoderar.picar.presentation.extension.addDecorationRecycler
 import com.empoderar.picar.presentation.extension.failure
 import com.empoderar.picar.presentation.extension.observe
@@ -20,13 +22,14 @@ import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetImagesByFormViewModel
+import com.empoderar.picar.presentation.presenter.GetTypesFormViewModel
 import com.empoderar.picar.presentation.presenter.InsertImagesViewModel
 import com.empoderar.picar.presentation.presenter.InsertOneFormViewModel
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.view_list_project.*
 import kotlinx.android.synthetic.main.view_new_form.*
+import kotlinx.android.synthetic.main.view_new_form.sp_select
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -43,10 +46,13 @@ class NewFormFragment: BaseFragment() {
     var flagNewForm = true
     var formView: FormView? = null
     private var numberPhotos = 0
-
+    private var codesTypesForms: ArrayList<String> = ArrayList()
+    private var listTypeForm: List<TypeFormView>? = null
     private lateinit var insertOneFormViewModel: InsertOneFormViewModel
     private lateinit var insertImagesViewModel: InsertImagesViewModel
     private lateinit var getImagesByFormViewModel: GetImagesByFormViewModel
+    private lateinit var getTypesFormViewModel: GetTypesFormViewModel
+
 
     override fun layoutId() = R.layout.view_new_form
 
@@ -88,6 +94,12 @@ class NewFormFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
+        getTypesFormViewModel = viewModel(viewModelFactory) {
+            observe(result, ::handleGetTypesForm)
+            failure(failure, ::handleFailure)
+        }
+
+        getTypesFormViewModel.loadTypesForm()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,6 +107,38 @@ class NewFormFragment: BaseFragment() {
         initializeView()
         fillDataControl()
     }
+
+    private fun handleGetTypesForm(list: List<TypeFormView>?){
+        this.listTypeForm = list.orEmpty()
+        loadCodesTypes()
+    }
+
+    private fun loadCodesTypes(){
+        if (this.listTypeForm != null && this.listTypeForm!!.isNotEmpty()){
+            loadValueCodes(this.listTypeForm!!)
+            setDataSpinner()
+        }
+
+    }
+
+    private fun loadValueCodes(list: List<TypeFormView>){
+        for (type: TypeFormView in list){
+            this.codesTypesForms.add(type.frmId)
+        }
+    }
+
+    private fun setDataSpinner(){
+
+        val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(context!!,
+                android.R.layout.simple_list_item_1, this.codesTypesForms)
+        sp_select!!.adapter = spinnerAdapter
+        spinnerAdapter.notifyDataSetChanged()
+        if (sp_select!!.adapter != null){
+            sp_select!!.refreshDrawableState()
+        }
+
+    }
+
 
     private fun handleInsertForm(id: Long?){
 

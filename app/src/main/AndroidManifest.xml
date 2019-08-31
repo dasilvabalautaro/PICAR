@@ -53,6 +53,7 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
         <activity android:name=".presentation.view.activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".presentation.view.activities.DownloadActivity" />
 
         <service android:name=".model.persistent.network.services.JobLocationService"
             android:exported="true"

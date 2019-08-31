@@ -89,9 +89,19 @@ class LoginFragment: BaseFragment() {
             this.prefs[Constants.prefLogin] = et_user.text.toString()
             val password = AES.encrypt(et_password.text.toString(), Constants.seed)
             this.prefs[Constants.prefPassword] = password
-            navigator.showMenu(activity!!)
-            (activity!! as LoginActivity).finish()
+            defineAccess()
+
         }
+    }
+
+    private fun defineAccess(){
+        val isDown = this.prefs.getInt(Constants.prefIsUnitiesDownload, 0)
+        if (isDown == 0){
+            navigator.showDownload(activity!!)
+        }else{
+            navigator.showMenu(activity!!)
+        }
+        (activity!! as LoginActivity).finish()
     }
 
     private fun checkPermission(){

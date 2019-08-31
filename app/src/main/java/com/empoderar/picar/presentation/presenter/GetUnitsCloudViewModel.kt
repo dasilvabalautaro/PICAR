@@ -10,10 +10,9 @@ import com.empoderar.picar.presentation.plataform.BaseViewModel
 import javax.inject.Inject
 
 class GetUnitsCloudViewModel @Inject constructor(private val getUnitsCloudUseCase:
-                                                 GetUnitsCloudUseCase,
-                                                 private val insertUnitsUseCase: InsertUnitsUseCase):
+                                                 GetUnitsCloudUseCase):
         BaseViewModel() {
-    var result: MutableLiveData<Boolean> = MutableLiveData()
+    var result: MutableLiveData<List<Unity>> = MutableLiveData()
     lateinit var url: String
     lateinit var token: String
     private lateinit var params: List<String>
@@ -34,15 +33,8 @@ class GetUnitsCloudViewModel @Inject constructor(private val getUnitsCloudUseCas
 
     private fun handleResult(list: List<Unity>){
 
-        result.value = true
-        insertUnitsUseCase(list){
-            it.either(::handleFailure, ::handleResultInsert)
-        }
+        result.value = list
 
-    }
-
-    private fun handleResultInsert(value: Boolean){
-        println("Insert Units $value")
     }
 
 

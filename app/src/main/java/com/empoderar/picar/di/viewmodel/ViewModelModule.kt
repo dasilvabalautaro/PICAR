@@ -139,6 +139,18 @@ abstract class ViewModelModule {
     abstract fun bindsInsertContentFormsViewModel(insertContentFormsViewModel:
                                                       InsertContentFormsViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetContentFormsViewModel::class)
+    abstract fun bindsGetContentFormsViewModel(getContentFormsViewModel:
+                                                   GetContentFormsViewModel): ViewModel
+
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertUnitsViewModel::class)
+    abstract fun bindsInsertUnitsViewModel(insertUnitsViewModel:
+                                               InsertUnitsViewModel): ViewModel
 
 
 }

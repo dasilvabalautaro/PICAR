@@ -18,5 +18,5 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun formDao(): FormDataDao
     abstract fun imageDao(): ImageDataDao
     abstract fun typeFormDao(): TypeFormDataDao
-    abstract fun contentFormDao(): ContentFormData
+    abstract fun contentFormDao(): ContentFormDataDao
 }

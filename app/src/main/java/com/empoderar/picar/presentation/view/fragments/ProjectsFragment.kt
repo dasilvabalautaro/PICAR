@@ -40,14 +40,14 @@ class ProjectsFragment: BaseFragment() {
     @Inject
     lateinit var projectsAdapter: ProjectsAdapter
 
-    private lateinit var getUnitsCloudViewModel: GetUnitsCloudViewModel
+    //private lateinit var getUnitsCloudViewModel: GetUnitsCloudViewModel
     private lateinit var getUnitsViewModel: GetUnitsDatabaseViewModel
     private var namesUnits: ArrayList<String> = ArrayList()
     private lateinit var getProjectsViewModel: GetProjectsDatabaseViewModel
-    private lateinit var getProjectsCloudViewModel: GetProjectsCloudViewModel
-    private lateinit var insertProjectsViewModel: InsertProjectsViewModel
-    private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
-    private lateinit var insertFormsViewModel: InsertFormsViewModel
+    //private lateinit var getProjectsCloudViewModel: GetProjectsCloudViewModel
+    //private lateinit var insertProjectsViewModel: InsertProjectsViewModel
+    //private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
+    //private lateinit var insertFormsViewModel: InsertFormsViewModel
     private var idUnityTemp = -1
     private lateinit var prefs: SharedPreferences
 
@@ -61,16 +61,16 @@ class ProjectsFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        getUnitsCloudViewModel = viewModel(viewModelFactory) {
+        /*getUnitsCloudViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleCloudUnits)
             failure(failure, ::handleFailure)
-        }
+        }*/
         getUnitsViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleGetUnits)
             failure(failure, ::handleFailure)
         }
 
-        getProjectsCloudViewModel = viewModel(viewModelFactory) {
+    /*    getProjectsCloudViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleProjectsCloud)
             failure(failure, ::handleFailure)
         }
@@ -88,13 +88,13 @@ class ProjectsFragment: BaseFragment() {
         insertFormsViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleInsertForms)
             failure(failure, ::handleFailure)
-        }
+        }*/
 
         this.prefs = PreferenceRepository.customPrefs(activity!!,
                 Constants.preference_picar)
 
-        verifyLoadOfUnities()
-        verifyLoadOfProjects()
+        loadUnitsDatabase()
+        loadProjectList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -124,16 +124,16 @@ class ProjectsFragment: BaseFragment() {
                 .subscribe { result -> println(result)})
     }
 
-    private fun verifyLoadOfUnities(){
+  /*  private fun verifyLoadOfUnities(){
         val isDown = this.prefs.getInt(Constants.prefIsUnitiesDownload, 0)
         if (isDown == 0){
             getUnitsOfCloud()
         }else{
             loadUnitsDatabase()
         }
-    }
+    }*/
 
-    private fun verifyLoadOfProjects(){
+   /* private fun verifyLoadOfProjects(){
         val isDown = this.prefs.getInt(Constants.prefIsProjectsDownload, 0)
         if (isDown == 0){
             getProjectsOfCloud()
@@ -141,17 +141,17 @@ class ProjectsFragment: BaseFragment() {
             loadProjectList()
         }
 
-    }
+    }*/
 
-    private fun handleProjectsCloud(list: List<Project>?){
+    /*private fun handleProjectsCloud(list: List<Project>?){
         if (list != null && list.isNotEmpty()){
             insertProjectsViewModel.list = list
             insertProjectsViewModel.insertProjects()
             getFormsOfCloud(list)
         }
     }
-
-    private fun getFormsOfCloud(list: List<Project>){
+*/
+   /* private fun getFormsOfCloud(list: List<Project>){
         GlobalScope.launch{
             for (i in 0 until list.count()){
                 val id = list[i].id
@@ -162,15 +162,15 @@ class ProjectsFragment: BaseFragment() {
         }
 
     }
-
-    private fun handleInsertProjects(value: Boolean?){
+*/
+   /* private fun handleInsertProjects(value: Boolean?){
         //hideProgress()
         if (value != null && value){
             this.prefs[Constants.prefIsProjectsDownload] = 1
             loadProjectList()
 
         }
-    }
+    }*/
 
     private fun loadProjectList(){
         getProjectsViewModel.loadProjects()
@@ -207,16 +207,16 @@ class ProjectsFragment: BaseFragment() {
         return id
     }
 
-    private fun handleCloudUnits(value: Boolean?){
+  /*  private fun handleCloudUnits(value: Boolean?){
         //hideProgress()
         if (value != null && value){
             Thread.sleep(2000)
             this.prefs[Constants.prefIsUnitiesDownload] = 1
             loadUnitsDatabase()
         }
-    }
+    }*/
 
-    private fun getUnitsOfCloud(){
+   /* private fun getUnitsOfCloud(){
         //showProgress()
         val url = String.format("${Constants.urlBase}${Constants.serviceUnit}")
         val token = "Bearer " + this.prefs.getString(Constants.prefToken, "")
@@ -237,7 +237,7 @@ class ProjectsFragment: BaseFragment() {
             getProjectsCloudViewModel.requestProjects()
         }
     }
-
+*/
     private fun loadUnitsDatabase(){
         getUnitsViewModel.loadUnities()
 
@@ -314,7 +314,7 @@ class ProjectsFragment: BaseFragment() {
         }
     }
 
-    private fun handleFormsCloud(list: List<Form>?){
+   /* private fun handleFormsCloud(list: List<Form>?){
         if (list != null && list.isNotEmpty()){
             insertFormsViewModel .list = list
             insertFormsViewModel .insertForms()
@@ -327,9 +327,9 @@ class ProjectsFragment: BaseFragment() {
         if (value != null && value){
             println("Insert Forms OK")
         }
-    }
+    }*/
 
-    private fun getFormsOfCloud(id: Int){
+   /* private fun getFormsOfCloud(id: Int){
         //showProgress()
 
         val url = String.format(Constants.urlBase +
@@ -342,5 +342,5 @@ class ProjectsFragment: BaseFragment() {
         }
 
 
-    }
+    }*/
 }

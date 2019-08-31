@@ -28,6 +28,7 @@
     <string name="lbl_change_user">Change user</string>
     <string name="lbl_description">Description</string>
     <string name="lbl_date">Date</string>
+    <string name="lbl_form_id">FrmId</string>
     <string name="lbl_state">State:</string>
     <string name="lbl_id">Id:</string>
     <string name="lbl_unity">Unity:</string>
@@ -60,4 +61,10 @@
     <string name="lbl_value">Value</string>
     <string name="lbl_cumple">Cumple</string>
     <string name="lbl_comment">Comment</string>
+    <string name="msg_download">Download complete</string>
+    <string name="msg_error_download_unities">Error download Unities</string>
+    <string name="msg_error_download_projects">Error download Projects</string>
+    <string name="msg_error_download_forms">Error download Forms</string>
+    <string name="msg_error_download_types_forms">Error download Types Forms</string>
+    <string name="msg_error_download_content_forms">Error download Content Forms</string>
 </resources>
