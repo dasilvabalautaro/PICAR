@@ -138,6 +138,7 @@ class NewFormFragment: BaseFragment() {
                     }
                 }
                 .subscribe { result -> println(result)})
+
     }
 
     private fun handleInsertBodies(value: Boolean?){
@@ -171,6 +172,12 @@ class NewFormFragment: BaseFragment() {
         if (this.listTypeForm != null && this.listTypeForm!!.isNotEmpty()){
             loadValueCodes(this.listTypeForm!!)
             setDataSpinner()
+            if (!this.flagNewForm){
+                setSpinnerTypeForm(formView!!.frmId)
+                sp_select!!.isEnabled = false
+
+            }
+
         }
 
     }
@@ -193,10 +200,17 @@ class NewFormFragment: BaseFragment() {
 
     }
 
-    private fun getPositionInSpinner(value: String): Int{
-        val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(context!!,
-                android.R.layout.simple_list_item_1, this.codesTypesForms)
-        return spinnerAdapter.getPosition(value)
+    private fun setSpinnerTypeForm(frmId: String){
+        if (frmId.isNotEmpty()){
+            for (i in 0 until sp_select!!.adapter.count){
+                val value = sp_select!!.adapter.getItem(i) as String
+                if (value == frmId){
+                    sp_select!!.setSelection(i)
+                    break
+                }
+            }
+        }
+
     }
 
     private fun handleInsertForm(id: Long?){
@@ -273,7 +287,7 @@ class NewFormFragment: BaseFragment() {
         tv_title!!.text = resources.getString(R.string.lbl_update_form)
         getImagesByFormViewModel.idForm = formView!!.id
         getImagesByFormViewModel.loadImages()
-        sp_select!!.setSelection(getPositionInSpinner(formView!!.frmId))
+
     }
 
     private fun fillDataControl(){
