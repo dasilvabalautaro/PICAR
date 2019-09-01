@@ -32,8 +32,7 @@ class FormsFragment: BaseFragment() {
     lateinit var formsAdapter: FormsAdapter
 
     private lateinit var getFormsViewModel: GetFormsViewModel
-    /*private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
-    private lateinit var insertFormsViewModel: InsertFormsViewModel*/
+
     private lateinit var prefs: SharedPreferences
 
     private var idFormTemp = -1
@@ -47,15 +46,7 @@ class FormsFragment: BaseFragment() {
             observe(result, ::handleGetForms)
             failure(failure, ::handleFailure)
         }
-        /*getFormsCloudViewModel = viewModel(viewModelFactory) {
-            observe(result, ::handleFormsCloud)
-            failure(failure, ::handleFailure)
-        }
 
-        insertFormsViewModel = viewModel(viewModelFactory) {
-            observe(result, ::handleInsertForms)
-            failure(failure, ::handleFailure)
-        }*/
         this.prefs = PreferenceRepository.customPrefs(activity!!,
                 Constants.preference_picar)
         //verifyLoadOfForms()
@@ -82,32 +73,6 @@ class FormsFragment: BaseFragment() {
 
     }
 
-   /* private fun verifyLoadOfForms(){
-        val isDown = this.prefs.getInt(Constants.prefIsFormsDownload, 0)
-        if (isDown == 0){
-            getFormsOfCloud()
-        }else{
-            loadFormsList()
-        }
-    }*/
-
-   /* private fun getFormsOfCloud(){
-        //showProgress()
-        if (proyectView != null && activity != null){
-            val url = String.format(Constants.urlBase +
-                    "${Constants.serviceFormsByProject}${proyectView!!.id}")
-            *//*val prefs = PreferenceRepository.customPrefs(activity!!,
-                    Constants.preference_picar)*//*
-            val token = "Bearer " + this.prefs.getString(Constants.prefToken, "")
-            getFormsCloudViewModel.url = url
-            getFormsCloudViewModel.token = token
-            if (getFormsCloudViewModel.verifyInput()){
-                getFormsCloudViewModel.requestForms()
-            }
-
-        }
-    }*/
-
     private fun loadFormsList(){
         getFormsViewModel.loadForms()
 
@@ -119,33 +84,21 @@ class FormsFragment: BaseFragment() {
     }
 
     private fun setListFormByProject(){
+        try {
+            if (!listForm.isNullOrEmpty()){
+                val subList = listForm!!
+                        .filter { it.project == proyectView!!.id }
+                formsAdapter.collection = subList
+            }else{
+                formsAdapter.collection = listForm.orEmpty()
+            }
+            sr_forms!!.isRefreshing = false
 
-        if (!listForm.isNullOrEmpty()){
-            val subList = listForm!!
-                    .filter { it.project == proyectView!!.id }
-            formsAdapter.collection = subList
-        }else{
-            formsAdapter.collection = listForm.orEmpty()
-        }
-        sr_forms!!.isRefreshing = false
-    }
-
-   /* private fun handleFormsCloud(list: List<Form>?){
-        if (list != null && list.isNotEmpty()){
-            insertFormsViewModel .list = list
-            insertFormsViewModel .insertForms()
-        }
-
-    }*/
-
-   /* private fun handleInsertForms(value: Boolean?){
-        //hideProgress()
-        if (value != null && value){
-            loadFormsList()
-
+        }catch (ex: UninitializedPropertyAccessException){
+            println(ex.message)
         }
     }
-*/
+
     private fun initializeView(){
         rv_forms!!.setHasFixedSize(true)
         rv_forms!!.layoutManager = LinearLayoutManager(activity,

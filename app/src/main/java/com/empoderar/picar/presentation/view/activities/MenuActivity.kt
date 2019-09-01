@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -180,6 +181,7 @@ class MenuActivity : BaseActivity(){
     }
 
     private fun executeOptionMenu(groupPosition: Int, childPosition: Int){
+        setOrientation(true)
         when(groupPosition){
             0 -> {
                 when(childPosition){
@@ -220,6 +222,15 @@ class MenuActivity : BaseActivity(){
 
     fun setMenuAddForm(option: Boolean){
         mainMenu.findItem(R.id.action_new_form).isVisible = option
+
+    }
+
+    fun setOrientation(option: Boolean){
+        requestedOrientation = if (option){
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }else{
+            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        }
     }
 
     fun gallery(){

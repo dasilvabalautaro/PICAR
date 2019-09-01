@@ -319,7 +319,7 @@ class DownloadFragment: BaseFragment() {
         val job = GlobalScope.launch(Dispatchers.Default) {
             var nextPrintTime = startTime
             var i = 0
-            while (i < 8 && !jobComplete) {
+            while (i < 12 && !jobComplete) {
                 if (System.currentTimeMillis() >= nextPrintTime) {
                     println("job: I'm sleeping ${i++} ...")
                     nextPrintTime += 500L

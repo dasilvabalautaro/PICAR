@@ -29,4 +29,5 @@ interface ApplicationComponent {
     fun inject(newFormFragment: NewFormFragment)
     fun inject(mapProjectsFragment: MapProjectsFragment)
     fun inject(downloadFragment: DownloadFragment)
+    fun inject(bodiesFormFragment: BodiesFormFragment)
 }

@@ -152,5 +152,17 @@ abstract class ViewModelModule {
     abstract fun bindsInsertUnitsViewModel(insertUnitsViewModel:
                                                InsertUnitsViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(InsertBodiesFormViewModel::class)
+    abstract fun bindsInsertBodiesFormViewModel(insertBodiesFormViewModel:
+                                                    InsertBodiesFormViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GetBodyFormViewModel::class)
+    abstract fun bindsGetBodyFormViewModel(getBodyFormViewModel:
+                                               GetBodyFormViewModel): ViewModel
+
 
 }
