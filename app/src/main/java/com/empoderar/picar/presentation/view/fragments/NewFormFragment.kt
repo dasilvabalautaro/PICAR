@@ -143,6 +143,7 @@ class NewFormFragment: BaseFragment() {
 
     private fun handleInsertBodies(value: Boolean?){
         if (value != null && value){
+            ib_bodies.visibility = View.VISIBLE
             context!!.toast("Insert Bodies OK")
         }
     }
@@ -263,7 +264,7 @@ class NewFormFragment: BaseFragment() {
         rv_photos.adapter = photoAdapter
         /*photoAdapter.clickListener = { photo, navigationExtras ->
             navigator.showForms(activity!!, photo, navigationExtras) }*/
-
+        ib_bodies.visibility = View.INVISIBLE
         ib_photo!!.setOnClickListener { (activity as MenuActivity).camera() }
         ib_save!!.setOnClickListener { insertForm() }
         ib_bodies!!.setOnClickListener {
@@ -287,7 +288,7 @@ class NewFormFragment: BaseFragment() {
         tv_title!!.text = resources.getString(R.string.lbl_update_form)
         getImagesByFormViewModel.idForm = formView!!.id
         getImagesByFormViewModel.loadImages()
-
+        ib_bodies.visibility = View.VISIBLE
     }
 
     private fun fillDataControl(){
