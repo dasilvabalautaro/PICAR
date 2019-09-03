@@ -14,7 +14,7 @@ class GetImagesByFormUseCase @Inject constructor(private val imageDataDao:
             val listData = imageDataDao.findImagesByForm(params)
 
             val list = listData.map { Image(it.id, it.form,
-                    it.base64, it.date) }
+                    it.base64, it.latitude, it.longitude, it.date) }
 
             when(list.isNotEmpty()){
                 true -> Either.Right(list)

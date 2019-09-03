@@ -9,7 +9,7 @@ import com.empoderar.picar.model.persistent.database.interfaces.*
     ProjectData::class, MunicipalityData::class, RoleData::class,
     FormData::class, ImageData::class, TypeFormData::class,
     ContentFormData::class, BodyFormData::class],
-        version = 2, exportSchema = false)
+        version = 3, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun userDao(): UserDataDao
     abstract fun unityDao(): UnityDataDao

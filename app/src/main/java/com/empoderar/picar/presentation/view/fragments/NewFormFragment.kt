@@ -79,7 +79,9 @@ class NewFormFragment: BaseFragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { resize ->
                     run {
-                        val photo = Photo(resize, Date().toString())
+                        val photo = Photo(resize, Date().toString(),
+                                Variables.locationUser.lat,
+                                Variables.locationUser.lon)
                         listPhoto.add(photo)
                         photoAdapter.collection = listPhoto.toList()
                     }
@@ -229,7 +231,8 @@ class NewFormFragment: BaseFragment() {
             for (i in this.numberPhotos until this.listPhoto.count()){
                 val base64 = manageFiles
                         .base641EncodedImage(this.listPhoto[i].image!!)
-                val img = Image(0, id.toInt(), base64, this.listPhoto[i].date)
+                val img = Image(0, id.toInt(), base64, this.listPhoto[i].latitude,
+                        this.listPhoto[i].longitude, this.listPhoto[i].date)
                 list.add(img)
 
             }
@@ -251,7 +254,7 @@ class NewFormFragment: BaseFragment() {
         if (!list.isNullOrEmpty()){
             for (imv: ImageView in list){
                 val bitmap = manageFiles.base64DecodeImage(imv.base64)
-                val photo = Photo(bitmap, imv.date)
+                val photo = Photo(bitmap, imv.date, imv.latitude, imv.longitude)
                 this.listPhoto.add(photo)
             }
             this.numberPhotos = this.listPhoto.count()
