@@ -25,13 +25,20 @@ import kotlinx.android.synthetic.main.view_list_form.*
 import javax.inject.Inject
 
 class FormsFragment: BaseFragment() {
+    companion object{
+        private lateinit var getFormsViewModel: GetFormsViewModel
+        fun loadFormsList(){
+            getFormsViewModel.loadForms()
+
+        }
+    }
 
     @Inject
     lateinit var navigator: Navigator
     @Inject
     lateinit var formsAdapter: FormsAdapter
 
-    private lateinit var getFormsViewModel: GetFormsViewModel
+
 
     private lateinit var prefs: SharedPreferences
 
@@ -58,24 +65,6 @@ class FormsFragment: BaseFragment() {
         setupSwipeRefresh()
 
         //loadFormsList()
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (proyectView != null){
-            if (listForm.isNullOrEmpty()){
-                loadFormsList()
-            }else{
-                setListFormByProject()
-            }
-
-        }
-
-    }
-
-    private fun loadFormsList(){
-        getFormsViewModel.loadForms()
-
     }
 
     private fun handleGetForms(list: List<FormView>?){

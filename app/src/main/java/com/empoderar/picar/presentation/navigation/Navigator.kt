@@ -10,6 +10,7 @@ import com.empoderar.picar.presentation.data.ProjectView
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.view.activities.*
 import com.empoderar.picar.presentation.view.fragments.BodiesFormFragment
+import com.empoderar.picar.presentation.view.fragments.FormsFragment
 import com.empoderar.picar.presentation.view.fragments.NewFormFragment
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,7 +51,7 @@ class Navigator @Inject constructor() {
                      projectView: ProjectView, navigationExtras: Extras){
         val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
         BaseFragment.proyectView = projectView
-
+        FormsFragment.loadFormsList()
         viewPager.currentItem = 1
 
     }
