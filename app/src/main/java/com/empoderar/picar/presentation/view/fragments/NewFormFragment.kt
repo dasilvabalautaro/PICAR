@@ -132,8 +132,11 @@ class NewFormFragment: BaseFragment() {
 
                         this.codeTypeForm = sp_select!!
                                 .getItemAtPosition(position) as String
-                        getContentFormsViewModel.frmId = this.codeTypeForm
-                        getContentFormsViewModel.loadContents()
+                        if (this.codeTypeForm.isEmpty().not()){
+                            getContentFormsViewModel.frmId = this.codeTypeForm
+                            getContentFormsViewModel.loadContents()
+
+                        }
                         return@map resources.getString(R.string.new_filter)
                     }
                 }
@@ -177,6 +180,9 @@ class NewFormFragment: BaseFragment() {
                 setSpinnerTypeForm(formView!!.frmId)
                 sp_select!!.isEnabled = false
 
+            }else{
+                sp_select!!.setSelection(0)
+                sp_select!!.performClick()
             }
 
         }
@@ -196,6 +202,7 @@ class NewFormFragment: BaseFragment() {
         sp_select!!.adapter = spinnerAdapter
         spinnerAdapter.notifyDataSetChanged()
         if (sp_select!!.adapter != null){
+
             sp_select!!.refreshDrawableState()
         }
 

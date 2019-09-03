@@ -40,8 +40,8 @@ class DownloadFragment: BaseFragment() {
 
     private lateinit var prefs: SharedPreferences
     private var listProjectDownload: MutableList<Project>? = null
-    private var jobComplete = false
-
+    private var jobFormsComplete = false
+    private var jobContentComplete = false
     override fun layoutId() = R.layout.view_down_progress
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -157,8 +157,7 @@ class DownloadFragment: BaseFragment() {
         if (value != null && value && isFinishDownloadForms()){
 
             this.prefs[Constants.prefIsFormsDownload] = 1
-            verifyDownload()
-            jobComplete = true
+            this.jobFormsComplete = true
 //            navigator.showMenu(activity!!)
 //            (activity!! as DownloadActivity).finish()
 
@@ -195,7 +194,7 @@ class DownloadFragment: BaseFragment() {
         if (value != null && value){
 
             this.prefs[Constants.prefIsContentFormsDownload] = 1
-
+            this.jobContentComplete = true
         }
     }
 
@@ -319,7 +318,7 @@ class DownloadFragment: BaseFragment() {
         val job = GlobalScope.launch(Dispatchers.Default) {
             var nextPrintTime = startTime
             var i = 0
-            while (i < 12 && !jobComplete) {
+            while (i < 12 && (!jobFormsComplete || !jobContentComplete)) {
                 if (System.currentTimeMillis() >= nextPrintTime) {
                     println("job: I'm sleeping ${i++} ...")
                     nextPrintTime += 500L
@@ -330,6 +329,7 @@ class DownloadFragment: BaseFragment() {
         job.cancelAndJoin()
         println("Now I can quit.")
         runOnUiThread {
+            verifyDownload()
             navigator.showMenu(activity!!)
             (activity!! as DownloadActivity).finish()
         }
