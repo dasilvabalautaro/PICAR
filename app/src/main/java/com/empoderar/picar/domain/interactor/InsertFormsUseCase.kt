@@ -30,8 +30,6 @@ class InsertFormsUseCase @Inject constructor(private val formDataDao:
 
     }
 
-
-
     private fun transformList(list: List<Form>): List<FormData>{
         val forms = ArrayList<FormData>()
 
@@ -41,7 +39,7 @@ class InsertFormsUseCase @Inject constructor(private val formDataDao:
                         list[i].frmNro, list[i].title, list[i].dateEvaluation,
                         list[i].state, list[i].observation,
                         list[i].userMobile, list[i].latitude, list[i].longitude,
-                        list[i].dateCreation, list[i].dateModification)
+                        list[i].dateCreation, list[i].dateModification, 0)
                 forms.add(form)
             }
         }

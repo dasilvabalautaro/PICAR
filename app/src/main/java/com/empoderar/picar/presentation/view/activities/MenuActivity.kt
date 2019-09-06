@@ -28,11 +28,9 @@ import com.empoderar.picar.presentation.plataform.BaseActivity
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.android.synthetic.main.toolbar.*
 import com.empoderar.picar.presentation.navigation.Navigator
+import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.tools.Validate
-import com.empoderar.picar.presentation.view.fragments.ListingsFragment
-import com.empoderar.picar.presentation.view.fragments.MapFragment
-import com.empoderar.picar.presentation.view.fragments.MapProjectsFragment
-import com.empoderar.picar.presentation.view.fragments.NewFormFragment
+import com.empoderar.picar.presentation.view.fragments.*
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -108,9 +106,7 @@ class MenuActivity : BaseActivity(){
         this.expandableListMenu = ExpandableListMenu().getListMenu(this)
         this.expandableHeaderMenu = this.expandableListMenu!!.keys.toList()
         addDrawerOptions()
-        GlobalScope.launch{
-            checkConnectionServer()
-        }
+
     }
 
     private fun addDrawerOptions(){
@@ -153,9 +149,7 @@ class MenuActivity : BaseActivity(){
         }
     }
 
-    private fun checkConnectionServer(){
-        Variables.isServerUp = Validate.isURLReachable(this)
-    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -168,9 +162,15 @@ class MenuActivity : BaseActivity(){
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item!!.itemId
         if (id == R.id.action_new_form){
-            val newForm = NewFormFragment()
-            newForm.flagNewForm = true
-            addFragment(newForm)
+            if (BaseFragment.proyectView != null){
+                val newForm = NewFormFragment()
+                newForm.flagNewForm = true
+                addFragment(newForm)
+            }else{
+                Toast.makeText(this,
+                        getString(R.string.failure_project_not_selected),
+                        Toast.LENGTH_SHORT).show()
+            }
         }
         if (toggle!!.onOptionsItemSelected(item)){
             return true
@@ -209,6 +209,20 @@ class MenuActivity : BaseActivity(){
                     }
 
                 }
+            }
+            2 -> {
+                when(childPosition){
+                    0 -> {
+                        val uploadFragment = UploadFragment()
+                        addFragment(uploadFragment)
+                    }
+
+                    1 -> {
+
+                    }
+
+                }
+
             }
         }
     }

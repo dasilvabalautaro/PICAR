@@ -4,18 +4,26 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import com.empoderar.picar.App
 import com.empoderar.picar.BuildConfig
+import com.empoderar.picar.model.persistent.caching.Constants
 import com.empoderar.picar.model.persistent.database.AppDatabase
 import com.empoderar.picar.model.persistent.network.apply.*
+import com.empoderar.picar.model.persistent.network.interfaces.PicarWebService
 import com.empoderar.picar.model.persistent.network.repository.UsersRepository
+import com.empoderar.picar.presentation.plataform.NetworkHandler
 import dagger.Module
 import dagger.Provides
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.security.cert.CertificateException
 import javax.inject.Singleton
 import javax.net.ssl.*
+import com.empoderar.picar.model.exception.NoNetworkException
+
+
 
 //Repository of Inject
 @Module
@@ -80,6 +88,31 @@ class ApplicationModule(private val app: App) {
             throw RuntimeException(e)
         }
 
+    }
+
+    @Provides
+    @Singleton
+    fun provideWebService(networkHandler: NetworkHandler): PicarWebService{
+        val baseUrl = Constants.urlBase
+
+        val builder = Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+        val okHttpClientBuilder =   getUnsafeOkHttpClient() //OkHttpClient.Builder()
+        okHttpClientBuilder.addInterceptor { chain ->
+            val connected = networkHandler.isConnected
+            if (connected!!) {
+                return@addInterceptor chain.proceed(chain.request())
+
+            } else {
+                throw NoNetworkException()
+            }
+        }
+
+        return builder.client(okHttpClientBuilder.build())
+                .build()
+                .create<PicarWebService>(PicarWebService::class.java)
     }
 
 //    Provide access the database
@@ -154,4 +187,9 @@ class ApplicationModule(private val app: App) {
     @Singleton
     fun provideLoadRequestContentForm(dataSource: LoadRequestContentForm.SendRequest):
             LoadRequestContentForm = dataSource
+
+    @Provides
+    @Singleton
+    fun provideLoadRequestPostForm(dataSource: LoadRequestPostForm.SendRequest):
+            LoadRequestPostForm = dataSource
 }

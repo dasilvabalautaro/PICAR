@@ -9,11 +9,11 @@ import javax.inject.Inject
 
 class GetFormsUseCase @Inject constructor(private val formDataDao:
                                           FormDataDao):
-        UseCase<List<Form>, UseCase.None>() {
+        UseCase<List<Form>, Int>() {
 
-    override suspend fun run(params: None): Either<Failure, List<Form>> {
+    override suspend fun run(params: Int): Either<Failure, List<Form>> {
         return try {
-            val listData = formDataDao.getAll()
+            val listData = formDataDao.getAll(params)
             val list = listData.map { Form(it.id, it.project, it.frmId,
                     it.frmNro, it.title, it.dateEvaluation, it.state, it.observation,
                     it.userMobile, it.latitude, it.longitude, it.dateCreation,

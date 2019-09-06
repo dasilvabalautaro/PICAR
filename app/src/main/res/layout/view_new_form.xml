@@ -17,20 +17,6 @@
             app:layout_constraintGuide_percent=".05"
             android:orientation="vertical"/>
 
-        <!--<android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/left_two_guideline"
-            app:layout_constraintGuide_percent=".20"
-            android:orientation="vertical"/>
-
-        <android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/left_three_guideline"
-            app:layout_constraintGuide_percent=".15"
-            android:orientation="vertical"/>-->
-
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,12 +31,6 @@
             app:layout_constraintGuide_percent=".30"
             android:orientation="vertical"/>
 
-        <!--<android.support.constraint.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/right_three_guideline"
-            app:layout_constraintGuide_percent=".85"
-            android:orientation="vertical"/>-->
 
         <android.support.constraint.Guideline
             android:layout_width="wrap_content"
@@ -228,6 +208,26 @@
             app:layout_constraintRight_toLeftOf="@+id/right_guideline"
             app:layout_constraintTop_toTopOf="@+id/tv_lbl_image"/>
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_finish"
+            android:text="@string/lbl_finished"
+            android:textStyle="bold"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorSecondaryText"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_one_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/ib_photo"/>
+
+        <CheckBox
+            android:id="@+id/cb_finished"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@+id/right_one_guideline"
+            app:layout_constraintTop_toTopOf="@+id/tv_lbl_finish" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_photos"
             android:layout_width="0dp"
@@ -235,7 +235,9 @@
             android:layout_marginTop="10dp"
             app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/ib_photo"/>
+            app:layout_constraintTop_toBottomOf="@+id/cb_finished"/>
+
+
     </android.support.constraint.ConstraintLayout>
 
 

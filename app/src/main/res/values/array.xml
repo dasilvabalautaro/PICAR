@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="project">
-        <item>Action 1</item>
+        <item>Init</item>
         <item>Action 2</item>
         <item>Action 3</item>
     </string-array>
@@ -12,7 +12,7 @@
     </string-array>
 
     <string-array name="system">
-        <item>Action 1</item>
+        <item>Upload Forms</item>
         <item>Action 2</item>
         <item>Action 3</item>
     </string-array>

@@ -22,6 +22,7 @@ import com.empoderar.picar.presentation.extension.*
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.*
+import com.empoderar.picar.presentation.tools.Transform
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -30,6 +31,10 @@ import io.reactivex.functions.Cancellable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.view_new_form.*
 import kotlinx.android.synthetic.main.view_new_form.sp_select
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Month
+import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -57,6 +62,7 @@ class NewFormFragment: BaseFragment() {
     private lateinit var getTypesFormViewModel: GetTypesFormViewModel
     private lateinit var getContentFormsViewModel: GetContentFormsViewModel
     private lateinit var insertBodiesFormViewModel: InsertBodiesFormViewModel
+    private lateinit var updateUploadFormsViewModel: UpdateUploadFormsViewModel
 
 
     override fun layoutId() = R.layout.view_new_form
@@ -116,6 +122,11 @@ class NewFormFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
+        updateUploadFormsViewModel = viewModel(viewModelFactory) {
+            observe(result, ::handleUpdateForm)
+            failure(failure, ::handleFailure)
+        }
+
         getTypesFormViewModel.loadTypesForm()
     }
 
@@ -146,9 +157,16 @@ class NewFormFragment: BaseFragment() {
 
     }
 
+    private fun handleUpdateForm(value: Boolean?){
+        if (value != null && value){
+            context!!.toast("Update Form OK")
+        }
+    }
+
     private fun handleInsertBodies(value: Boolean?){
         if (value != null && value){
             ib_bodies.visibility = View.VISIBLE
+            cb_finished!!.isEnabled = true
             context!!.toast("Insert Bodies OK")
         }
     }
@@ -183,7 +201,7 @@ class NewFormFragment: BaseFragment() {
                 sp_select!!.isEnabled = false
 
             }else{
-                sp_select!!.setSelection(0)
+
                 sp_select!!.performClick()
             }
 
@@ -280,13 +298,28 @@ class NewFormFragment: BaseFragment() {
         ib_bodies!!.setOnClickListener {
             navigator.showBodies(activity!!, this.idNewForm)
         }
+        cb_finished!!.setOnClickListener {
+            if (cb_finished!!.isChecked) {
+                updateUploadForm(1)
+            } else {
+                updateUploadForm(0)
+            }
+        }
+    }
+
+    private fun updateUploadForm(upload: Int){
+        updateUploadFormsViewModel.idForm = this.idNewForm
+        updateUploadFormsViewModel.value = upload
+        updateUploadFormsViewModel.buildParams()
+        updateUploadFormsViewModel.updateUploadForms()
+
     }
 
     private fun setNewDataControl(){
         tv_date!!.text = Date().toString()
         tv_latitude.text = Variables.locationUser.lat.toString()
         tv_longitude.text = Variables.locationUser.lon.toString()
-
+        cb_finished!!.isEnabled = false
     }
 
     private fun setUpdateDataControl(){
@@ -299,6 +332,7 @@ class NewFormFragment: BaseFragment() {
         getImagesByFormViewModel.idForm = formView!!.id
         getImagesByFormViewModel.loadImages()
         ib_bodies.visibility = View.VISIBLE
+        cb_finished!!.isEnabled = true
     }
 
     private fun fillDataControl(){
@@ -319,10 +353,18 @@ class NewFormFragment: BaseFragment() {
     }
 
     private fun insertNewForm(){
+        val dateMinusFiftyYear = Calendar.getInstance().run {
+            add(Calendar.YEAR, -50)
+            time
+        }
+        val dateLong = System.currentTimeMillis()
+        val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+        val dateInit = dateMinusFiftyYear.time
+        val dateInitToCloud = String.format(Locale.US,"/Date(%d)/", dateInit)
         val form = Form(0, proyectView!!.id, this.codeTypeForm , 1,
-                et_title.text.toString(), "", 1, "",
+                et_title.text.toString(), dateInitToCloud, 1, "None",
                 123, Variables.locationUser.lat,
-                Variables.locationUser.lon, tv_date.text.toString(), "")
+                Variables.locationUser.lon, dateToCloud, dateInitToCloud)
         insertOneFormViewModel.form = form
         insertOneFormViewModel.insertForm()
 

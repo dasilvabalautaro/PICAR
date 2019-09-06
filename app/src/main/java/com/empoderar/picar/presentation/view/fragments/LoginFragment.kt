@@ -19,7 +19,6 @@ import com.empoderar.picar.presentation.plataform.NetworkHandler
 import com.empoderar.picar.presentation.presenter.PermissionViewModel
 import com.empoderar.picar.presentation.tools.Validate
 import com.empoderar.picar.presentation.view.activities.LoginActivity
-import com.empoderar.picar.presentation.view.activities.OptionAccessActivity
 import kotlinx.android.synthetic.main.view_login.*
 import javax.inject.Inject
 

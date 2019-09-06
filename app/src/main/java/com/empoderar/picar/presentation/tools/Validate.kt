@@ -25,7 +25,7 @@ object Validate {
         val netInfo = connectivityManager.activeNetworkInfo
         if (netInfo != null && netInfo.isConnected) {
             try {
-                val url = URL(Constants.server)
+                val url = URL(Constants.urlBase)
                 val urlConnection = url.openConnection() as HttpURLConnection
                 urlConnection.connectTimeout = 3 * 1000          // 2 s.
                 urlConnection.connect()

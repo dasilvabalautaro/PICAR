@@ -18,9 +18,10 @@ data class FormData(@PrimaryKey(autoGenerate = true) var id: Int,
                     @ColumnInfo(name = "latitudeMobile") var latitude: Double,
                     @ColumnInfo(name = "longitudeMobile") var longitude: Double,
                     @ColumnInfo(name = "dateCreation") var dateCreation: String,
-                    @ColumnInfo(name = "dateModification") var dateModification: String) {
+                    @ColumnInfo(name = "dateModification") var dateModification: String,
+                    @ColumnInfo(name = "upload") var upload: Int) {
 
     constructor():this(0, 0, "", 0, "",
             "", 0, "", 0,
-            0.0, 0.0, "", "")
+            0.0, 0.0, "", "", 0)
 }

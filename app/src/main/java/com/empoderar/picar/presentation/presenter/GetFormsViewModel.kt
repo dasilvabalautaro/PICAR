@@ -12,8 +12,9 @@ class GetFormsViewModel @Inject constructor(private val getFormsUseCase:
                                             GetFormsUseCase): BaseViewModel() {
 
     var result: MutableLiveData<List<FormView>> = MutableLiveData()
+    var upload: Int? = null
 
-    fun loadForms() = getFormsUseCase(UseCase.None()){
+    fun loadForms() = getFormsUseCase(upload!!){
         it.either(::handleFailure, ::handleFormList)
     }
 

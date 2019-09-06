@@ -12,6 +12,7 @@ import com.empoderar.picar.presentation.extension.inTransaction
 import com.empoderar.picar.R.id
 import com.empoderar.picar.R.layout
 import com.empoderar.picar.di.ApplicationComponent
+import com.empoderar.picar.model.persistent.network.interfaces.PicarWebService
 import com.empoderar.picar.presentation.permission.EnablePermissions
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.disposables.CompositeDisposable
@@ -30,6 +31,8 @@ abstract class BaseActivity: AppCompatActivity() {
 
     @Inject
     lateinit var networkHandler: NetworkHandler
+    @Inject
+    lateinit var picarWebService: PicarWebService
     @Inject
     lateinit var enablePermissions: EnablePermissions
     internal var disposable: CompositeDisposable = CompositeDisposable()

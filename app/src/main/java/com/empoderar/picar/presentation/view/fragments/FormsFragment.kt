@@ -28,8 +28,8 @@ class FormsFragment: BaseFragment() {
     companion object{
         private lateinit var getFormsViewModel: GetFormsViewModel
         fun loadFormsList(){
+            getFormsViewModel.upload = 0
             getFormsViewModel.loadForms()
-
         }
     }
 
@@ -41,8 +41,6 @@ class FormsFragment: BaseFragment() {
 
 
     private lateinit var prefs: SharedPreferences
-
-    private var idFormTemp = -1
 
     override fun layoutId() = R.layout.view_list_form
 

@@ -164,5 +164,23 @@ abstract class ViewModelModule {
     abstract fun bindsGetBodyFormViewModel(getBodyFormViewModel:
                                                GetBodyFormViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(UploadFormsViewModel::class)
+    abstract fun bindsUploadFormsViewModel(uploadFormsViewModel:
+                                               UploadFormsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdateUploadFormsViewModel::class)
+    abstract fun bindsUpdateUploadFormsViewModel(updateUploadFormsViewModel:
+                                                     UpdateUploadFormsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UpdateUploadAllFormsViewModel::class)
+    abstract fun bindsUpdateUploadAllFormsViewModel(updateUploadAllFormsViewModel:
+                                                        UpdateUploadAllFormsViewModel): ViewModel
+
 
 }

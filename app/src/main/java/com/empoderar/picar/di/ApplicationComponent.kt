@@ -4,6 +4,7 @@ import android.content.Context
 import com.empoderar.picar.App
 import com.empoderar.picar.di.viewmodel.ViewModelModule
 import com.empoderar.picar.model.persistent.network.LocationListener
+import com.empoderar.picar.presentation.view.activities.LoginActivity
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import com.empoderar.picar.presentation.view.activities.RouteActivity
 import com.empoderar.picar.presentation.view.fragments.*
@@ -18,6 +19,7 @@ interface ApplicationComponent {
     fun context(): Context
     fun inject(routeActivity: RouteActivity)
     fun inject(menuActivity: MenuActivity)
+    fun inject(loginActivity: LoginActivity)
     fun inject(splashFragment: SplashFragment)
     fun inject(projectsFragment: ProjectsFragment)
     fun inject(formsFragment: FormsFragment)
@@ -30,4 +32,5 @@ interface ApplicationComponent {
     fun inject(mapProjectsFragment: MapProjectsFragment)
     fun inject(downloadFragment: DownloadFragment)
     fun inject(bodiesFormFragment: BodiesFormFragment)
+    fun inject(uploadFragment: UploadFragment)
 }

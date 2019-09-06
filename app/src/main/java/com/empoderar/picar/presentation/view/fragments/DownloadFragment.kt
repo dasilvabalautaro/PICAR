@@ -30,8 +30,8 @@ class DownloadFragment: BaseFragment() {
     private lateinit var getProjectsCloudViewModel: GetProjectsCloudViewModel
     private lateinit var insertProjectsViewModel: InsertProjectsViewModel
     private lateinit var insertUnitsViewModel: InsertUnitsViewModel
-    private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
-    private lateinit var insertFormsViewModel: InsertFormsViewModel
+    //private lateinit var getFormsCloudViewModel: GetFormsCloudViewModel
+    //private lateinit var insertFormsViewModel: InsertFormsViewModel
     private lateinit var getTypesFormCloudViewModel: GetTypesFormCloudViewModel
     private lateinit var insertTypesFormViewModel: InsertTypesFormViewModel
     private lateinit var getContentFormsCloudViewModel: GetContentFormsCloudViewModel
@@ -40,7 +40,7 @@ class DownloadFragment: BaseFragment() {
 
     private lateinit var prefs: SharedPreferences
     private var listProjectDownload: MutableList<Project>? = null
-    private var jobFormsComplete = false
+    //private var jobFormsComplete = false
     private var jobContentComplete = false
     override fun layoutId() = R.layout.view_down_progress
 
@@ -67,6 +67,7 @@ class DownloadFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
+/*
         getFormsCloudViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleFormsCloud)
             failure(failure, ::handleFailure)
@@ -76,6 +77,7 @@ class DownloadFragment: BaseFragment() {
             observe(result, ::handleInsertForms)
             failure(failure, ::handleFailure)
         }
+*/
 
         getTypesFormCloudViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleTypesFormsCloud)
@@ -121,8 +123,8 @@ class DownloadFragment: BaseFragment() {
         if (value != null && value){
             this.prefs[Constants.prefIsProjectsDownload] = 1
             getTypesFormOfCloud()
-            Thread.sleep(1000)
-            initDownloadForms()
+            //Thread.sleep(1000)
+            //initDownloadForms()
 
         }
     }
@@ -144,6 +146,7 @@ class DownloadFragment: BaseFragment() {
         }
     }
 
+/*
     private fun handleFormsCloud(list: List<Form>?){
         if (list != null && list.isNotEmpty()){
             insertFormsViewModel .list = list
@@ -163,6 +166,7 @@ class DownloadFragment: BaseFragment() {
 
         }
     }
+*/
 
     private fun handleTypesFormsCloud(list: List<TypeForm>?){
         if (list != null && list.isNotEmpty()){
@@ -221,6 +225,7 @@ class DownloadFragment: BaseFragment() {
         }
     }
 
+/*
     private fun initDownloadForms(){
 
         if (listProjectDownload!!.isNotEmpty()){
@@ -244,7 +249,9 @@ class DownloadFragment: BaseFragment() {
         }
 
     }
+*/
 
+/*
     private fun getFormsOfCloud(id: Int){
         //showProgress()
 
@@ -259,6 +266,7 @@ class DownloadFragment: BaseFragment() {
 
 
     }
+*/
 
     private fun getTypesFormOfCloud(){
         //showProgress()
@@ -292,10 +300,12 @@ class DownloadFragment: BaseFragment() {
         if (isDown == 0){
             result += getString(R.string.msg_error_download_projects) + "\n"
         }
+/*
         isDown = this.prefs.getInt(Constants.prefIsFormsDownload, 0)
         if (isDown == 0){
             result += getString(R.string.msg_error_download_forms) + "\n"
         }
+*/
         isDown = this.prefs.getInt(Constants.prefIsTypesFormsDownload, 0)
         if (isDown == 0){
             result += getString(R.string.msg_error_download_types_forms) + "\n"
@@ -309,7 +319,7 @@ class DownloadFragment: BaseFragment() {
             result = getString(R.string.msg_download)
         }
 
-        toast(result)
+        context!!.toast(result)
 
     }
 
@@ -318,7 +328,7 @@ class DownloadFragment: BaseFragment() {
         val job = GlobalScope.launch(Dispatchers.Default) {
             var nextPrintTime = startTime
             var i = 0
-            while (i < 12 && (!jobFormsComplete || !jobContentComplete)) {
+            while (i < 12 && !jobContentComplete) {
                 if (System.currentTimeMillis() >= nextPrintTime) {
                     println("job: I'm sleeping ${i++} ...")
                     nextPrintTime += 500L

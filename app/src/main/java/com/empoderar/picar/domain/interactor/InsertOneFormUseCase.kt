@@ -30,6 +30,6 @@ class InsertOneFormUseCase @Inject constructor(private val formDataDao:
                 frmNro = form.frmNro, title = form.title, dateEvaluation = form.dateEvaluation,
                 state = form.state, observation = form.observation,
                 userMobile = form.userMobile, latitude = form.latitude, longitude = form.longitude,
-                dateCreation = form.dateCreation, dateModification = form.dateModification)
+                dateCreation = form.dateCreation, dateModification = form.dateModification, upload = 0)
     }
 }
