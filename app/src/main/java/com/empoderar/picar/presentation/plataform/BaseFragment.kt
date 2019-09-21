@@ -31,6 +31,8 @@ abstract class BaseFragment: Fragment() {
         var listProject: List<ProjectView>? = null
         var proyectView: ProjectView? = null
         var listForm: List<FormView>? = null
+        var currentProject: Int = 0
+        var oldProject: Int = 0
 
     }
 

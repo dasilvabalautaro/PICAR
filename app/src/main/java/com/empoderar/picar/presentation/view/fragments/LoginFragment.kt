@@ -55,7 +55,7 @@ class LoginFragment: BaseFragment() {
         }
         verifyEmail()
 
-        et_user.setText("dasilvaba")
+        et_user.setText("david")
         et_password.setText("It@p@llu1962")
     }
 
@@ -86,6 +86,8 @@ class LoginFragment: BaseFragment() {
             this.prefs[Constants.prefExpiration] = permission.expiration
             this.prefs[Constants.prefEmail] = permission.email
             this.prefs[Constants.prefLogin] = et_user.text.toString()
+            this.prefs[Constants.prefIdUser] = permission.id
+            this.prefs[Constants.prefUnity] = permission.unity
             val password = AES.encrypt(et_password.text.toString(), Constants.seed)
             this.prefs[Constants.prefPassword] = password
             defineAccess()
@@ -167,6 +169,6 @@ class LoginFragment: BaseFragment() {
     }
 
     private fun validatedInput(name: String, password: String): Boolean{
-        return name.length > 5 && password.length > 5
+        return name.length > 4 && password.length > 5
     }
 }

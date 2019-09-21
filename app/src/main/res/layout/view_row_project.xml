@@ -225,7 +225,7 @@
             android:layout_marginTop="5dp"
             card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_date_presentation"/>
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_lbl_date_presentation"/>
 
         <TextView
             android:layout_width="0dp"
@@ -244,9 +244,11 @@
             android:textStyle="bold"
             android:textColor="@color/colorSecondaryText"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             card_view:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             card_view:layout_constraintRight_toRightOf="@+id/right_one_guideline"
-            card_view:layout_constraintTop_toBottomOf="@+id/tv_date_init_agreement"/>
+            card_view:layout_constraintTop_toBottomOf="@+id/tv_lbl_date_init_agreement"
+            card_view:layout_constraintBottom_toBottomOf="@+id/bottom_guideline"/>
 
         <TextView
             android:layout_width="0dp"

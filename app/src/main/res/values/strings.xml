@@ -42,6 +42,8 @@
     <string name="lbl_dateEndAgreement">Date End Agreement:</string>
     <string name="lbl_tab_projects">Projects</string>
     <string name="lbl_tab_forms">Forms</string>
+    <string name="lbl_tab_new">Form</string>
+    <string name="lbl_tab_detail">Detail</string>
     <string name="item_menu_1">Action 1</string>
     <string name="item_menu_2">Action 2</string>
     <string name="item_menu_3">Action 3</string>
@@ -58,6 +60,7 @@
     <string name="title_my_location">My Location</string>
     <string name="msg_email_not_found">Email not found</string>
     <string name="msg_user_not_found">User not found</string>
+    <string name="msg_connect_ok">Successful Request</string>
     <string name="new_filter">New Filter</string>
     <string name="lbl_code">Code</string>
     <string name="lbl_value">Value</string>
@@ -69,4 +72,6 @@
     <string name="msg_error_download_forms">Error download Forms</string>
     <string name="msg_error_download_types_forms">Error download Types Forms</string>
     <string name="msg_error_download_content_forms">Error download Content Forms</string>
+    <string name="msg_error_connection_other">Connection Some Other Error</string>
+    <string name="msg_error_wrong_unit">Wrong unit</string>
 </resources>

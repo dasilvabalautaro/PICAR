@@ -4,6 +4,9 @@ import com.empoderar.picar.domain.data.Permission
 
 data class PermissionEntity(private var token: String,
                             private var expiration: String,
-                            private var email: String) {
-    fun toPermission() = Permission(token, expiration, email)
+                            private var email: String,
+                            private var id: Int,
+                            private var unity: Int) {
+    fun toPermission() = Permission(token,
+            expiration, email, id, unity)
 }

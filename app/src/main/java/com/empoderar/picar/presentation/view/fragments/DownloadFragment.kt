@@ -213,16 +213,39 @@ class DownloadFragment: BaseFragment() {
             getUnitsCloudViewModel.requestUnits()
         }
     }
-
-    private fun getProjectsOfCloud(){
-        //showProgress()
-        val url = String.format("${Constants.urlBase}${Constants.serviceProjectsByUnit}")
-        val token = "Bearer " + this.prefs.getString(Constants.prefToken, "")
+    private fun launchGetProjectsOfCloud(url: String, token: String){
         getProjectsCloudViewModel.url = url
         getProjectsCloudViewModel.token = token
         if (getProjectsCloudViewModel.verifyInput()){
             getProjectsCloudViewModel.requestProjects()
         }
+
+    }
+    private fun getProjectsOfCloud(){
+        //showProgress()
+        when(val unity = this.prefs.getInt(Constants.prefUnity, -1)){
+            0->{
+                val url = String.format(Constants.urlBase +
+                        Constants.serviceProjects)
+                val token = "Bearer " +
+                        this.prefs.getString(Constants.prefToken, "")
+                launchGetProjectsOfCloud(url, token)
+            }
+            -1->{
+                context!!.toast(getString(R.string.msg_error_wrong_unit))
+                this.jobContentComplete = true
+
+            }
+            else->{
+                val url = String.format(Constants.urlBase +
+                        Constants.serviceProjectsByUnit + "$unity")
+                val token = "Bearer " +
+                        this.prefs.getString(Constants.prefToken, "")
+                launchGetProjectsOfCloud(url, token)
+
+            }
+        }
+
     }
 
 /*

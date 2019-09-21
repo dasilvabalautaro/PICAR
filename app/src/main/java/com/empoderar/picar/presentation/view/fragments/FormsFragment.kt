@@ -31,6 +31,9 @@ class FormsFragment: BaseFragment() {
             getFormsViewModel.upload = 0
             getFormsViewModel.loadForms()
         }
+
+        @JvmStatic
+        fun newInstance()=FormsFragment()
     }
 
     @Inject
@@ -47,6 +50,12 @@ class FormsFragment: BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+        
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         getFormsViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleGetForms)
             failure(failure, ::handleFailure)
@@ -54,16 +63,15 @@ class FormsFragment: BaseFragment() {
 
         this.prefs = PreferenceRepository.customPrefs(activity!!,
                 Constants.preference_picar)
-        //verifyLoadOfForms()
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initializeView()
         setupSwipeRefresh()
+        if (proyectView != null){
+            loadFormsList()
+        }
 
-        //loadFormsList()
     }
+
 
     private fun handleGetForms(list: List<FormView>?){
         listForm = list.orEmpty()

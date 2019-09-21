@@ -16,26 +16,18 @@ import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_listings.*
 import javax.inject.Inject
 
-
-
-
 class ListingsFragment: BaseFragment(){
 
     @Inject
     lateinit var navigator: Navigator
 
-    //private lateinit var getUnitsViewModel: GetUnitsDatabaseViewModel
 
     override fun layoutId() = R.layout.view_listings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
-        /*getUnitsViewModel = viewModel(viewModelFactory) {
-            observe(result, ::handleGetUnits)
-            failure(failure, ::handleFailure)
-        }
-        loadUnitsList()*/
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,18 +38,23 @@ class ListingsFragment: BaseFragment(){
         tl_options!!.setupWithViewPager(vp_list)
         tl_options!!.getTabAt(0)!!.text = getString(R.string.lbl_tab_projects)
         tl_options!!.getTabAt(1)!!.text = getString(R.string.lbl_tab_forms)
+        tl_options!!.getTabAt(2)!!.text = getString(R.string.lbl_tab_new)
+        tl_options!!.getTabAt(3)!!.text = getString(R.string.lbl_tab_detail)
 
         vp_list?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(position: Int,
+                                        positionOffset: Float,
+                                        positionOffsetPixels: Int) {
 
             }
             override fun onPageSelected(position: Int) {
-                if (position == 0) (activity as MenuActivity).setMenuAddForm(false)
-                if (position == 1) (activity as MenuActivity).setMenuAddForm(true)
+                if (position == 2) (activity as MenuActivity).setOrientation(true)
+                if (position == 3) (activity as MenuActivity).setOrientation(false)
+
             }
 
         })
@@ -73,17 +70,6 @@ class ListingsFragment: BaseFragment(){
     override fun renderFailure(message: Int) {
         notify(message)
     }
-
-    /*private fun loadUnitsList(){
-        getUnitsViewModel.loadUnities()
-
-    }
-
-    private fun handleGetUnits(list: List<Unity>?){
-        listUnity = list.orEmpty()
-
-    }*/
-
 
 
 }

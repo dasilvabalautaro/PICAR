@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.empoderar.picar.R
 import com.empoderar.picar.model.persistent.caching.Variables
 import com.empoderar.picar.presentation.plataform.BaseActivity
 import com.empoderar.picar.presentation.view.fragments.LoginFragment
@@ -29,17 +30,21 @@ class LoginActivity: BaseActivity() {
                 .subscribe({
                     Variables.isServerUp = true
                     Toast.makeText(this,
-                            "Successful Request", Toast.LENGTH_SHORT).show()
+                            getString(R.string.msg_connect_ok),
+                            Toast.LENGTH_SHORT).show()
                 }, { throwable ->
 
                     if (throwable is NoNetworkException) {
 
                         Variables.isServerUp = false
                         Toast.makeText(this,
-                                "No Network Connection", Toast.LENGTH_SHORT).show()
+                                getString(R.string.failure_network_connection),
+                                Toast.LENGTH_SHORT).show()
                     } else {
                         Variables.isServerUp = false
-                        Toast.makeText(this, "Connection Some Other Error", Toast.LENGTH_SHORT)
+                        Toast.makeText(this,
+                                getString(R.string.msg_error_connection_other),
+                                Toast.LENGTH_SHORT)
                                 .show()
                     }
                 })

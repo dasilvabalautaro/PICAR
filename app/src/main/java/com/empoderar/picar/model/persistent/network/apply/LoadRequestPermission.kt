@@ -19,7 +19,8 @@ interface LoadRequestPermission {
         override fun getResult(url: String, body: RequestBody): Either<Failure, Permission> {
             return when (networkHandler.isConnected) {
                 true -> LinkBackend.request(bodyRequest.send(url, body),
-                        { it.toPermission() }, PermissionEntity("", "", ""))
+                        { it.toPermission() },
+                        PermissionEntity("", "", "", 0, 0))
                 false, null -> Either.Left(Failure.NetworkConnection())
             }
         }

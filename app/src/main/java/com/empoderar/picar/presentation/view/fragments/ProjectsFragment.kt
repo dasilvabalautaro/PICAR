@@ -4,7 +4,9 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.empoderar.picar.R
@@ -35,6 +37,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProjectsFragment: BaseFragment() {
+    companion object{
+        @JvmStatic
+        fun newInstance()=ProjectsFragment()
+    }
+
     @Inject
     lateinit var navigator: Navigator
     @Inject
@@ -51,6 +58,12 @@ class ProjectsFragment: BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         getProjectsViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleGetProjects)
             failure(failure, ::handleFailure)
@@ -62,14 +75,8 @@ class ProjectsFragment: BaseFragment() {
 
         this.prefs = PreferenceRepository.customPrefs(activity!!,
                 Constants.preference_picar)
-
         loadUnitsDatabase()
         loadProjectList()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        ib_refresh.setOnClickListener { loadUnitsDatabase() }
         initializeView()
         setupSwipeRefresh()
 
@@ -160,26 +167,39 @@ class ProjectsFragment: BaseFragment() {
 
     private fun loadUnits(){
         if (listUnity != null && listUnity!!.isNotEmpty()){
+
             loadNamesUnits(listUnity!!)
             setDataSpinner()
         }
     }
 
     private fun loadNamesUnits(list: List<Unity>){
-        for (u: Unity in list){
-            this.namesUnits.add(u.name)
+        when(val unityId = this.prefs.getInt(Constants.prefUnity, -1)){
+            0 -> {
+                for (u: Unity in list){
+                    this.namesUnits.add(u.name)
 
+                }
+
+            }
+            -1 -> {
+                context!!.toast(getString(R.string.msg_error_wrong_unit))
+            }
+            else -> {
+                val unity = list.first { u -> u.id == unityId }
+                this.namesUnits.add(unity.name)
+            }
         }
     }
 
     private fun setDataSpinner(){
+        if (this.namesUnits.count() > 0){
+            val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(context!!,
+                    android.R.layout.simple_list_item_1, this.namesUnits)
+            sp_select!!.adapter = spinnerAdapter
+            spinnerAdapter.notifyDataSetChanged()
+            sp_select!!.setSelection(0)
 
-        val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(context!!,
-                android.R.layout.simple_list_item_1, this.namesUnits)
-        sp_select!!.adapter = spinnerAdapter
-        spinnerAdapter.notifyDataSetChanged()
-        if (sp_select!!.adapter != null){
-            sp_select!!.refreshDrawableState()
         }
 
     }

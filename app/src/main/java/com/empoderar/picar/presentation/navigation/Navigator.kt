@@ -39,11 +39,10 @@ class Navigator @Inject constructor() {
             .startActivity(DownloadActivity.callingIntent(context))
 
     fun showBodies(activity: FragmentActivity, formId: Int) {
-        val bodiesForm = BodiesFormFragment()
-        bodiesForm.formId = formId
-        (activity as MenuActivity).setMenuAddForm(false)
-        activity.setOrientation(false)
-        activity.addFragment(bodiesForm)
+        val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
+        BodiesFormFragment.formId = formId
+        BodiesFormFragment.getBodies()
+        viewPager.currentItem = 3
 
     }
 
@@ -51,19 +50,27 @@ class Navigator @Inject constructor() {
                      projectView: ProjectView, navigationExtras: Extras){
         val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
         BaseFragment.proyectView = projectView
+        BaseFragment.oldProject = BaseFragment.currentProject
+        BaseFragment.currentProject = projectView.id
+        if (BaseFragment.oldProject != BaseFragment.currentProject){
+            NewFormFragment.flagNewForm = true
+            NewFormFragment.formView = null
+        }
+
         FormsFragment.loadFormsList()
+        BodiesFormFragment.formId = 0
         viewPager.currentItem = 1
 
     }
 
     fun showDetailForm(activity: FragmentActivity,
                        formView: FormView, navigationExtras: Extras){
-        val newForm = NewFormFragment()
-        newForm.flagNewForm = false
-        newForm.formView = formView
-        (activity as MenuActivity).setMenuAddForm(false)
-        activity.addFragment(newForm)
 
+        val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
+        NewFormFragment.formView = formView
+        NewFormFragment.flagNewForm = false
+        BodiesFormFragment.formId = 0
+        viewPager.currentItem = 2
     }
 
 

@@ -162,7 +162,7 @@ class MenuActivity : BaseActivity(){
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item!!.itemId
         if (id == R.id.action_new_form){
-            if (BaseFragment.proyectView != null){
+            /*if (BaseFragment.proyectView != null){
                 val newForm = NewFormFragment()
                 newForm.flagNewForm = true
                 addFragment(newForm)
@@ -170,7 +170,7 @@ class MenuActivity : BaseActivity(){
                 Toast.makeText(this,
                         getString(R.string.failure_project_not_selected),
                         Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
         if (toggle!!.onOptionsItemSelected(item)){
             return true

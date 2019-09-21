@@ -21,7 +21,17 @@ import javax.inject.Inject
 class BodiesFormFragment: BaseFragment() {
 
     companion object{
+        private lateinit var getBodyFormViewModel: GetBodyFormViewModel
         private var listBodiesView: List<BodyFormView>? = null
+        var formId: Int = 0
+
+        fun getBodies(){
+            if (formId != 0){
+                getBodyFormViewModel.formId = formId
+                getBodyFormViewModel.loadBodyForm()
+            }
+        }
+
         fun updateValue(newValue: String, id: Int){
             listBodiesView!!.find {it.id == id}!!.value = newValue
         }
@@ -38,20 +48,26 @@ class BodiesFormFragment: BaseFragment() {
             listBodiesView!!.find {it.id == id}!!.comment = newComment
         }
 
+        @JvmStatic
+        fun newInstance()=BodiesFormFragment()
     }
 
     @Inject
     lateinit var bodyFormAdapter: BodyFormAdapter
 
-    private lateinit var getBodyFormViewModel: GetBodyFormViewModel
+
     private lateinit var insertBodiesFormViewModel: InsertBodiesFormViewModel
-    var formId: Int? = null
+
     override fun layoutId() = R.layout.view_body_form
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         getBodyFormViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleGetBodies)
             failure(failure, ::handleFailure)
@@ -61,13 +77,17 @@ class BodiesFormFragment: BaseFragment() {
             observe(result, ::handleInsertBodies)
             failure(failure, ::handleFailure)
         }
+
+        initializeView()
+        getBodies()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initializeView()
-        getBodyFormViewModel.formId = formId
-        getBodyFormViewModel.loadBodyForm()
+    override fun onResume() {
+        super.onResume()
+        if (formId == 0){
+            bodyFormAdapter.collection.toMutableList().clear()
+        }
+
     }
     private fun handleGetBodies(list: List<BodyFormView>?){
         listBodiesView = list
@@ -102,7 +122,10 @@ class BodiesFormFragment: BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        insertBodies()
+        if (!listBodiesView.isNullOrEmpty()){
+            insertBodies()
+        }
+
     }
 
     override fun renderFailure(message: Int) {

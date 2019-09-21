@@ -41,6 +41,14 @@ import kotlin.collections.ArrayList
 
 class NewFormFragment: BaseFragment() {
 
+    companion object{
+        var flagNewForm = true
+        var formView: FormView? = null
+
+        @JvmStatic
+        fun newInstance()= NewFormFragment()
+    }
+
     @Inject
     lateinit var photoAdapter: PhotoAdapter
     @Inject
@@ -48,10 +56,9 @@ class NewFormFragment: BaseFragment() {
     @Inject
     lateinit var manageFiles: ManageFiles
 
-    var flagNewForm = true
-    var formView: FormView? = null
     private var idNewForm = 0
     private var numberPhotos = 0
+    private var fragmentIsCreated = false
     private var codesTypesForms: ArrayList<String> = ArrayList()
     private var listTypeForm: List<TypeFormView>? = null
     private var codeTypeForm = String.empty()
@@ -72,6 +79,12 @@ class NewFormFragment: BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val image = (activity as MenuActivity)
                 .observableImage.map { i -> i }
         disposable.add(image.observeOn(Schedulers.newThread())
@@ -128,12 +141,11 @@ class NewFormFragment: BaseFragment() {
         }
 
         getTypesFormViewModel.loadTypesForm()
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         initializeView()
-        fillDataControl()
+
+        this.fragmentIsCreated = true
+
     }
 
     override fun onStart() {
@@ -157,6 +169,21 @@ class NewFormFragment: BaseFragment() {
 
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser && this.fragmentIsCreated){
+            fillDataControl()
+            loadCodesTypes()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (proyectView == null){
+            context!!.toast(getString(R.string.failure_project_not_selected))
+        }
+
+    }
     private fun handleUpdateForm(value: Boolean?){
         if (value != null && value){
             context!!.toast("Update Form OK")
@@ -196,7 +223,7 @@ class NewFormFragment: BaseFragment() {
         if (this.listTypeForm != null && this.listTypeForm!!.isNotEmpty()){
             loadValueCodes(this.listTypeForm!!)
             setDataSpinner()
-            if (!this.flagNewForm){
+            if (!flagNewForm){
                 setSpinnerTypeForm(formView!!.frmId)
                 sp_select!!.isEnabled = false
 
@@ -210,7 +237,9 @@ class NewFormFragment: BaseFragment() {
     }
 
     private fun loadValueCodes(list: List<TypeFormView>){
+        this.codesTypesForms.clear()
         for (type: TypeFormView in list){
+
             this.codesTypesForms.add(type.frmId)
         }
     }
@@ -255,6 +284,7 @@ class NewFormFragment: BaseFragment() {
 
             }
             insertBodies()
+            flagNewForm = false
             if (!list.isNullOrEmpty()){
                 insertImagesViewModel.list = list.toList()
                 insertImagesViewModel.insertImages()
@@ -317,9 +347,13 @@ class NewFormFragment: BaseFragment() {
 
     private fun setNewDataControl(){
         tv_date!!.text = Date().toString()
+        et_title!!.setText("")
+        ib_bodies.visibility = View.INVISIBLE
         tv_latitude.text = Variables.locationUser.lat.toString()
         tv_longitude.text = Variables.locationUser.lon.toString()
         cb_finished!!.isEnabled = false
+        photoAdapter.collection.toMutableList().clear()
+
     }
 
     private fun setUpdateDataControl(){
@@ -336,7 +370,7 @@ class NewFormFragment: BaseFragment() {
     }
 
     private fun fillDataControl(){
-        if (this.flagNewForm){
+        if (flagNewForm){
             setNewDataControl()
         }else{
             setUpdateDataControl()
@@ -353,20 +387,26 @@ class NewFormFragment: BaseFragment() {
     }
 
     private fun insertNewForm(){
-        val dateMinusFiftyYear = Calendar.getInstance().run {
-            add(Calendar.YEAR, -50)
-            time
+        if (proyectView != null){
+            val dateMinusFiftyYear = Calendar.getInstance().run {
+                add(Calendar.YEAR, -50)
+                time
+            }
+            val dateLong = System.currentTimeMillis()
+            val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+            val dateInit = dateMinusFiftyYear.time
+            val dateInitToCloud = String.format(Locale.US,"/Date(%d)/", dateInit)
+            val form = Form(0, proyectView!!.id, this.codeTypeForm , 1,
+                    et_title.text.toString(), dateInitToCloud, 1, "None",
+                    123, Variables.locationUser.lat,
+                    Variables.locationUser.lon, dateToCloud, dateInitToCloud)
+            insertOneFormViewModel.form = form
+            insertOneFormViewModel.insertForm()
+
         }
-        val dateLong = System.currentTimeMillis()
-        val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
-        val dateInit = dateMinusFiftyYear.time
-        val dateInitToCloud = String.format(Locale.US,"/Date(%d)/", dateInit)
-        val form = Form(0, proyectView!!.id, this.codeTypeForm , 1,
-                et_title.text.toString(), dateInitToCloud, 1, "None",
-                123, Variables.locationUser.lat,
-                Variables.locationUser.lon, dateToCloud, dateInitToCloud)
-        insertOneFormViewModel.form = form
-        insertOneFormViewModel.insertForm()
+        else{
+            context!!.toast(getString(R.string.failure_project_not_selected))
+        }
 
     }
 
