@@ -25,5 +25,7 @@ Constants {
     const val serviceProjects = "Project"
     const val serviceFormsByProject = "Form/GetByProject/"
     const val serviceUploadForms = "Form/Insert"
+    const val serviceUploadImages = "Photo/Insert"
+    const val serviceUploadBodies = "Body/Insert"
     const val seed = "936844983"
 }

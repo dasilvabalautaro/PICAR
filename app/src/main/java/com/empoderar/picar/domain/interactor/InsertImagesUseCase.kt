@@ -36,7 +36,7 @@ class InsertImagesUseCase @Inject constructor(private val imageDataDao:
         if (list.isNotEmpty()){
             for (i in list.indices){
                 val image = ImageData(list[i].id, list[i].form,
-                        list[i].base64, list[i].latitude,
+                        list[i].project, list[i].base64, list[i].latitude,
                         list[i].longitude, list[i].date)
                 images.add(image)
             }

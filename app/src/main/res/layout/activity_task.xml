@@ -18,9 +18,10 @@
         android:layout_width="@dimen/nav_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorTransparent"
+        android:background="@color/colorPrimaryText"
         android:divider="@color/colorSecondary"
         android:dividerHeight="@dimen/divider_height"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
 
 </android.support.v4.widget.DrawerLayout>
+<!--    android:background="@color/colorTransparent"-->

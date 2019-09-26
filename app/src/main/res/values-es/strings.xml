@@ -10,8 +10,8 @@
     <string name="msg_users_saved">Usuario guardado.</string>
     <string name="select_photo">Seleccionar foto.</string>
     <string name="lbl_title_login">Ingresar</string>
-    <string name="lbl_new_form">Nuevo formulario</string>
-    <string name="lbl_update_form">Actualizar formulario</string>
+    <string name="lbl_new_form">Nuevo</string>
+    <string name="lbl_update_form">Actualizar</string>
     <string name="hint_user">Nombre usuario</string>
     <string name="hint_title">Título formulario</string>
     <string name="hint_password">Contraseña</string>

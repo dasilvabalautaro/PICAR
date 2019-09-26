@@ -20,7 +20,7 @@ class GetBodyFormViewModel @Inject constructor(private val getBodyFormUseCase:
 
     private fun handleFormList(forms: List<BodyForm>) {
         this.result.value = forms.map { BodyFormView(it.id, it.formId,
-                it.code, it.description, it.value, it.satisfy,
+                it.idProject, it.code, it.description, it.value, it.satisfy,
                 it.date, it.comment) }
     }
 

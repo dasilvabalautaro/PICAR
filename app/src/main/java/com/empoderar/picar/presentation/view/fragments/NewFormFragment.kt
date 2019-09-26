@@ -1,7 +1,10 @@
 package com.empoderar.picar.presentation.view.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.support.v4.content.FileProvider
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.AdapterView
@@ -14,27 +17,22 @@ import com.empoderar.picar.domain.data.Photo
 import com.empoderar.picar.model.persistent.caching.Variables
 import com.empoderar.picar.model.persistent.files.ManageFiles
 import com.empoderar.picar.presentation.component.PhotoAdapter
-import com.empoderar.picar.presentation.data.ContentFormView
-import com.empoderar.picar.presentation.data.FormView
-import com.empoderar.picar.presentation.data.ImageView
-import com.empoderar.picar.presentation.data.TypeFormView
+import com.empoderar.picar.presentation.data.*
 import com.empoderar.picar.presentation.extension.*
 import com.empoderar.picar.presentation.navigation.Navigator
+import com.empoderar.picar.presentation.permission.EnablePermissions
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.*
-import com.empoderar.picar.presentation.tools.Transform
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Cancellable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.view_new_form.*
 import kotlinx.android.synthetic.main.view_new_form.sp_select
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.Month
-import java.time.format.DateTimeFormatter
+
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -62,7 +60,7 @@ class NewFormFragment: BaseFragment() {
     private var codesTypesForms: ArrayList<String> = ArrayList()
     private var listTypeForm: List<TypeFormView>? = null
     private var codeTypeForm = String.empty()
-    private var listContent: List<ContentFormView>? = null
+    private var listContent = ArrayList<ContentFormView>()
     private lateinit var insertOneFormViewModel: InsertOneFormViewModel
     private lateinit var insertImagesViewModel: InsertImagesViewModel
     private lateinit var getImagesByFormViewModel: GetImagesByFormViewModel
@@ -70,11 +68,23 @@ class NewFormFragment: BaseFragment() {
     private lateinit var getContentFormsViewModel: GetContentFormsViewModel
     private lateinit var insertBodiesFormViewModel: InsertBodiesFormViewModel
     private lateinit var updateUploadFormsViewModel: UpdateUploadFormsViewModel
+    @Inject
+    lateinit var enablePermissions: EnablePermissions
 
+  /*  private val keyTitle = "keyTitle"
+    private val keyCodeTypeForm = "keyCodeTypeForm"
+    private val keyListPhotoView = "keyListPhotoView"
+    private val keyLatitude = "keyLatitude"
+    private val keyLongitude = "keyLongitude"
+    private val keyIdNewForm = "keyIdNewForm"
+    private val keyListContent = "keyListContent"
+    private val keyDate = "keyDate"*/
 
     override fun layoutId() = R.layout.view_new_form
 
-    private val listPhoto = ArrayList<Photo>()
+    private var listPhoto = ArrayList<PhotoView>()
+
+    private var disposableImage: Disposable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,24 +97,29 @@ class NewFormFragment: BaseFragment() {
 
         val image = (activity as MenuActivity)
                 .observableImage.map { i -> i }
-        disposable.add(image.observeOn(Schedulers.newThread())
+        disposableImage = image.observeOn(AndroidSchedulers.mainThread())
                 .map { i ->
-                    run {
+                    kotlin.run {
                         return@map Bitmap.createScaledBitmap(i,
                                 (i.width*0.9).toInt(),
                                 (i.height*0.9).toInt(), true)
                     }
                 }
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { resize ->
-                    run {
-                        val photo = Photo(resize, Date().toString(),
+                    kotlin.run {
+                        val dateLong = System.currentTimeMillis()
+                        val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+
+                        val photo = PhotoView(resize, dateToCloud,
                                 Variables.locationUser.lat,
                                 Variables.locationUser.lon)
                         listPhoto.add(photo)
                         photoAdapter.collection = listPhoto.toList()
+
                     }
-                })
+                } //.observeOn(AndroidSchedulers.mainThread()) // Schedulers.newThread()
+
+
         insertOneFormViewModel = viewModel(viewModelFactory) {
             observe(result, ::handleInsertForm)
             failure(failure, ::handleFailure)
@@ -139,14 +154,14 @@ class NewFormFragment: BaseFragment() {
             observe(result, ::handleUpdateForm)
             failure(failure, ::handleFailure)
         }
-
+        initializeView()
         getTypesFormViewModel.loadTypesForm()
 
-        initializeView()
-
         this.fragmentIsCreated = true
-
+        //fillDataControl()
+        //loadCodesTypes()
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -166,16 +181,56 @@ class NewFormFragment: BaseFragment() {
                     }
                 }
                 .subscribe { result -> println(result)})
+        if (this.fragmentIsCreated){
+            this.fragmentIsCreated = false
+            et_title!!.setText("")
+        }
 
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+    /*override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser && this.fragmentIsCreated){
             fillDataControl()
             loadCodesTypes()
         }
+    }*/
+
+  /*  override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(keyTitle, et_title.text.toString())
+        outState.putString(keyDate, tv_date.text.toString())
+        outState.putString(keyLatitude, tv_latitude.text.toString())
+        outState.putString(keyLongitude, tv_longitude.text.toString())
+        outState.putString(keyCodeTypeForm, this.codeTypeForm)
+        outState.putInt(keyIdNewForm, this.idNewForm)
+        outState.putParcelableArrayList(keyListPhotoView, this.listPhoto)
+        outState.putParcelableArrayList(keyListContent, this.listContent)
+
     }
+*/
+ /*   override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null ){
+            if (!isNewProject){
+                et_title.setText(savedInstanceState.getString(keyTitle))
+                tv_latitude.text = savedInstanceState.getString(keyLatitude)
+                tv_longitude.text = savedInstanceState.getString(keyLongitude)
+                tv_date.text = savedInstanceState.getString(keyDate)
+                this.codeTypeForm = savedInstanceState.getString(keyCodeTypeForm)!!
+
+                this.listPhoto = savedInstanceState
+                        .getParcelableArrayList(keyListPhotoView)!!
+                this.listContent = savedInstanceState.getParcelableArrayList(keyListContent)!!
+            }else{
+                savedInstanceState.clear()
+                isNewProject = false
+
+            }
+        }else{
+            isNewProject = false
+        }
+    }*/
 
     override fun onResume() {
         super.onResume()
@@ -184,6 +239,13 @@ class NewFormFragment: BaseFragment() {
         }
 
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        BodiesFormFragment.formId = 0
+        disposableImage!!.dispose()
+    }
+
     private fun handleUpdateForm(value: Boolean?){
         if (value != null && value){
             context!!.toast("Update Form OK")
@@ -194,21 +256,24 @@ class NewFormFragment: BaseFragment() {
         if (value != null && value){
             ib_bodies.visibility = View.VISIBLE
             cb_finished!!.isEnabled = true
+            ib_save!!.visibility = View.INVISIBLE
             context!!.toast("Insert Bodies OK")
         }
     }
 
     private fun handleGetContentForm(list: List<ContentFormView>?){
-        this.listContent = list.orEmpty()
+        this.listContent = ArrayList(list.orEmpty())
     }
 
     private fun insertBodies(){
         val list = ArrayList<BodyForm>()
+        val dateLong = System.currentTimeMillis()
+        val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
 
-        for (content:ContentFormView in this.listContent!!){
-            val body = BodyForm(0, this.idNewForm, content.varCodigo,
-                    "", content.description, "",
-                    "", "")
+        for (content:ContentFormView in this.listContent){
+            val body = BodyForm(0, this.idNewForm, proyectView!!.id,
+                    content.varCodigo, "12", content.description, "SI",
+                    dateToCloud, "None")
             list.add(body)
         }
         insertBodiesFormViewModel.list = list.toList()
@@ -223,18 +288,20 @@ class NewFormFragment: BaseFragment() {
         if (this.listTypeForm != null && this.listTypeForm!!.isNotEmpty()){
             loadValueCodes(this.listTypeForm!!)
             setDataSpinner()
-            if (!flagNewForm){
-                setSpinnerTypeForm(formView!!.frmId)
-                sp_select!!.isEnabled = false
-
-            }else{
-
-                sp_select!!.performClick()
-            }
+            initDataSpinner()
 
         }
 
     }
+
+    private fun initDataSpinner(){
+
+        if (this.codeTypeForm.isNotEmpty()){
+            setSpinnerTypeForm(this.codeTypeForm)
+
+        }
+    }
+
 
     private fun loadValueCodes(list: List<TypeFormView>){
         this.codesTypesForms.clear()
@@ -277,14 +344,15 @@ class NewFormFragment: BaseFragment() {
             val list = ArrayList<Image>()
             for (i in this.numberPhotos until this.listPhoto.count()){
                 val base64 = manageFiles
-                        .base641EncodedImage(this.listPhoto[i].image!!)
-                val img = Image(0, id.toInt(), base64, this.listPhoto[i].latitude,
+                        .base641EncodedImage(this.listPhoto[i].image)
+                val img = Image(0, id.toInt(), proyectView!!.id,
+                        base64, this.listPhoto[i].latitude,
                         this.listPhoto[i].longitude, this.listPhoto[i].date)
                 list.add(img)
 
             }
             insertBodies()
-            flagNewForm = false
+
             if (!list.isNullOrEmpty()){
                 insertImagesViewModel.list = list.toList()
                 insertImagesViewModel.insertImages()
@@ -302,7 +370,7 @@ class NewFormFragment: BaseFragment() {
         if (!list.isNullOrEmpty()){
             for (imv: ImageView in list){
                 val bitmap = manageFiles.base64DecodeImage(imv.base64)
-                val photo = Photo(bitmap, imv.date, imv.latitude, imv.longitude)
+                val photo = PhotoView(bitmap, imv.date, imv.latitude, imv.longitude)
                 this.listPhoto.add(photo)
             }
             this.numberPhotos = this.listPhoto.count()
@@ -320,14 +388,13 @@ class NewFormFragment: BaseFragment() {
                 LinearLayoutManager.VERTICAL, false)
         addDecorationRecycler(rv_photos, context!!)
         rv_photos.adapter = photoAdapter
-        /*photoAdapter.clickListener = { photo, navigationExtras ->
-            navigator.showForms(activity!!, photo, navigationExtras) }*/
         ib_bodies.visibility = View.INVISIBLE
         ib_photo!!.setOnClickListener { (activity as MenuActivity).camera() }
         ib_save!!.setOnClickListener { insertForm() }
         ib_bodies!!.setOnClickListener {
             navigator.showBodies(activity!!, this.idNewForm)
         }
+        ib_add!!.setOnClickListener { setNewDataControl() }
         cb_finished!!.setOnClickListener {
             if (cb_finished!!.isChecked) {
                 updateUploadForm(1)
@@ -335,6 +402,9 @@ class NewFormFragment: BaseFragment() {
                 updateUploadForm(0)
             }
         }
+        this.codeTypeForm = String.empty()
+        this.idNewForm = 0
+
     }
 
     private fun updateUploadForm(upload: Int){
@@ -346,18 +416,35 @@ class NewFormFragment: BaseFragment() {
     }
 
     private fun setNewDataControl(){
+        flagNewForm = true
+        formView = null
+        BodiesFormFragment.formId = 0
+        this.codeTypeForm = String.empty()
+        tv_title!!.text = getString(R.string.lbl_new_form)
         tv_date!!.text = Date().toString()
         et_title!!.setText("")
         ib_bodies.visibility = View.INVISIBLE
+        ib_save!!.visibility = View.VISIBLE
         tv_latitude.text = Variables.locationUser.lat.toString()
         tv_longitude.text = Variables.locationUser.lon.toString()
         cb_finished!!.isEnabled = false
-        photoAdapter.collection.toMutableList().clear()
-
+        sp_select!!.isEnabled = true
+        sp_select!!.setSelection(0)
+        this.listPhoto.clear()
+        photoAdapter.collection = this.listPhoto.toList()
+        /*if (itemView != 0){
+            firstVisibleItem = (rvOts!!
+                    .layoutManager as LinearLayoutManager)
+                    .findFirstVisibleItemPosition()
+        }*/
+        rv_photos!!.refreshDrawableState()
+        rv_photos!!.scrollToPosition(rv_photos!!.adapter!!.itemCount)
     }
 
-    private fun setUpdateDataControl(){
+    fun setUpdateDataControl(){
         this.idNewForm = formView!!.id
+        this.codeTypeForm = formView!!.frmId
+        BodiesFormFragment.formId = this.idNewForm
         tv_date!!.text = formView!!.dateCreation
         tv_latitude.text = formView!!.latitude.toString()
         tv_longitude.text = formView!!.longitude.toString()
@@ -366,15 +453,11 @@ class NewFormFragment: BaseFragment() {
         getImagesByFormViewModel.idForm = formView!!.id
         getImagesByFormViewModel.loadImages()
         ib_bodies.visibility = View.VISIBLE
+        ib_save!!.visibility = View.VISIBLE
         cb_finished!!.isEnabled = true
-    }
+        initDataSpinner()
+        sp_select!!.isEnabled = false
 
-    private fun fillDataControl(){
-        if (flagNewForm){
-            setNewDataControl()
-        }else{
-            setUpdateDataControl()
-        }
     }
 
     private fun insertForm(){

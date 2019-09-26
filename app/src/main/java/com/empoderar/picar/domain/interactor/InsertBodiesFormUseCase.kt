@@ -36,7 +36,7 @@ class InsertBodiesFormUseCase @Inject constructor(private val bodyFormDataDao:
         if (list.isNotEmpty()){
             for (i in list.indices){
                 val body = BodyFormData(list[i].id, list[i].formId,
-                        list[i].code, list[i].value, list[i].description,
+                        list[i].idProject, list[i].code, list[i].value, list[i].description,
                         list[i].satisfy, list[i].date, list[i].comment)
                 bodies.add(body)
             }

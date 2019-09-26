@@ -42,6 +42,7 @@ class Navigator @Inject constructor() {
         val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
         BodiesFormFragment.formId = formId
         BodiesFormFragment.getBodies()
+        //(activity as MenuActivity).setOrientation(false)
         viewPager.currentItem = 3
 
     }
@@ -55,6 +56,7 @@ class Navigator @Inject constructor() {
         if (BaseFragment.oldProject != BaseFragment.currentProject){
             NewFormFragment.flagNewForm = true
             NewFormFragment.formView = null
+            BaseFragment.isNewProject = true
         }
 
         FormsFragment.loadFormsList()
@@ -71,6 +73,11 @@ class Navigator @Inject constructor() {
         NewFormFragment.flagNewForm = false
         BodiesFormFragment.formId = 0
         viewPager.currentItem = 2
+        val newForm = viewPager.adapter!!
+                .instantiateItem(viewPager,
+                        viewPager.currentItem) as NewFormFragment
+        newForm.setUpdateDataControl()
+
     }
 
 

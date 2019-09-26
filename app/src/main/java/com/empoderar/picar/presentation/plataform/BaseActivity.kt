@@ -85,7 +85,7 @@ abstract class BaseActivity: AppCompatActivity() {
                         R.anim.design_bottom_sheet_slide_out)
                 .replace(id.fragmentContainer, newFragment, newFragment.javaClass.simpleName)
                 .commit()
-
+                //.addToBackStack(null)
         /*supportFragmentManager.inTransaction { add(
                 id.fragmentContainer, newFragment) }*/
     }

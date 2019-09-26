@@ -19,7 +19,7 @@ class GetImagesByFormViewModel @Inject constructor(private val getImagesByFormUs
 
     private fun handleFormList(images: List<Image>) {
         this.result.value = images.map { ImageView(it.id, it.form,
-                it.base64, it.latitude, it.longitude, it.date) }
+                it.project, it.base64, it.latitude, it.longitude, it.date) }
     }
 
 }

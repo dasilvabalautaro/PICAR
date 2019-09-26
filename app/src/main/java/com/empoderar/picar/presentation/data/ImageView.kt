@@ -6,6 +6,7 @@ import com.empoderar.picar.presentation.plataform.parcelableCreator
 
 data class ImageView(var id: Int,
                      var form: Int,
+                     var project: Int,
                      var base64: String,
                      var latitude: Double,
                      var longitude: Double,
@@ -17,13 +18,14 @@ data class ImageView(var id: Int,
     }
 
     constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readInt(),
-            parcel.readString(), parcel.readDouble(),
+            parcel.readInt(), parcel.readString(), parcel.readDouble(),
             parcel.readDouble(), parcel.readString())
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         with(dest) {
             writeInt(id)
             writeInt(form)
+            writeInt(project)
             writeString(base64)
             writeDouble(latitude)
             writeDouble(longitude)

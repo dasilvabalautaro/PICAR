@@ -13,7 +13,7 @@ class GetBodyFormUseCase @Inject constructor(private val bodyFormDataDao:
         return try {
             val listData = bodyFormDataDao.getBodyByIdForm(params)
             val list = listData.map { BodyForm(it.id, it.formId,
-                    it.code, it.value, it.description, it.satisfy,
+                    it.idProject, it.code, it.value, it.description, it.satisfy,
                     it.date, it.comment) }
 
             when(list.isNotEmpty()){

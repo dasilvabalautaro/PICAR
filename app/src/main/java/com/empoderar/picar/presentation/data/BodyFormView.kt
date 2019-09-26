@@ -6,6 +6,7 @@ import com.empoderar.picar.presentation.plataform.parcelableCreator
 
 data class BodyFormView(var id: Int,
                         var formId: Int,
+                        var idProject: Int,
                         var code: String,
                         var description: String,
                         var value: String,
@@ -18,13 +19,14 @@ data class BodyFormView(var id: Int,
     }
 
     constructor(parcel: Parcel) : this(parcel.readInt(), parcel.readInt(),
-            parcel.readString(), parcel.readString(),
+            parcel.readInt(), parcel.readString(), parcel.readString(),
             parcel.readString(), parcel.readString(), parcel.readString(), parcel.readString())
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         with(dest) {
             writeInt(id)
             writeInt(formId)
+            writeInt(idProject)
             writeString(code)
             writeString(description)
             writeString(value)

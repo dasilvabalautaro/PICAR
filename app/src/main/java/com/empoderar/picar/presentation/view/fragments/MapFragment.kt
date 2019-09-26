@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 class MapFragment: BaseFragment(), OnMapReadyCallback {
@@ -24,23 +25,24 @@ class MapFragment: BaseFragment(), OnMapReadyCallback {
     @Inject
     lateinit var locationChangeObserver: LocationChangeObserver
 
+    private var disposableImage: Disposable? = null
+
     override fun layoutId() = R.layout.view_map
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
         val hearLocation = locationChangeObserver.observableLocation.map { l -> l }
-        disposable.add(hearLocation .observeOn(AndroidSchedulers.mainThread())
+        disposableImage = hearLocation .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { l ->
                     kotlin.run {
                         val lat = l.latitude
                         val long = l.longitude
                         val coordinates = LatLng(lat, long)
-
                         this.markMap.position = coordinates
 
                     }
-                })
+                }
 
     }
 
@@ -65,12 +67,12 @@ class MapFragment: BaseFragment(), OnMapReadyCallback {
         val coordinates = LatLng(lat, lng)
         markMap =  googleMaps.addMarker(MarkerOptions().position(coordinates)
                 .title(getString(R.string.title_my_location)))
-        googleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 10f))
+        googleMaps.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15f))
 
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.dispose()
+        disposableImage!!.dispose()
     }
 }

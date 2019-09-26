@@ -61,11 +61,11 @@ class ListingsFragment: BaseFragment(){
 
     }
 
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         vp_list!!.postDelayed({ vp_list!!.setCurrentItem(0,
                 true) }, 100)
-    }
+    }*/
 
     override fun renderFailure(message: Int) {
         notify(message)

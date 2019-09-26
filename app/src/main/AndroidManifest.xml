@@ -50,6 +50,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".presentation.view.activities.MenuActivity"
             android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTop"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"/>
         <activity android:name=".presentation.view.activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

@@ -16,6 +16,7 @@ import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetBodyFormViewModel
 import com.empoderar.picar.presentation.presenter.InsertBodiesFormViewModel
 import kotlinx.android.synthetic.main.view_body_form.*
+import java.util.*
 import javax.inject.Inject
 
 class BodiesFormFragment: BaseFragment() {
@@ -41,7 +42,10 @@ class BodiesFormFragment: BaseFragment() {
         }
 
         fun updateDate(newDate: String, id: Int){
-            listBodiesView!!.find {it.id == id}!!.date = newDate
+            val dateLong = System.currentTimeMillis()
+            val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+
+            listBodiesView!!.find {it.id == id}!!.date = dateToCloud
         }
 
         fun updateComment(newComment: String, id: Int){
@@ -82,6 +86,7 @@ class BodiesFormFragment: BaseFragment() {
         getBodies()
     }
 
+
     override fun onResume() {
         super.onResume()
         if (formId == 0){
@@ -114,7 +119,7 @@ class BodiesFormFragment: BaseFragment() {
     private fun insertBodies(){
 
         val list = listBodiesView!!.map { BodyForm(it.id, it.formId,
-                it.code, it.value, it.description, it.satisfy,
+                it.idProject, it.code, it.value, it.description, it.satisfy,
                 it.date, it.comment)  }
         insertBodiesFormViewModel.list = list.toList()
         insertBodiesFormViewModel.insertBodiesForm()

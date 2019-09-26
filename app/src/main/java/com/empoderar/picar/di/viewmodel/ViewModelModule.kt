@@ -2,6 +2,7 @@ package com.empoderar.picar.di.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import com.empoderar.picar.presentation.presenter.UploadImagesViewModel
 import com.empoderar.picar.presentation.presenter.GetProjectsCloudViewModel
 import com.empoderar.picar.presentation.presenter.*
 import dagger.Binds
@@ -181,6 +182,18 @@ abstract class ViewModelModule {
     @ViewModelKey(UpdateUploadAllFormsViewModel::class)
     abstract fun bindsUpdateUploadAllFormsViewModel(updateUploadAllFormsViewModel:
                                                         UpdateUploadAllFormsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UploadImagesViewModel::class)
+    abstract fun bindsUploadImagesViewModel(uploadImagesViewModel:
+                                            UploadImagesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UploadBodiesViewModel::class)
+    abstract fun bindsUploadBodiesViewModel(uploadBodiesViewModel:
+                                                UploadBodiesViewModel): ViewModel
 
 
 }

@@ -142,8 +142,11 @@ class MenuActivity : BaseActivity(){
                             ".provider", manageFiles
                     .getCameraFile())
             this.image = manageFiles.getBitmap(photoUri)
+            //Thread.sleep(100)
             if (this.image != null){
+
                 this.observableImage.onNext(this.image!!)
+
             }
 
         }
