@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/left_three_guideline"
-            card_view:layout_constraintGuide_percent=".45"
+            card_view:layout_constraintGuide_percent=".40"
             android:orientation="vertical"/>
 
         <android.support.constraint.Guideline
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_two_guideline"
-            card_view:layout_constraintGuide_percent=".55"
+            card_view:layout_constraintGuide_percent=".50"
             android:orientation="vertical"/>
 
         <android.support.constraint.Guideline
@@ -110,9 +110,20 @@
             card_view:layout_constraintRight_toRightOf="@+id/right_two_guideline"
             card_view:layout_constraintTop_toTopOf="@+id/top_guideline"
             tools:ignore="Autofill,LabelFor"
-            android:inputType="text"/>
+            android:inputType="number"
+            android:imeOptions="actionDone"/>
 
-        <EditText
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sp_cumple"
+            android:entries="@array/satisfy"
+            android:layout_marginTop="10dp"
+            card_view:layout_constraintLeft_toLeftOf="@+id/right_two_guideline"
+            card_view:layout_constraintRight_toRightOf="@+id/right_three_guideline"
+            card_view:layout_constraintTop_toTopOf="@+id/top_guideline"/>
+
+        <!--<EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/et_cumple"
@@ -123,7 +134,7 @@
             card_view:layout_constraintRight_toRightOf="@+id/right_three_guideline"
             card_view:layout_constraintTop_toTopOf="@+id/top_guideline"
             tools:ignore="Autofill,LabelFor"
-            android:inputType="text"/>
+            android:inputType="text"/>-->
 
         <EditText
             android:layout_width="0dp"
@@ -136,7 +147,8 @@
             card_view:layout_constraintRight_toRightOf="@+id/right_four_guideline"
             card_view:layout_constraintTop_toTopOf="@+id/top_guideline"
             tools:ignore="Autofill,LabelFor"
-            android:inputType="date"/>
+            android:inputType="date"
+            android:imeOptions="actionDone"/>
 
         <EditText
             android:layout_width="0dp"
@@ -149,7 +161,8 @@
             card_view:layout_constraintRight_toRightOf="@+id/right_guideline"
             card_view:layout_constraintTop_toTopOf="@+id/top_guideline"
             tools:ignore="Autofill,LabelFor"
-            android:inputType="text"/>
+            android:inputType="text"
+            android:imeOptions="actionDone"/>
 
     </android.support.constraint.ConstraintLayout>
 

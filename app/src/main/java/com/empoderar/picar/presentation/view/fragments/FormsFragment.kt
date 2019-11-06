@@ -102,6 +102,7 @@ class FormsFragment: BaseFragment() {
         rv_forms.adapter = formsAdapter
         formsAdapter.clickListener = { form, navigationExtras ->
              navigator.showDetailForm(activity!!, form, navigationExtras) }
+
     }
 
     override fun renderFailure(message: Int) {

@@ -157,14 +157,14 @@ class MenuActivity : BaseActivity(){
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-        menu.findItem(R.id.action_new_form).isVisible = false
+        menu.findItem(R.id.action_save_bodies).isVisible = false
         mainMenu = menu
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         val id = item!!.itemId
-        if (id == R.id.action_new_form){
+        if (id == R.id.action_save_bodies){
             /*if (BaseFragment.proyectView != null){
                 val newForm = NewFormFragment()
                 newForm.flagNewForm = true
@@ -174,6 +174,7 @@ class MenuActivity : BaseActivity(){
                         getString(R.string.failure_project_not_selected),
                         Toast.LENGTH_SHORT).show()
             }*/
+            BodiesFormFragment.insertBodies()
         }
         if (toggle!!.onOptionsItemSelected(item)){
             return true
@@ -185,10 +186,12 @@ class MenuActivity : BaseActivity(){
 
     private fun executeOptionMenu(groupPosition: Int, childPosition: Int){
         setOrientation(true)
+        setMenuSave(false)
         when(groupPosition){
             0 -> {
                 when(childPosition){
                     0 -> {
+
                         val listFragment = ListingsFragment()
                         addFragment(listFragment )
                     }
@@ -237,8 +240,8 @@ class MenuActivity : BaseActivity(){
         super.onDestroy()
     }
 
-    fun setMenuAddForm(option: Boolean){
-        mainMenu.findItem(R.id.action_new_form).isVisible = option
+    fun setMenuSave(option: Boolean){
+        mainMenu.findItem(R.id.action_save_bodies).isVisible = option
 
     }
 

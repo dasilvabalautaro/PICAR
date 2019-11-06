@@ -75,4 +75,5 @@
     <string name="msg_error_download_content_forms">Error descarga cuerpo de formularios</string>
     <string name="msg_error_connection_other">Error no especificado en la red.</string>
     <string name="msg_error_wrong_unit">Unidad incorrecta.</string>
+    <string name="lbl_save_bodies">Guardar</string>
 </resources>

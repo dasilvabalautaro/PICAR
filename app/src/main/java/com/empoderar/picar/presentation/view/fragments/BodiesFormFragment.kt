@@ -15,6 +15,7 @@ import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetBodyFormViewModel
 import com.empoderar.picar.presentation.presenter.InsertBodiesFormViewModel
+import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_body_form.*
 import java.util.*
 import javax.inject.Inject
@@ -23,6 +24,7 @@ class BodiesFormFragment: BaseFragment() {
 
     companion object{
         private lateinit var getBodyFormViewModel: GetBodyFormViewModel
+        private lateinit var insertBodiesFormViewModel: InsertBodiesFormViewModel
         private var listBodiesView: List<BodyFormView>? = null
         var formId: Int = 0
 
@@ -52,6 +54,20 @@ class BodiesFormFragment: BaseFragment() {
             listBodiesView!!.find {it.id == id}!!.comment = newComment
         }
 
+        fun insertBodies(){
+
+            if (!listBodiesView.isNullOrEmpty()){
+                val list = listBodiesView!!.map {
+                    BodyForm(it.id, it.formId,
+                        it.idProject, it.code, it.value,
+                            it.description, it.satisfy,
+                        it.date, it.comment)  }
+                insertBodiesFormViewModel.list = list.toList()
+                insertBodiesFormViewModel.insertBodiesForm()
+            }
+
+        }
+
         @JvmStatic
         fun newInstance()=BodiesFormFragment()
     }
@@ -59,8 +75,6 @@ class BodiesFormFragment: BaseFragment() {
     @Inject
     lateinit var bodyFormAdapter: BodyFormAdapter
 
-
-    private lateinit var insertBodiesFormViewModel: InsertBodiesFormViewModel
 
     override fun layoutId() = R.layout.view_body_form
 
@@ -111,25 +125,15 @@ class BodiesFormFragment: BaseFragment() {
                 LinearLayoutManager.VERTICAL, false)
         addDecorationRecycler(rv_body, context!!)
         rv_body.adapter = bodyFormAdapter
+
         /*photoAdapter.clickListener = { photo, navigationExtras ->
             navigator.showForms(activity!!, photo, navigationExtras) }*/
 
     }
 
-    private fun insertBodies(){
-
-        val list = listBodiesView!!.map { BodyForm(it.id, it.formId,
-                it.idProject, it.code, it.value, it.description, it.satisfy,
-                it.date, it.comment)  }
-        insertBodiesFormViewModel.list = list.toList()
-        insertBodiesFormViewModel.insertBodiesForm()
-    }
-
     override fun onPause() {
         super.onPause()
-        if (!listBodiesView.isNullOrEmpty()){
-            insertBodies()
-        }
+        insertBodies()
 
     }
 

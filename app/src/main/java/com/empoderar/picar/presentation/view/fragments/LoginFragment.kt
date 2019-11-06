@@ -62,7 +62,7 @@ class LoginFragment: BaseFragment() {
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun verifyEmail(){
         this.email = this.prefs.getString(Constants.prefEmail, "")
-        if (email.isEmpty()){
+        if (email.trim().isEmpty()){
             enableControls(true)
         }else{
             enableControls(false)

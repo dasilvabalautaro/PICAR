@@ -20,13 +20,15 @@ class ManagerLocation @Inject constructor(private val context: Context) {
         jobInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             JobInfo.Builder(jobId, ComponentName(context,
                     JobLocationService::class.java))
-                    .setPeriodic((15 * 60 * 1000).toLong(), (7 * 60 * 1000).toLong())
-                    .build()
+                    .setPeriodic((15 * 60 * 1000).toLong()) //, (15 * 60 * 1000).toLong()
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_NOT_ROAMING)
+                    .build() //15 min
 
         } else {
             JobInfo.Builder(jobId, ComponentName(context,
                     JobLocationService::class.java))
-                    .setPeriodic((60 * 1000).toLong())
+                    .setPeriodic((60 * 1000 * 15).toLong())
+                    .setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                     .build()
         }
 

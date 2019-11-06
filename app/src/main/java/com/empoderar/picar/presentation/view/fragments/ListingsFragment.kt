@@ -54,7 +54,7 @@ class ListingsFragment: BaseFragment(){
             override fun onPageSelected(position: Int) {
                 if (position == 2) (activity as MenuActivity).setOrientation(true)
                 if (position == 3) (activity as MenuActivity).setOrientation(false)
-
+                if (position != 3) (activity as MenuActivity).setMenuSave(false)
             }
 
         })

@@ -74,4 +74,5 @@
     <string name="msg_error_download_content_forms">Error download Content Forms</string>
     <string name="msg_error_connection_other">Connection Some Other Error</string>
     <string name="msg_error_wrong_unit">Wrong unit</string>
+    <string name="lbl_save_bodies">Save</string>
 </resources>

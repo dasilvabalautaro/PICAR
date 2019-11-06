@@ -4,8 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_new_form"
-        android:title="@string/lbl_new_form"
-        android:icon="@drawable/ic_menu_add"
+        android:id="@+id/action_save_bodies"
+        android:title="@string/lbl_save_bodies"
+        android:icon="@drawable/ic_menu_done"
         app:showAsAction="ifRoom" />
 </menu>

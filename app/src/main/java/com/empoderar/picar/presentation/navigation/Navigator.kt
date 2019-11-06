@@ -42,7 +42,7 @@ class Navigator @Inject constructor() {
         val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
         BodiesFormFragment.formId = formId
         BodiesFormFragment.getBodies()
-        //(activity as MenuActivity).setOrientation(false)
+        (activity as MenuActivity).setMenuSave(true)
         viewPager.currentItem = 3
 
     }

@@ -101,6 +101,7 @@ class ProjectsFragment: BaseFragment() {
                 .subscribe { result -> println(result)})
     }
 
+
     private fun loadProjectList(){
         getProjectsViewModel.loadProjects()
 
@@ -155,6 +156,7 @@ class ProjectsFragment: BaseFragment() {
         rv_projects.adapter = projectsAdapter
         projectsAdapter.clickListener = { project, navigationExtras ->
             navigator.showForms(activity!!, project, navigationExtras) }
+
     }
 
     override fun renderFailure(message: Int) {

@@ -5,14 +5,13 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.BodyFormView
-import com.empoderar.picar.presentation.data.FormView
 import com.empoderar.picar.presentation.extension.inflate
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.view.fragments.BodiesFormFragment
 import kotlinx.android.synthetic.main.view_row_body.view.*
-import kotlinx.android.synthetic.main.view_row_form.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -26,9 +25,9 @@ class BodyFormAdapter @Inject constructor():
     internal var clickListener: (BodyFormView, Navigator.Extras) -> Unit = { _, _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            BodyFormAdapter.ViewHolder(parent.inflate(R.layout.view_row_body))
+            ViewHolder(parent.inflate(R.layout.view_row_body))
 
-    override fun onBindViewHolder(viewHolder: BodyFormAdapter.ViewHolder, position: Int) =
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) =
             viewHolder.bind(collection[position], clickListener)
 
     override fun getItemCount() = collection.size
@@ -39,7 +38,12 @@ class BodyFormAdapter @Inject constructor():
             itemView.lbl_code.tag = bodyFormView.id
             itemView.lbl_description.text = bodyFormView.description
             itemView.et_value.setText(bodyFormView.value)
-            itemView.et_cumple.setText(bodyFormView.satisfy)
+            if (bodyFormView.satisfy == "SI"){
+                itemView.sp_cumple.setSelection(0)
+            }else{
+                itemView.sp_cumple.setSelection(1)
+            }
+            //itemView.et_cumple.setText(bodyFormView.satisfy)
             itemView.et_date.setText(bodyFormView.date)
             itemView.et_comment.setText(bodyFormView.comment)
             itemView.setOnClickListener {
@@ -64,8 +68,22 @@ class BodyFormAdapter @Inject constructor():
                 }
 
             })
+            itemView.sp_cumple.onItemSelectedListener = object :
+                    AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+                    val selectedItem = parent.getItemAtPosition(position).toString()
 
-            itemView.et_cumple.addTextChangedListener(object: TextWatcher {
+                    BodiesFormFragment.updateSatisfy(selectedItem,
+                            (itemView.lbl_code.tag as Int))
+                } // to close the onItemSelected
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+            }
+
+           /* itemView.et_cumple.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     BodiesFormFragment.updateSatisfy(s.toString(),
                             (itemView.lbl_code.tag as Int))
@@ -80,7 +98,7 @@ class BodyFormAdapter @Inject constructor():
 
                 }
 
-            })
+            })*/
 
             itemView.et_date.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
@@ -116,6 +134,8 @@ class BodyFormAdapter @Inject constructor():
 
             })
         }
+
+
     }
 
 }

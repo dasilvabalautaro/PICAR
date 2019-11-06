@@ -30,4 +30,9 @@
         <item>Help</item>
     </string-array>
 
+    <string-array name="satisfy">
+        <item>SI</item>
+        <item>NO</item>
+    </string-array>
+
 </resources>
