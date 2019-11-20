@@ -9,6 +9,7 @@ import com.empoderar.picar.model.persistent.network.entity.MessageEntity
 import com.empoderar.picar.presentation.data.FormView
 import com.empoderar.picar.presentation.plataform.BaseViewModel
 import com.google.gson.Gson
+import java.util.*
 import javax.inject.Inject
 
 class UploadFormsViewModel @Inject constructor(private val uploadFormUseCase:
@@ -25,9 +26,12 @@ class UploadFormsViewModel @Inject constructor(private val uploadFormUseCase:
         if (URLUtil.isValidUrl(this.url) &&
                 this.token.isNotEmpty()){
             val list = forms.map { FormEntity(it.id,
-                    it.project, it.frmId, it.frmNro, it.title, it.dateEvaluation,
+                    it.project, it.frmId, it.frmNro, it.title,
+                    String.format(Locale.US,"/Date(%d)/", it.dateEvaluation.toLong()),
                     it.state, it.observation, it.userMobile,
-                    it.latitude, it.longitude, it.dateCreation, it.dateModification) }
+                    it.latitude, it.longitude,
+                    String.format(Locale.US,"/Date(%d)/", it.dateCreation.toLong()),
+                    String.format(Locale.US,"/Date(%d)/", it.dateModification.toLong())) }
             val gson = Gson()
             val jsonString = gson.toJson(list)
             println(jsonString)

@@ -25,6 +25,7 @@ class LoginActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
+
         picarWebService.getPublicEvents()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({

@@ -8,6 +8,7 @@ import com.empoderar.picar.model.persistent.network.entity.ImageEntity
 import com.empoderar.picar.presentation.data.ImageView
 import com.empoderar.picar.presentation.plataform.BaseViewModel
 import com.google.gson.Gson
+import java.util.*
 import javax.inject.Inject
 
 class UploadImagesViewModel @Inject constructor(private val uploadFormUseCase:
@@ -25,7 +26,8 @@ class UploadImagesViewModel @Inject constructor(private val uploadFormUseCase:
                 this.token.isNotEmpty()){
             val list = images.map { ImageEntity(it.id,
                     it.form, it.project, it.base64, it.latitude,
-                    it.longitude, it.date) }
+                    it.longitude,
+                    String.format(Locale.US,"/Date(%d)/", it.date.toLong())) }
             val gson = Gson()
             val jsonString = gson.toJson(list)
             println(jsonString)

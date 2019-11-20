@@ -148,7 +148,9 @@
             card_view:layout_constraintTop_toTopOf="@+id/top_guideline"
             tools:ignore="Autofill,LabelFor"
             android:inputType="date"
-            android:imeOptions="actionDone"/>
+            android:focusable="false"
+            android:clickable="true"
+            android:maxLines="1"/>
 
         <EditText
             android:layout_width="0dp"

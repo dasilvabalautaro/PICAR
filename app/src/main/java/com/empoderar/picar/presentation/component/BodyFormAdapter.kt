@@ -1,5 +1,10 @@
 package com.empoderar.picar.presentation.component
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.DatePickerDialog
+import android.content.Context
+import android.content.ContextWrapper
 import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,13 +15,19 @@ import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.BodyFormView
 import com.empoderar.picar.presentation.extension.inflate
 import com.empoderar.picar.presentation.navigation.Navigator
+import com.empoderar.picar.presentation.tools.DatePickerFragment
+import com.empoderar.picar.presentation.tools.Transform
 import com.empoderar.picar.presentation.view.fragments.BodiesFormFragment
 import kotlinx.android.synthetic.main.view_row_body.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
+
 class BodyFormAdapter @Inject constructor():
         RecyclerView.Adapter<BodyFormAdapter.ViewHolder>() {
+
 
     internal var collection: List<BodyFormView> by Delegates.observable(emptyList()) {
         _, _, _ -> notifyDataSetChanged()
@@ -43,8 +54,9 @@ class BodyFormAdapter @Inject constructor():
             }else{
                 itemView.sp_cumple.setSelection(1)
             }
-            //itemView.et_cumple.setText(bodyFormView.satisfy)
-            itemView.et_date.setText(bodyFormView.date)
+
+            itemView.et_date.setText(Transform
+                    .convertLongToTime(bodyFormView.date.toLong()))
             itemView.et_comment.setText(bodyFormView.comment)
             itemView.setOnClickListener {
                 clickListener(bodyFormView,
@@ -83,22 +95,13 @@ class BodyFormAdapter @Inject constructor():
                 }
             }
 
-           /* itemView.et_cumple.addTextChangedListener(object: TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    BodiesFormFragment.updateSatisfy(s.toString(),
-                            (itemView.lbl_code.tag as Int))
+            itemView.et_date.setOnClickListener {
+                val activity = getActivity(it.context)
+                if (activity != null){
+                    showDatePickerDialog(activity)
                 }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int,
-                                               count: Int, after: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int,
-                                           before: Int, count: Int) {
-
-                }
-
-            })*/
+            }
 
             itemView.et_date.addTextChangedListener(object: TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
@@ -135,7 +138,30 @@ class BodyFormAdapter @Inject constructor():
             })
         }
 
+        @SuppressLint("NewApi")
+        private fun showDatePickerDialog(activity: Activity) {
+            val newFragment = DatePickerFragment
+                    .newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                // +1 because January is zero
+                        val selectedDate = year.toString() + "-" +
+                                (month + 1).toString() + "-" + day.toString() + "+00:00:00"
+                        val localDate = LocalDate.parse(selectedDate, DateTimeFormatter.ISO_DATE)
+                        val date = Transform.convertToDateViaInstant(localDate)
+                        val validDate = Transform.convertLongToTime(date!!.time)
+                        itemView.et_date.setText(validDate)
 
+            })
+
+            newFragment.show(activity.fragmentManager, "datePicker")
+        }
+
+        private fun getActivity(context: Context?): Activity? {
+            return when (context) {
+                null -> null
+                is Activity -> context
+                else -> if (context is ContextWrapper) getActivity(context.baseContext) else null
+            }
+        }
     }
 
 }

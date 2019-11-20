@@ -8,6 +8,7 @@ import com.empoderar.picar.model.persistent.network.entity.BodyEntity
 import com.empoderar.picar.presentation.data.BodyFormView
 import com.empoderar.picar.presentation.plataform.BaseViewModel
 import com.google.gson.Gson
+import java.util.*
 import javax.inject.Inject
 
 class UploadBodiesViewModel @Inject constructor(private val uploadFormUseCase:
@@ -25,7 +26,9 @@ class UploadBodiesViewModel @Inject constructor(private val uploadFormUseCase:
                 this.token.isNotEmpty()){
             val list = bodies.map { BodyEntity(it.id,
                     it.formId, it.idProject, it.code, it.value,
-                    it.description, it.satisfy, it.date, it.comment) }
+                    it.description, it.satisfy,
+                    String.format(Locale.US,"/Date(%d)/", it.date.toLong()),
+                    it.comment) }
             val gson = Gson()
             val jsonString = gson.toJson(list)
             println(jsonString)

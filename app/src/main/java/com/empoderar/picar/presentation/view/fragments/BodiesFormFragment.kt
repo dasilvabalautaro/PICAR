@@ -15,6 +15,7 @@ import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetBodyFormViewModel
 import com.empoderar.picar.presentation.presenter.InsertBodiesFormViewModel
+import com.empoderar.picar.presentation.tools.Transform
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_body_form.*
 import java.util.*
@@ -44,9 +45,9 @@ class BodiesFormFragment: BaseFragment() {
         }
 
         fun updateDate(newDate: String, id: Int){
-            val dateLong = System.currentTimeMillis()
-            val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
-
+            val dateLong = Transform.convertDateToLong(newDate)
+            //val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+            val dateToCloud = dateLong.toString()
             listBodiesView!!.find {it.id == id}!!.date = dateToCloud
         }
 

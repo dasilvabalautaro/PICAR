@@ -1,10 +1,7 @@
 package com.empoderar.picar.presentation.view.fragments
 
-import android.app.Activity
-import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.content.FileProvider
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.AdapterView
@@ -13,7 +10,6 @@ import com.empoderar.picar.R
 import com.empoderar.picar.domain.data.BodyForm
 import com.empoderar.picar.domain.data.Form
 import com.empoderar.picar.domain.data.Image
-import com.empoderar.picar.domain.data.Photo
 import com.empoderar.picar.model.persistent.caching.Variables
 import com.empoderar.picar.model.persistent.files.ManageFiles
 import com.empoderar.picar.presentation.component.PhotoAdapter
@@ -23,13 +19,13 @@ import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.permission.EnablePermissions
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.*
+import com.empoderar.picar.presentation.tools.Transform
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Cancellable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.view_new_form.*
 import kotlinx.android.synthetic.main.view_new_form.sp_select
 
@@ -108,8 +104,8 @@ class NewFormFragment: BaseFragment() {
                 .subscribe { resize ->
                     kotlin.run {
                         val dateLong = System.currentTimeMillis()
-                        val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
-
+                        // val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+                        val dateToCloud = dateLong.toString()
                         val photo = PhotoView(resize, dateToCloud,
                                 Variables.locationUser.lat,
                                 Variables.locationUser.lon)
@@ -268,8 +264,8 @@ class NewFormFragment: BaseFragment() {
     private fun insertBodies(){
         val list = ArrayList<BodyForm>()
         val dateLong = System.currentTimeMillis()
-        val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
-
+        //val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+        val dateToCloud = dateLong.toString()
         for (content:ContentFormView in this.listContent){
             val body = BodyForm(0, this.idNewForm, proyectView!!.id,
                     content.varCodigo, "12", content.description, "SI",
@@ -445,7 +441,7 @@ class NewFormFragment: BaseFragment() {
         this.idNewForm = formView!!.id
         this.codeTypeForm = formView!!.frmId
         BodiesFormFragment.formId = this.idNewForm
-        tv_date!!.text = formView!!.dateCreation
+        tv_date!!.text = Transform.convertLongToTime(formView!!.dateCreation.toLong())
         tv_latitude.text = formView!!.latitude.toString()
         tv_longitude.text = formView!!.longitude.toString()
         et_title!!.setText(formView!!.title)
@@ -476,9 +472,12 @@ class NewFormFragment: BaseFragment() {
                 time
             }
             val dateLong = System.currentTimeMillis()
-            val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+            //val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
+            val dateToCloud = dateLong.toString()
             val dateInit = dateMinusFiftyYear.time
-            val dateInitToCloud = String.format(Locale.US,"/Date(%d)/", dateInit)
+            //val dateInitToCloud = String.format(Locale.US,"/Date(%d)/", dateInit)
+            val dateInitToCloud = dateInit.toString()
+
             val form = Form(0, proyectView!!.id, this.codeTypeForm , 1,
                     et_title.text.toString(), dateInitToCloud, 1, "None",
                     123, Variables.locationUser.lat,
