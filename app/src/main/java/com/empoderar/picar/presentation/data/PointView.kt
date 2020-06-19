@@ -5,7 +5,7 @@ import com.empoderar.picar.presentation.plataform.*
 
 data class PointView(var latitude: Double,
                      var longitude: Double,
-                     var title: String): KParcelable  {
+                     var title: String?): KParcelable  {
 
     companion object {
         @JvmField val CREATOR = parcelableCreator(

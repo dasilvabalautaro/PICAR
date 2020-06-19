@@ -20,7 +20,7 @@ class GetUserUseCase @Inject constructor(private val userDataDao:
                     it.phone, it.address, it.password) }
             val user = verifyPassword(list, params[1])
             when (user != null){
-                true -> Either.Right(user!!)
+                true -> Either.Right(user)
                 false -> Either.Left(Failure.DatabaseError())
             }
 

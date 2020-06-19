@@ -6,14 +6,14 @@ import com.empoderar.picar.presentation.plataform.parcelableCreator
 
 data class ProjectView(var id: Int,
                        var unity: Int,
-                       var codeProject: String,
-                       var nameProject: String,
+                       var codeProject: String?,
+                       var nameProject: String?,
                        var latitude: Double,
                        var longitude: Double,
-                       var state: String,
-                       var datePresentation: String,
-                       var dateInitAgreement: String,
-                       var dateEndAgreement: String): KParcelable {
+                       var state: String?,
+                       var datePresentation: String?,
+                       var dateInitAgreement: String?,
+                       var dateEndAgreement: String?): KParcelable {
     companion object {
         @JvmField val CREATOR = parcelableCreator(
                 ::ProjectView)

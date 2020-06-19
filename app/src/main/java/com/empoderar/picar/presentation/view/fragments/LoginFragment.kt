@@ -61,7 +61,7 @@ class LoginFragment: BaseFragment() {
 
     @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
     private fun verifyEmail(){
-        this.email = this.prefs.getString(Constants.prefEmail, "")
+        this.email = this.prefs.getString(Constants.prefEmail, "").toString()
         if (email.trim().isEmpty()){
             enableControls(true)
         }else{
@@ -90,6 +90,7 @@ class LoginFragment: BaseFragment() {
             this.prefs[Constants.prefUnity] = permission.unity
             val password = AES.encrypt(et_password.text.toString(), Constants.seed)
             this.prefs[Constants.prefPassword] = password
+            //println(permission.expiration) 2020-03-05T17:59:44.1443949Z
             defineAccess()
 
         }
@@ -109,9 +110,7 @@ class LoginFragment: BaseFragment() {
         if (validatedInput(et_user.text.toString(),
                         et_password.text.toString())){
 
-            if ((networkHandler.isConnected == null ||
-                    !networkHandler.isConnected!! ||
-                    !Variables.isServerUp) && isRegisterPermission()){
+            if ((!networkHandler.isConnected || !Variables.isServerUp) && isRegisterPermission()){
                 checkPermissionLocal()
             }else{
                 checkPermissionCloud()
@@ -150,7 +149,7 @@ class LoginFragment: BaseFragment() {
 
             val password = this.prefs.getString(Constants.prefPassword, "")
             val login = this.prefs.getString(Constants.prefLogin, "")
-            val decrypt = AES.decrypt(password, Constants.seed)
+            val decrypt = password?.let { AES.decrypt(it, Constants.seed) }
             if (et_user.text.toString() == login && et_password.text.toString() == decrypt){
                 navigator.showMenu(activity!!)
                 (activity!! as LoginActivity).finish()

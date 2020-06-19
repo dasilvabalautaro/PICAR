@@ -7,12 +7,12 @@ import com.empoderar.picar.presentation.plataform.parcelableCreator
 data class BodyFormView(var id: Int,
                         var formId: Int,
                         var idProject: Int,
-                        var code: String,
-                        var description: String,
-                        var value: String,
-                        var satisfy: String,
-                        var date: String,
-                        var comment: String): KParcelable {
+                        var code: String?,
+                        var description: String?,
+                        var value: String?,
+                        var satisfy: String?,
+                        var date: String?,
+                        var comment: String?): KParcelable {
     companion object {
         @JvmField val CREATOR = parcelableCreator(
                 ::BodyFormView)

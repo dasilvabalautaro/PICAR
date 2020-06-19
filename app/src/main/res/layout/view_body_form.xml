@@ -5,67 +5,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background">
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/left_guideline"
             app:layout_constraintGuide_percent=".02"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/left_two_guideline"
             app:layout_constraintGuide_percent=".12"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/left_three_guideline"
             app:layout_constraintGuide_percent=".40"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_guideline"
             app:layout_constraintGuide_percent=".98"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_two_guideline"
             app:layout_constraintGuide_percent=".50"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_three_guideline"
             app:layout_constraintGuide_percent=".65"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_four_guideline"
             app:layout_constraintGuide_percent=".78"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/top_guideline"
             app:layout_constraintGuide_percent=".05"
             android:orientation="horizontal"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_guideline"
@@ -144,7 +144,7 @@
             app:layout_constraintRight_toRightOf="@+id/right_guideline"
             app:layout_constraintTop_toTopOf="@+id/top_guideline" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_guideline"
             app:layout_constraintTop_toBottomOf="@+id/lbl_code"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </ScrollView>

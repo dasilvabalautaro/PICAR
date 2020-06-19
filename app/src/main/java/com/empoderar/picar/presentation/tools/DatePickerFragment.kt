@@ -1,9 +1,10 @@
 package com.empoderar.picar.presentation.tools
-
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.app.DialogFragment
+import android.content.Context
 import android.os.Bundle
+import androidx.fragment.app.DialogFragment
+
 import java.util.*
 
 class DatePickerFragment : DialogFragment() {
@@ -16,7 +17,7 @@ class DatePickerFragment : DialogFragment() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        return DatePickerDialog(activity, listener, year, month, day)
+        return DatePickerDialog(activity as Context, listener, year, month, day)
     }
 
     companion object {

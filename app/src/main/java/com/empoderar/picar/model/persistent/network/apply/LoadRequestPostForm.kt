@@ -21,7 +21,7 @@ interface LoadRequestPostForm {
             return when (networkHandler.isConnected) {
                 true -> LinkBackend.request(bodyRequest.send(token, url, body),
                         { it.toMessage() }, MessageEntity("", "", ""))
-                false, null -> Either.Left(Failure.NetworkConnection())
+                false  -> Either.Left(Failure.NetworkConnection())
             }
         }
 

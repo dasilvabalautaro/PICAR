@@ -2,20 +2,14 @@ package com.empoderar.picar.presentation.view.fragments
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v4.view.ViewPager
-import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.empoderar.picar.R
-import com.empoderar.picar.domain.data.Form
-import com.empoderar.picar.domain.data.Project
 import com.empoderar.picar.domain.data.Unity
 import com.empoderar.picar.model.persistent.caching.Constants
 import com.empoderar.picar.model.persistent.preference.PreferenceRepository
-import com.empoderar.picar.model.persistent.preference.PreferenceRepository.set
 import com.empoderar.picar.presentation.component.ProjectsAdapter
 import com.empoderar.picar.presentation.data.ProjectView
 import com.empoderar.picar.presentation.extension.addDecorationRecycler
@@ -25,15 +19,11 @@ import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.*
-import com.empoderar.picar.presentation.view.activities.MenuActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.Cancellable
 import kotlinx.android.synthetic.main.view_list_project.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ProjectsFragment: BaseFragment() {

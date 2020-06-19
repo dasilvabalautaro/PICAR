@@ -1,9 +1,8 @@
 package com.empoderar.picar.presentation.presenter
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.empoderar.picar.domain.data.Form
 import com.empoderar.picar.domain.interactor.GetFormsUseCase
-import com.empoderar.picar.domain.interactor.UseCase
 import com.empoderar.picar.presentation.data.FormView
 import com.empoderar.picar.presentation.plataform.BaseViewModel
 import javax.inject.Inject

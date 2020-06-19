@@ -7,17 +7,14 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.FileProvider
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
+import androidx.core.content.FileProvider
+import androidx.core.view.GravityCompat
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.empoderar.picar.App
 import com.empoderar.picar.R
-import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.model.observer.LocationChangeObserver
 import com.empoderar.picar.model.persistent.caching.Variables
 import com.empoderar.picar.model.persistent.files.ManageFiles
@@ -28,14 +25,10 @@ import com.empoderar.picar.presentation.plataform.BaseActivity
 import kotlinx.android.synthetic.main.activity_task.*
 import kotlinx.android.synthetic.main.toolbar.*
 import com.empoderar.picar.presentation.navigation.Navigator
-import com.empoderar.picar.presentation.plataform.BaseFragment
-import com.empoderar.picar.presentation.tools.Validate
 import com.empoderar.picar.presentation.view.fragments.*
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MenuActivity : BaseActivity(){
@@ -70,7 +63,7 @@ class MenuActivity : BaseActivity(){
         appComponent.inject(this)
         enablePermissions.permissionServiceLocation(this)
         enablePermissions.permissionCamera(this)
-        if (networkHandler.isConnected == null || !networkHandler.isConnected!!){
+        if (!networkHandler.isConnected){
             Toast.makeText(this,
                     getString(R.string.failure_network_connection),
                     Toast.LENGTH_SHORT).show()
@@ -113,7 +106,7 @@ class MenuActivity : BaseActivity(){
         menuExpandableListAdapter = MenuExpandableAdapter(this,
                 navList, this.expandableHeaderMenu!!, this.expandableListMenu!!)
         navList.setAdapter(menuExpandableListAdapter)
-        navList.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+        navList.setOnChildClickListener { _, _, groupPosition, childPosition, _ ->
             // TODO Auto-generated method stub
             val selectedItem = this.expandableListMenu!![this
                     .expandableHeaderMenu!![groupPosition]]!![childPosition]

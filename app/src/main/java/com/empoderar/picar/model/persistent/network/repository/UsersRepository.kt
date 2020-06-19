@@ -17,7 +17,7 @@ interface UsersRepository {
         override fun users(): Either<Failure, List<User>> {
             return when (networkHandler.isConnected) {
                 true -> request(service.users(), { it.map { it.toUser() } }, emptyList())
-                false, null -> Either.Left(Failure.NetworkConnection())
+                false  -> Either.Left(Failure.NetworkConnection())
             }
         }
 

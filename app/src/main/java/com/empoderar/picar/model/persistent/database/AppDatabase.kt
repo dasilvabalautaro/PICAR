@@ -1,7 +1,7 @@
 package com.empoderar.picar.model.persistent.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.empoderar.picar.model.persistent.database.data.*
 import com.empoderar.picar.model.persistent.database.interfaces.*
 

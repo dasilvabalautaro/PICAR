@@ -5,8 +5,8 @@ import com.empoderar.picar.presentation.plataform.KParcelable
 import com.empoderar.picar.presentation.plataform.parcelableCreator
 
 data class UserView(var id: Int, var unit: Int,
-                    var role: Int, var name: String,
-                    var phone: String, var address: String): KParcelable {
+                    var role: Int, var name: String?,
+                    var phone: String?, var address: String?): KParcelable {
     companion object {
         @JvmField val CREATOR = parcelableCreator(
                 ::UserView)

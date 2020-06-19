@@ -1,13 +1,14 @@
 package com.empoderar.picar.presentation.extension
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.empoderar.picar.presentation.plataform.BaseActivity
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import kotlinx.android.synthetic.main.activity_task.*
@@ -21,7 +22,8 @@ inline fun <reified T : ViewModel> Fragment.viewModel(factory: ViewModelProvider
     return vm
 }
 
-fun BaseFragment.close() = fragmentManager?.popBackStack()
+
+fun BaseFragment.close() = (activity as FragmentActivity).supportFragmentManager.popBackStack()
 
 val BaseFragment.viewContainer: View
     get() = (activity as BaseActivity)

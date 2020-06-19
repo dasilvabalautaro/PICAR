@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/BaseToolbarStyle"
         android:layout_width="match_parent"
@@ -20,9 +20,9 @@
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp">
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,14 +41,14 @@
             app:layout_constraintTop_toTopOf="parent"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="4dp"/>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </android.support.design.widget.AppBarLayout>
 

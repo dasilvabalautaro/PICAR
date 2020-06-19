@@ -21,7 +21,7 @@ interface LoadRequestPermission {
                 true -> LinkBackend.request(bodyRequest.send(url, body),
                         { it.toPermission() },
                         PermissionEntity("", "", "", 0, 0))
-                false, null -> Either.Left(Failure.NetworkConnection())
+                false -> Either.Left(Failure.NetworkConnection())
             }
         }
 

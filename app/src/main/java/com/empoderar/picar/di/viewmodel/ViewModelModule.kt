@@ -1,7 +1,7 @@
 package com.empoderar.picar.di.viewmodel
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.empoderar.picar.presentation.presenter.UploadImagesViewModel
 import com.empoderar.picar.presentation.presenter.GetProjectsCloudViewModel
 import com.empoderar.picar.presentation.presenter.*

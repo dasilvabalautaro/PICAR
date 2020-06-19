@@ -3,9 +3,8 @@ package com.empoderar.picar.presentation.plataform
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.empoderar.picar.App
 import com.empoderar.picar.R
 import com.empoderar.picar.presentation.extension.inTransaction
@@ -56,7 +55,6 @@ abstract class BaseActivity: AppCompatActivity() {
                 super.onBackPressed()
                 android.os.Process.killProcess(android.os.Process.myPid())
                 exitProcess(1)
-                return
             }
 
             this.doubleBackToExitPressedOnce = true

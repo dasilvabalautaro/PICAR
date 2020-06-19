@@ -11,8 +11,6 @@ import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetMunicipalitiesViewModel
 import com.empoderar.picar.presentation.view.activities.OptionAccessActivity
-import com.empoderar.picar.presentation.view.activities.SplashActivity
-import kotlinx.android.synthetic.main.view_list_form.*
 import kotlinx.android.synthetic.main.view_options_access.*
 import javax.inject.Inject
 

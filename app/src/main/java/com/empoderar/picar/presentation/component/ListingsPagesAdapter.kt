@@ -1,16 +1,15 @@
 package com.empoderar.picar.presentation.component
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.empoderar.picar.presentation.view.fragments.BodiesFormFragment
 import com.empoderar.picar.presentation.view.fragments.FormsFragment
 import com.empoderar.picar.presentation.view.fragments.NewFormFragment
 import com.empoderar.picar.presentation.view.fragments.ProjectsFragment
 
-class ListingsPagesAdapter(manager: FragmentManager, pager: ViewPager):
-        FragmentStatePagerAdapter(manager){
+class ListingsPagesAdapter(manager: FragmentManager):
+        FragmentStatePagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
     var projects: ProjectsFragment? = null
     var forms: FormsFragment? = null
     var newForm: NewFormFragment? = null

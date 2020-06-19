@@ -6,46 +6,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background">
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/left_guideline"
             app:layout_constraintGuide_percent=".05"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_guideline"
             app:layout_constraintGuide_percent=".95"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_one_guideline"
             app:layout_constraintGuide_percent=".30"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/right_two_guideline"
             app:layout_constraintGuide_percent=".82"
             android:orientation="vertical"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/top_guideline"
             app:layout_constraintGuide_percent=".05"
             android:orientation="horizontal"/>
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bottom_guideline"
@@ -244,7 +244,7 @@
             app:layout_constraintRight_toLeftOf="@+id/right_guideline"
             app:layout_constraintTop_toTopOf="@+id/cb_finished"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_photos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ib_save"/>
 
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </ScrollView>

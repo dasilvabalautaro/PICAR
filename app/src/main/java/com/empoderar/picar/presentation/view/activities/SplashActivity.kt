@@ -2,8 +2,6 @@ package com.empoderar.picar.presentation.view.activities
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
-import android.os.Handler
 import com.empoderar.picar.presentation.plataform.BaseActivity
 import com.empoderar.picar.presentation.view.fragments.SplashFragment
 

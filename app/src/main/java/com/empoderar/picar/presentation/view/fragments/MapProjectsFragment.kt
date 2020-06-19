@@ -55,7 +55,9 @@ class MapProjectsFragment: BaseFragment(), OnMapReadyCallback {
                 val name = projectView.nameProject
                 val coordinates = LatLng(lat, lng)
                 this.listCoordinates.add(coordinates)
-                this.listNameProjects.add(name)
+                if (name != null) {
+                    this.listNameProjects.add(name)
+                }
             }
         }
 

@@ -1,17 +1,12 @@
 package com.empoderar.picar.presentation.view.fragments
 
 import android.os.Bundle
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import com.empoderar.picar.R
-import com.empoderar.picar.domain.data.Unity
 import com.empoderar.picar.presentation.component.ListingsPagesAdapter
-import com.empoderar.picar.presentation.extension.failure
-import com.empoderar.picar.presentation.extension.observe
-import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
-import com.empoderar.picar.presentation.presenter.GetUnitsDatabaseViewModel
 import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_listings.*
 import javax.inject.Inject
@@ -33,7 +28,7 @@ class ListingsFragment: BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vp_list!!.adapter = ListingsPagesAdapter(activity!!
-                .supportFragmentManager, vp_list!!)
+                .supportFragmentManager)
 
         tl_options!!.setupWithViewPager(vp_list)
         tl_options!!.getTabAt(0)!!.text = getString(R.string.lbl_tab_projects)

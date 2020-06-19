@@ -33,9 +33,17 @@ class InsertUsersUseCase @Inject constructor(private val userDataDao:
 
         if (list.isNotEmpty()){
             for (i in list.indices){
-                val user = UserData(list[i].id, list[i].unit, list[i].role,
-                        list[i].name, list[i].phone, list[i].address)
-                users.add(user)
+                val user = list[i].name?.let {
+                    list[i].phone?.let { it1 ->
+                        list[i].address?.let { it2 ->
+                            UserData(list[i].id, list[i].unit, list[i].role,
+                                    it, it1, it2)
+                        }
+                    }
+                }
+                if (user != null) {
+                    users.add(user)
+                }
             }
         }
         return users.toList()

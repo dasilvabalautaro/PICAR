@@ -36,21 +36,17 @@ class LoginActivity: BaseActivity() {
                 }, { throwable ->
 
                     if (throwable is NoNetworkException) {
-
-                        Variables.isServerUp = false
                         Toast.makeText(this,
                                 getString(R.string.failure_network_connection),
                                 Toast.LENGTH_SHORT).show()
                     } else {
-                        Variables.isServerUp = false
                         Toast.makeText(this,
                                 getString(R.string.msg_error_connection_other),
                                 Toast.LENGTH_SHORT)
                                 .show()
                     }
+                    Variables.isServerUp = false
                 })
-
-
     }
 
 }

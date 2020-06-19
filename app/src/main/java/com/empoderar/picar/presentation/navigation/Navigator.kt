@@ -1,8 +1,8 @@
 package com.empoderar.picar.presentation.navigation
 
 import android.content.Context
-import android.support.v4.app.FragmentActivity
-import android.support.v4.view.ViewPager
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.FormView
@@ -48,7 +48,7 @@ class Navigator @Inject constructor() {
     }
 
     fun showForms(activity: FragmentActivity,
-                     projectView: ProjectView, navigationExtras: Extras){
+                  projectView: ProjectView, navigationExtras: Extras){
         val viewPager = activity.findViewById<ViewPager>(R.id.vp_list)
         BaseFragment.proyectView = projectView
         BaseFragment.oldProject = BaseFragment.currentProject

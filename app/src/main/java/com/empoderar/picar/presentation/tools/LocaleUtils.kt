@@ -14,7 +14,7 @@ class LocaleUtils @Inject constructor() {
     fun setLocale(locale: Locale){
         this.locale = locale
         if (this.locale != null){
-            Locale.setDefault(this.locale)
+            Locale.setDefault(this.locale!!)
         }
     }
 

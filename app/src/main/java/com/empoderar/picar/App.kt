@@ -1,7 +1,7 @@
 package com.empoderar.picar
 
 import android.app.Application
-import android.arch.lifecycle.ProcessLifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import android.content.res.Configuration
 import com.empoderar.picar.di.ApplicationComponent
 import com.empoderar.picar.di.ApplicationModule
@@ -46,8 +46,8 @@ class App: Application() {
         if (BuildConfig.DEBUG) LeakCanary.install(this)
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration?) {
+    override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        localeUtils.updateConfiguration(this, newConfig!!)
+        localeUtils.updateConfiguration(this, newConfig)
     }
 }

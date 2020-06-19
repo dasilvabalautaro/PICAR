@@ -5,9 +5,9 @@ import com.empoderar.picar.presentation.plataform.KParcelable
 import com.empoderar.picar.presentation.plataform.parcelableCreator
 
 data class UnityView(var id: Int,
-                     var name: String,
-                     var phone: String,
-                     var address: String): KParcelable {
+                     var name: String?,
+                     var phone: String?,
+                     var address: String?): KParcelable {
     companion object {
         @JvmField val CREATOR = parcelableCreator(
                 ::UnityView)

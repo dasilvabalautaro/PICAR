@@ -1,16 +1,16 @@
 package com.empoderar.picar.presentation.component
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.ContextWrapper
-import android.support.v7.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.BodyFormView
 import com.empoderar.picar.presentation.extension.inflate
@@ -23,7 +23,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 import kotlin.properties.Delegates
-
 
 class BodyFormAdapter @Inject constructor():
         RecyclerView.Adapter<BodyFormAdapter.ViewHolder>() {
@@ -55,8 +54,10 @@ class BodyFormAdapter @Inject constructor():
                 itemView.sp_cumple.setSelection(1)
             }
 
-            itemView.et_date.setText(Transform
-                    .convertLongToTime(bodyFormView.date.toLong()))
+            itemView.et_date.setText(bodyFormView.date?.toLong()?.let {
+                Transform
+                        .convertLongToTime(it)
+            })
             itemView.et_comment.setText(bodyFormView.comment)
             itemView.setOnClickListener {
                 clickListener(bodyFormView,
@@ -138,7 +139,6 @@ class BodyFormAdapter @Inject constructor():
             })
         }
 
-        @SuppressLint("NewApi")
         private fun showDatePickerDialog(activity: Activity) {
             val newFragment = DatePickerFragment
                     .newInstance(DatePickerDialog.OnDateSetListener { _, year, month, day ->
@@ -152,7 +152,7 @@ class BodyFormAdapter @Inject constructor():
 
             })
 
-            newFragment.show(activity.fragmentManager, "datePicker")
+            newFragment.show((activity as FragmentActivity).supportFragmentManager, "datePicker")
         }
 
         private fun getActivity(context: Context?): Activity? {

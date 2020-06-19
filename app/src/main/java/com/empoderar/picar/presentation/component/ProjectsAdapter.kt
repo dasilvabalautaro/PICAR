@@ -1,8 +1,9 @@
 package com.empoderar.picar.presentation.component
 
-import android.support.v7.widget.RecyclerView
+//import androidx.appcompat.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.ProjectView
 import com.empoderar.picar.presentation.extension.inflate

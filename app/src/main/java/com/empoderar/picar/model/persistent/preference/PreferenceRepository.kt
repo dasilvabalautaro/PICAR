@@ -2,7 +2,7 @@ package com.empoderar.picar.model.persistent.preference
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 
 object PreferenceRepository {
     const val latitude = "latitude"

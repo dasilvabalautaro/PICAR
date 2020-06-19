@@ -35,6 +35,7 @@ object Transform {
 
     fun convertDateToLong(date: String): Long {
         val df = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US)
+        @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         return df.parse(date).time
     }
 

@@ -1,6 +1,6 @@
 package com.empoderar.picar.di
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import android.content.Context
 import com.empoderar.picar.App
 import com.empoderar.picar.BuildConfig
@@ -102,7 +102,7 @@ class ApplicationModule(private val app: App) {
         val okHttpClientBuilder =   getUnsafeOkHttpClient() //OkHttpClient.Builder()
         okHttpClientBuilder.addInterceptor { chain ->
             val connected = networkHandler.isConnected
-            if (connected!!) {
+            if (connected) {
                 return@addInterceptor chain.proceed(chain.request())
 
             } else {

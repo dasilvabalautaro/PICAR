@@ -3,9 +3,9 @@ package com.empoderar.picar.presentation.data
 import android.os.Parcel
 import com.empoderar.picar.presentation.plataform.*
 
-data class MunicipalityView(var id: String,
+data class MunicipalityView(var id: String?,
                             var unit: Int,
-                            var name: String): KParcelable {
+                            var name: String?): KParcelable {
 
     companion object {
         @JvmField val CREATOR = parcelableCreator(

@@ -1,6 +1,6 @@
 package com.empoderar.picar.presentation.presenter
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 import com.empoderar.picar.domain.interactor.DownUsersUseCase
 import com.empoderar.picar.domain.data.User
 import com.empoderar.picar.domain.interactor.UseCase

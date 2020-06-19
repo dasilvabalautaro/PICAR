@@ -2,10 +2,10 @@ package com.empoderar.picar.presentation.view.fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.empoderar.picar.R
 import com.empoderar.picar.domain.data.BodyForm
 import com.empoderar.picar.domain.data.Form
@@ -267,10 +267,16 @@ class NewFormFragment: BaseFragment() {
         //val dateToCloud = String.format(Locale.US,"/Date(%d)/", dateLong)
         val dateToCloud = dateLong.toString()
         for (content:ContentFormView in this.listContent){
-            val body = BodyForm(0, this.idNewForm, proyectView!!.id,
-                    content.varCodigo, "12", content.description, "SI",
-                    dateToCloud, "None")
-            list.add(body)
+            val body = content.varCodigo?.let {
+                content.description?.let { it1 ->
+                    BodyForm(0, this.idNewForm, proyectView!!.id,
+                            it, "12", it1, "SI",
+                            dateToCloud, "None")
+                }
+            }
+            if (body != null) {
+                list.add(body)
+            }
         }
         insertBodiesFormViewModel.list = list.toList()
         insertBodiesFormViewModel.insertBodiesForm()
@@ -303,7 +309,7 @@ class NewFormFragment: BaseFragment() {
         this.codesTypesForms.clear()
         for (type: TypeFormView in list){
 
-            this.codesTypesForms.add(type.frmId)
+            type.frmId?.let { this.codesTypesForms.add(it) }
         }
     }
 
@@ -341,10 +347,14 @@ class NewFormFragment: BaseFragment() {
             for (i in this.numberPhotos until this.listPhoto.count()){
                 val base64 = manageFiles
                         .base641EncodedImage(this.listPhoto[i].image)
-                val img = Image(0, id.toInt(), proyectView!!.id,
-                        base64, this.listPhoto[i].latitude,
-                        this.listPhoto[i].longitude, this.listPhoto[i].date)
-                list.add(img)
+                val img = this.listPhoto[i].date?.let {
+                    Image(0, id.toInt(), proyectView!!.id,
+                            base64, this.listPhoto[i].latitude,
+                            this.listPhoto[i].longitude, it)
+                }
+                if (img != null) {
+                    list.add(img)
+                }
 
             }
             insertBodies()
@@ -365,9 +375,11 @@ class NewFormFragment: BaseFragment() {
     private fun handleGetImages(list: List<ImageView>?){
         if (!list.isNullOrEmpty()){
             for (imv: ImageView in list){
-                val bitmap = manageFiles.base64DecodeImage(imv.base64)
-                val photo = PhotoView(bitmap, imv.date, imv.latitude, imv.longitude)
-                this.listPhoto.add(photo)
+                val bitmap = imv.base64?.let { manageFiles.base64DecodeImage(it) }
+                val photo = bitmap?.let { PhotoView(it, imv.date, imv.latitude, imv.longitude) }
+                if (photo != null) {
+                    this.listPhoto.add(photo)
+                }
             }
             this.numberPhotos = this.listPhoto.count()
             photoAdapter.collection = listPhoto.toList()
@@ -439,9 +451,9 @@ class NewFormFragment: BaseFragment() {
 
     fun setUpdateDataControl(){
         this.idNewForm = formView!!.id
-        this.codeTypeForm = formView!!.frmId
+        this.codeTypeForm = formView!!.frmId.toString()
         BodiesFormFragment.formId = this.idNewForm
-        tv_date!!.text = Transform.convertLongToTime(formView!!.dateCreation.toLong())
+        tv_date!!.text = formView!!.dateCreation?.toLong()?.let { Transform.convertLongToTime(it) }
         tv_latitude.text = formView!!.latitude.toString()
         tv_longitude.text = formView!!.longitude.toString()
         et_title!!.setText(formView!!.title)
@@ -487,17 +499,21 @@ class NewFormFragment: BaseFragment() {
 
         }
         else{
-            context!!.toast(getString(R.string.failure_project_not_selected))
+            requireContext().toast(getString(R.string.failure_project_not_selected))
         }
 
     }
 
     private fun updateForm(){
-        val form = Form(formView!!.id, formView!!.project, formView!!.frmId,
-                formView!!.frmNro, et_title.text.toString(), "",
-                formView!!.state, "", formView!!.userMobile,
-                formView!!.latitude, formView!!.longitude, formView!!.dateCreation,
-                "")
+        val form = formView!!.frmId?.let {
+            formView!!.dateCreation?.let { it1 ->
+                Form(formView!!.id, formView!!.project, it,
+                    formView!!.frmNro, et_title.text.toString(), "",
+                    formView!!.state, "", formView!!.userMobile,
+                    formView!!.latitude, formView!!.longitude, it1,
+                    "")
+            }
+        }
         insertOneFormViewModel.form = form
         insertOneFormViewModel.insertForm()
 

@@ -2,8 +2,9 @@ package com.empoderar.picar.presentation.extension
 
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
+import android.net.Network
 
-val Context.networkInfo: NetworkInfo? get() =
+val Context.networkInfo: Network?
+    get() =
     (this.getSystemService(Context.CONNECTIVITY_SERVICE)
-            as ConnectivityManager).activeNetworkInfo
+            as ConnectivityManager).activeNetwork

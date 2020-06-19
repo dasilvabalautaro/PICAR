@@ -1,11 +1,10 @@
 package com.empoderar.picar.presentation.plataform
 
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
+import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +16,9 @@ import com.empoderar.picar.domain.data.Unity
 import com.empoderar.picar.model.exception.Failure
 import com.empoderar.picar.presentation.data.*
 import com.empoderar.picar.presentation.extension.viewContainer
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.toolbar.*
-import java.util.LinkedHashMap
 import javax.inject.Inject
 
 abstract class BaseFragment: Fragment() {

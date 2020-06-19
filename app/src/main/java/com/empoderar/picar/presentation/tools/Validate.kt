@@ -22,8 +22,8 @@ object Validate {
     fun isURLReachable(context: Context): Boolean {
         val connectivityManager = context
                 .getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        val netInfo = connectivityManager.activeNetworkInfo
-        if (netInfo != null && netInfo.isConnected) {
+        val netInfo = connectivityManager.activeNetwork
+        if (netInfo != null) {
             try {
                 val url = URL(Constants.urlBase)
                 val urlConnection = url.openConnection() as HttpURLConnection

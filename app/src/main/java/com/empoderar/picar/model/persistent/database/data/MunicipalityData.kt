@@ -1,8 +1,8 @@
 package com.empoderar.picar.model.persistent.database.data
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "municipalityData")
 data class MunicipalityData(@PrimaryKey var id: String,

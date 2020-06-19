@@ -3,6 +3,7 @@ package com.empoderar.picar.model.persistent.files
 import android.content.Context
 import android.graphics.*
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
@@ -31,7 +32,7 @@ class ManageFiles @Inject constructor(private val context: Context) {
     }
 
     private fun getStorageDirectory(): File {
-        val file = File(Environment.getExternalStorageDirectory(), directoryWork)
+        val file = File(context.getExternalFilesDir(null), directoryWork)
         if (!file.exists()) {
             file.mkdirs()
             println("Directory not created")
@@ -83,9 +84,17 @@ class ManageFiles @Inject constructor(private val context: Context) {
     fun getBitmap(uri: Uri?): Bitmap? {
         when {
             uri != null -> return try {
-                scaleBitmapDown(
-                        MediaStore.Images.Media
-                                .getBitmap(context.contentResolver, uri))
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    val source = ImageDecoder
+                            .createSource(context.contentResolver, uri)
+                    scaleBitmapDown(ImageDecoder.decodeBitmap(source))
+                } else {
+                    @Suppress("DEPRECATION")
+                    scaleBitmapDown(
+                            MediaStore.Images.Media
+                                    .getBitmap(context.contentResolver, uri))
+                }
 
             } catch (e: IOException) {
                 println(e.message)
@@ -156,7 +165,7 @@ class ManageFiles @Inject constructor(private val context: Context) {
 
     private fun deleteImagesJpeg(){
 
-        val file = File(Environment.getExternalStoragePublicDirectory(
+        val file = File(context.getExternalFilesDir(
                 Environment.DIRECTORY_DOCUMENTS), directoryWork)
         if (file.isDirectory) {
             val files = file.listFiles()
@@ -180,9 +189,11 @@ class ManageFiles @Inject constructor(private val context: Context) {
 
     fun getCameraFile(): File {
         val dir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        if (!dir.exists()) {
-            dir.mkdirs()
-            println("Directory not created")
+        if (dir != null) {
+            if (!dir.exists()) {
+                dir.mkdirs()
+                println("Directory not created")
+            }
         }
         return File(dir, imageFile)
     }

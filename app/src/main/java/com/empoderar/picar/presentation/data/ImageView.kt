@@ -7,10 +7,10 @@ import com.empoderar.picar.presentation.plataform.parcelableCreator
 data class ImageView(var id: Int,
                      var form: Int,
                      var project: Int,
-                     var base64: String,
+                     var base64: String?,
                      var latitude: Double,
                      var longitude: Double,
-                     var date: String): KParcelable {
+                     var date: String?): KParcelable {
 
     companion object {
         @JvmField val CREATOR = parcelableCreator(

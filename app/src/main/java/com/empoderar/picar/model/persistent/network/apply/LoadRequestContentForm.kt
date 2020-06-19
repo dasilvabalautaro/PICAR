@@ -19,7 +19,7 @@ interface LoadRequestContentForm {
             return when (networkHandler.isConnected) {
                 true -> LinkBackend.request(bodyRequest.acquire(token, url),
                         { it.map { it.toContentForm() } }, emptyList())
-                false, null -> Either.Left(Failure.NetworkConnection())
+                false -> Either.Left(Failure.NetworkConnection())
             }
         }
 

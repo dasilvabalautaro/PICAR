@@ -1,6 +1,6 @@
 package com.empoderar.picar.model.persistent.database.interfaces
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.empoderar.picar.model.persistent.database.data.FormData
 
 @Dao

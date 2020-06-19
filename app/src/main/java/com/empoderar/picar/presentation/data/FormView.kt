@@ -2,21 +2,20 @@ package com.empoderar.picar.presentation.data
 
 import android.os.Parcel
 import com.empoderar.picar.presentation.plataform.*
-import java.util.*
 
 data class FormView(var id: Int,
                     var project: Int,
-                    var frmId: String,
+                    var frmId: String?,
                     var frmNro: Int,
-                    var title: String,
-                    var dateEvaluation: String,
+                    var title: String?,
+                    var dateEvaluation: String?,
                     var state: Int,
                     var observation: String?,
                     var userMobile: Int,
                     var latitude: Double,
                     var longitude: Double,
-                    var dateCreation: String,
-                    var dateModification: String): KParcelable {
+                    var dateCreation: String?,
+                    var dateModification: String?): KParcelable {
 
     companion object {
         @JvmField val CREATOR = parcelableCreator(

@@ -1,17 +1,16 @@
 package com.empoderar.picar.presentation.data
 
+import android.annotation.SuppressLint
 import android.os.Parcel
 import com.empoderar.picar.presentation.plataform.KParcelable
 import com.empoderar.picar.presentation.plataform.parcelableCreator
-import com.empoderar.picar.presentation.plataform.readBoolean
-import com.empoderar.picar.presentation.plataform.writeBoolean
 
-data class TypeFormView(var frmId: String,
-                        var idEtapa: String,
-                        var titulo: String,
+data class TypeFormView(var frmId: String?,
+                        var idEtapa: String?,
+                        var titulo: String?,
                         var maximo: Double,
                         var ponderacion: Double,
-                        var observation: String,
+                        var observation: String?,
                         var maxi: Boolean,
                         var valor: Boolean,
                         var logico: Boolean,
@@ -22,12 +21,14 @@ data class TypeFormView(var frmId: String,
                 ::TypeFormView)
     }
 
+    @SuppressLint("NewApi")
     constructor(parcel: Parcel) : this(parcel.readString(), parcel.readString(),
             parcel.readString(), parcel.readDouble(),
             parcel.readDouble(), parcel.readString(), parcel.readBoolean(),
             parcel.readBoolean(), parcel.readBoolean(), parcel.readBoolean(),
             parcel.readBoolean())
 
+    @SuppressLint("NewApi")
     override fun writeToParcel(dest: Parcel, flags: Int) {
         with(dest) {
             writeString(frmId)

@@ -1,13 +1,12 @@
 package com.empoderar.picar.presentation.view.fragments
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.empoderar.picar.R
 import com.empoderar.picar.domain.data.BodyForm
 import com.empoderar.picar.presentation.component.BodyFormAdapter
 import com.empoderar.picar.presentation.data.BodyFormView
-import com.empoderar.picar.presentation.data.ContentFormView
 import com.empoderar.picar.presentation.extension.addDecorationRecycler
 import com.empoderar.picar.presentation.extension.failure
 import com.empoderar.picar.presentation.extension.observe
@@ -16,9 +15,7 @@ import com.empoderar.picar.presentation.plataform.BaseFragment
 import com.empoderar.picar.presentation.presenter.GetBodyFormViewModel
 import com.empoderar.picar.presentation.presenter.InsertBodiesFormViewModel
 import com.empoderar.picar.presentation.tools.Transform
-import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_body_form.*
-import java.util.*
 import javax.inject.Inject
 
 class BodiesFormFragment: BaseFragment() {
@@ -60,9 +57,10 @@ class BodiesFormFragment: BaseFragment() {
             if (!listBodiesView.isNullOrEmpty()){
                 val list = listBodiesView!!.map {
                     BodyForm(it.id, it.formId,
-                        it.idProject, it.code, it.value,
-                            it.description, it.satisfy,
-                        it.date, it.comment)  }
+                            it.idProject, it.code!!, it.value!!,
+                            it.description!!, it.satisfy!!,
+                            it.date!!, it.comment!!)
+                }
                 insertBodiesFormViewModel.list = list.toList()
                 insertBodiesFormViewModel.insertBodiesForm()
             }
@@ -116,7 +114,7 @@ class BodiesFormFragment: BaseFragment() {
 
     private fun handleInsertBodies(value: Boolean?){
         if (value != null && value){
-            context!!.toast("Insert Bodies OK")
+            requireContext().toast("Insert Bodies OK")
         }
     }
 
@@ -124,7 +122,7 @@ class BodiesFormFragment: BaseFragment() {
         rv_body!!.setHasFixedSize(true)
         rv_body!!.layoutManager = LinearLayoutManager(activity,
                 LinearLayoutManager.VERTICAL, false)
-        addDecorationRecycler(rv_body, context!!)
+        addDecorationRecycler(rv_body, requireContext())
         rv_body.adapter = bodyFormAdapter
 
         /*photoAdapter.clickListener = { photo, navigationExtras ->

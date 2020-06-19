@@ -1,14 +1,16 @@
 package com.empoderar.picar.presentation.component
 
-import android.support.v7.widget.RecyclerView
+//import androidx.appcompat.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.empoderar.picar.R
-import com.empoderar.picar.domain.data.Photo
+//import com.empoderar.picar.domain.data.Photo
 import com.empoderar.picar.presentation.data.PhotoView
 import com.empoderar.picar.presentation.extension.inflate
 import com.empoderar.picar.presentation.navigation.Navigator
 import kotlinx.android.synthetic.main.view_row_image.view.*
+//import kotlinx.android.synthetic.main.view_row_image.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 

@@ -2,10 +2,9 @@ package com.empoderar.picar.presentation.view.fragments
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.empoderar.picar.R
-import com.empoderar.picar.domain.data.Form
 import com.empoderar.picar.model.persistent.caching.Constants
 import com.empoderar.picar.model.persistent.preference.PreferenceRepository
 import com.empoderar.picar.presentation.component.FormsAdapter
@@ -16,10 +15,7 @@ import com.empoderar.picar.presentation.extension.observe
 import com.empoderar.picar.presentation.extension.viewModel
 import com.empoderar.picar.presentation.navigation.Navigator
 import com.empoderar.picar.presentation.plataform.BaseFragment
-import com.empoderar.picar.presentation.presenter.GetFormsCloudViewModel
 import com.empoderar.picar.presentation.presenter.GetFormsViewModel
-import com.empoderar.picar.presentation.presenter.InsertFormsViewModel
-import com.empoderar.picar.presentation.view.activities.MenuActivity
 import kotlinx.android.synthetic.main.view_list_form.*
 
 import javax.inject.Inject
@@ -61,7 +57,7 @@ class FormsFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        this.prefs = PreferenceRepository.customPrefs(activity!!,
+        this.prefs = PreferenceRepository.customPrefs(requireActivity(),
                 Constants.preference_picar)
 
         initializeView()
