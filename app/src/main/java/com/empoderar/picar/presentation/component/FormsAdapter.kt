@@ -8,6 +8,7 @@ import com.empoderar.picar.R
 import com.empoderar.picar.presentation.data.FormView
 import com.empoderar.picar.presentation.extension.inflate
 import com.empoderar.picar.presentation.navigation.Navigator
+import com.empoderar.picar.presentation.tools.Transform
 import kotlinx.android.synthetic.main.view_row_form.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
@@ -34,7 +35,7 @@ class FormsAdapter @Inject constructor():
         fun bind(formView: FormView, clickListener: (FormView, Navigator.Extras) -> Unit) {
             itemView.tv_title.text = formView.title
             itemView.tv_title.tag = formView.id
-            itemView.tv_date.text = formView.dateCreation
+            itemView.tv_date.text = formView.dateCreation?.toLong()?.let { Transform.convertLongToTime(it) }
             itemView.tv_state.text = formView.state.toString()
             itemView.tv_latitude.text = formView.latitude.toString()
             itemView.tv_longitude.text = formView.longitude.toString()

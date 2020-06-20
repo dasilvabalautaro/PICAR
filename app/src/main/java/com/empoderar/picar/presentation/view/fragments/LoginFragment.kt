@@ -42,7 +42,7 @@ class LoginFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        this.prefs = PreferenceRepository.customPrefs(activity!!,
+        this.prefs = PreferenceRepository.customPrefs(requireActivity(),
                 Constants.preference_picar)
     }
 
@@ -55,7 +55,7 @@ class LoginFragment: BaseFragment() {
         }
         verifyEmail()
 
-        et_user.setText("david")
+        et_user.setText("dasilvaba")
         et_password.setText("It@p@llu1962")
     }
 
@@ -99,11 +99,11 @@ class LoginFragment: BaseFragment() {
     private fun defineAccess(){
         val isDown = this.prefs.getInt(Constants.prefIsUnitiesDownload, 0)
         if (isDown == 0){
-            navigator.showDownload(activity!!)
+            navigator.showDownload(requireActivity())
         }else{
-            navigator.showMenu(activity!!)
+            navigator.showMenu(requireActivity())
         }
-        (activity!! as LoginActivity).finish()
+        (requireActivity() as LoginActivity).finish()
     }
 
     private fun checkPermission(){
@@ -151,8 +151,8 @@ class LoginFragment: BaseFragment() {
             val login = this.prefs.getString(Constants.prefLogin, "")
             val decrypt = password?.let { AES.decrypt(it, Constants.seed) }
             if (et_user.text.toString() == login && et_password.text.toString() == decrypt){
-                navigator.showMenu(activity!!)
-                (activity!! as LoginActivity).finish()
+                navigator.showMenu(requireActivity())
+                (requireActivity() as LoginActivity).finish()
             }else{
                 notify(R.string.msg_user_not_found)
             }

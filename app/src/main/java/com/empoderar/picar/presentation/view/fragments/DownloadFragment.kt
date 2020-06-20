@@ -99,7 +99,7 @@ class DownloadFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        this.prefs = PreferenceRepository.customPrefs(activity!!,
+        this.prefs = PreferenceRepository.customPrefs(requireActivity(),
                 Constants.preference_picar)
 
         GlobalScope.async{
@@ -232,7 +232,7 @@ class DownloadFragment: BaseFragment() {
                 launchGetProjectsOfCloud(url, token)
             }
             -1->{
-                context!!.toast(getString(R.string.msg_error_wrong_unit))
+                requireContext().toast(getString(R.string.msg_error_wrong_unit))
                 this.jobContentComplete = true
 
             }
@@ -342,7 +342,7 @@ class DownloadFragment: BaseFragment() {
             result = getString(R.string.msg_download)
         }
 
-        context!!.toast(result)
+        requireContext().toast(result)
 
     }
 
@@ -363,8 +363,8 @@ class DownloadFragment: BaseFragment() {
         println("Now I can quit.")
         runOnUiThread {
             verifyDownload()
-            navigator.showMenu(activity!!)
-            (activity!! as DownloadActivity).finish()
+            navigator.showMenu(requireActivity())
+            (requireActivity() as DownloadActivity).finish()
         }
 
     }

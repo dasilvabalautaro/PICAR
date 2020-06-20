@@ -41,6 +41,7 @@ class ProjectsFragment: BaseFragment() {
     private var namesUnits: ArrayList<String> = ArrayList()
     private lateinit var getProjectsViewModel: GetProjectsDatabaseViewModel
     private var idUnityTemp = -1
+    private var positionSpinnerCurrent = 0
     private lateinit var prefs: SharedPreferences
 
 
@@ -63,7 +64,7 @@ class ProjectsFragment: BaseFragment() {
             failure(failure, ::handleFailure)
         }
 
-        this.prefs = PreferenceRepository.customPrefs(activity!!,
+        this.prefs = PreferenceRepository.customPrefs(requireActivity(),
                 Constants.preference_picar)
         loadUnitsDatabase()
         loadProjectList()
@@ -83,12 +84,14 @@ class ProjectsFragment: BaseFragment() {
                                 .getItemAtPosition(position) as String
 
                         this.idUnityTemp = getIdUnityOfList(nameUnity)
+                        this.positionSpinnerCurrent = position
                         setListProjectForUnity()
 
                         return@map resources.getString(R.string.new_filter)
                     }
                 }
                 .subscribe { result -> println(result)})
+
     }
 
 
@@ -142,10 +145,10 @@ class ProjectsFragment: BaseFragment() {
         rv_projects!!.setHasFixedSize(true)
         rv_projects!!.layoutManager = LinearLayoutManager(activity,
                 LinearLayoutManager.VERTICAL, false)
-        addDecorationRecycler(rv_projects, context!!)
+        addDecorationRecycler(rv_projects, requireContext())
         rv_projects.adapter = projectsAdapter
         projectsAdapter.clickListener = { project, navigationExtras ->
-            navigator.showForms(activity!!, project, navigationExtras) }
+            navigator.showForms(requireActivity(), project, navigationExtras) }
 
     }
 
@@ -175,7 +178,7 @@ class ProjectsFragment: BaseFragment() {
 
             }
             -1 -> {
-                context!!.toast(getString(R.string.msg_error_wrong_unit))
+                requireContext().toast(getString(R.string.msg_error_wrong_unit))
             }
             else -> {
                 val unity = list.first { u -> u.id == unityId }
@@ -186,11 +189,11 @@ class ProjectsFragment: BaseFragment() {
 
     private fun setDataSpinner(){
         if (this.namesUnits.count() > 0){
-            val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(context!!,
+            val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(requireContext(),
                     android.R.layout.simple_list_item_1, this.namesUnits)
             sp_select!!.adapter = spinnerAdapter
             spinnerAdapter.notifyDataSetChanged()
-            sp_select!!.setSelection(0)
+            sp_select!!.setSelection(this.positionSpinnerCurrent)
 
         }
 

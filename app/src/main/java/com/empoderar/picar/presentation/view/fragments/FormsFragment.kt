@@ -94,10 +94,10 @@ class FormsFragment: BaseFragment() {
         rv_forms!!.setHasFixedSize(true)
         rv_forms!!.layoutManager = LinearLayoutManager(activity,
                 LinearLayoutManager.VERTICAL, false)
-        addDecorationRecycler(rv_forms, context!!)
+        addDecorationRecycler(rv_forms, requireContext())
         rv_forms.adapter = formsAdapter
         formsAdapter.clickListener = { form, navigationExtras ->
-             navigator.showDetailForm(activity!!, form, navigationExtras) }
+             navigator.showDetailForm(requireActivity(), form, navigationExtras) }
 
     }
 

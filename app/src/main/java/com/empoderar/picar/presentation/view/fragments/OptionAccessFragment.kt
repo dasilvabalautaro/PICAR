@@ -34,8 +34,8 @@ class OptionAccessFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ib_forms.setOnClickListener{
-            navigator.showLogin(activity!!)
-            (activity!! as OptionAccessActivity).finish()
+            navigator.showLogin(requireActivity())
+            (requireActivity() as OptionAccessActivity).finish()
         }
         loadMunicipalityList()
     }

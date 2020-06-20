@@ -36,13 +36,13 @@ class SplashFragment: BaseFragment() {
         }
 
         Handler().postDelayed({
-            navigator.showOptions(activity!!)
-            (activity!! as SplashActivity).finish()
+            navigator.showOptions(requireActivity())
+            (requireActivity() as SplashActivity).finish()
         }, 3000)
     }
 
     private fun handleDownUsers(list: List<UserView>?){
-        if (list != null && !list.isEmpty()){
+        if (list != null && list.isNotEmpty()){
             insertUsersViewModel.list = list
             insertUsersViewModel.insertUsers()
         }
@@ -50,7 +50,7 @@ class SplashFragment: BaseFragment() {
 
     private fun handleSaveUsers(value: Boolean?){
         if (value != null && value){
-            context!!.toast(getString(R.string.msg_users_saved))
+            requireContext().toast(getString(R.string.msg_users_saved))
         }
     }
 

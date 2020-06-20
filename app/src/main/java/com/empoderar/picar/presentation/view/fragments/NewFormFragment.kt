@@ -231,7 +231,7 @@ class NewFormFragment: BaseFragment() {
     override fun onResume() {
         super.onResume()
         if (proyectView == null){
-            context!!.toast(getString(R.string.failure_project_not_selected))
+            requireContext().toast(getString(R.string.failure_project_not_selected))
         }
 
     }
@@ -244,7 +244,7 @@ class NewFormFragment: BaseFragment() {
 
     private fun handleUpdateForm(value: Boolean?){
         if (value != null && value){
-            context!!.toast("Update Form OK")
+            requireContext().toast("Update Form OK")
         }
     }
 
@@ -253,7 +253,7 @@ class NewFormFragment: BaseFragment() {
             ib_bodies.visibility = View.VISIBLE
             cb_finished!!.isEnabled = true
             ib_save!!.visibility = View.INVISIBLE
-            context!!.toast("Insert Bodies OK")
+            requireContext().toast("Insert Bodies OK")
         }
     }
 
@@ -368,7 +368,7 @@ class NewFormFragment: BaseFragment() {
 
     private fun handleInsertImages(value: Boolean?){
         if (value != null && value){
-            context!!.toast("Insert OK")
+            requireContext().toast("Insert OK")
         }
     }
 
@@ -394,13 +394,13 @@ class NewFormFragment: BaseFragment() {
         rv_photos!!.setHasFixedSize(true)
         rv_photos!!.layoutManager = LinearLayoutManager(activity,
                 LinearLayoutManager.VERTICAL, false)
-        addDecorationRecycler(rv_photos, context!!)
+        addDecorationRecycler(rv_photos, requireContext())
         rv_photos.adapter = photoAdapter
         ib_bodies.visibility = View.INVISIBLE
         ib_photo!!.setOnClickListener { (activity as MenuActivity).camera() }
         ib_save!!.setOnClickListener { insertForm() }
         ib_bodies!!.setOnClickListener {
-            navigator.showBodies(activity!!, this.idNewForm)
+            navigator.showBodies(requireActivity(), this.idNewForm)
         }
         ib_add!!.setOnClickListener { setNewDataControl() }
         cb_finished!!.setOnClickListener {
