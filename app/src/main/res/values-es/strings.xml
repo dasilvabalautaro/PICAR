@@ -6,7 +6,7 @@
     <string name="failure_project_not_selected">Proyecto no seleccionado.</string>
     <string name="failure_server_error">Error en el servidor.</string>
     <string name="failure_database_error">Error base de datos.</string>
-    <string name="failure_input">Error entrada de datos.</string>
+    <string name="failure_input">Error entrada de datos o red caida.</string>
     <string name="msg_users_saved">Usuario guardado.</string>
     <string name="select_photo">Seleccionar foto.</string>
     <string name="lbl_title_login">Ingresar</string>

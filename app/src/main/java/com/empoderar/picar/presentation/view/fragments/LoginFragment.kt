@@ -31,6 +31,8 @@ class LoginFragment: BaseFragment() {
     private lateinit var permissionViewModel: PermissionViewModel
     private lateinit var prefs: SharedPreferences
     private lateinit var email: String
+    private lateinit var loginUser: String
+    private lateinit var passwordUser: String
 
     override fun layoutId() = R.layout.view_login
 
@@ -52,23 +54,53 @@ class LoginFragment: BaseFragment() {
         bt_change_user.setOnClickListener {
             enableControls(true)
             this.email = ""
+            this.loginUser = ""
+            this.passwordUser =  ""
         }
-        verifyEmail()
-
-        et_user.setText("dasilvaba")
-        et_password.setText("It@p@llu1962")
+//        verifyEmail()
+//
+//        et_user.setText("dasilvaba")
+//        et_password.setText("It@p@llu1962")
+        controlAccess()
     }
 
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    private fun verifyEmail(){
+    private fun verifyUserData(): Boolean{
         this.email = this.prefs.getString(Constants.prefEmail, "").toString()
-        if (email.trim().isEmpty()){
-            enableControls(true)
-        }else{
-            enableControls(false)
+         val password = this.prefs.getString(Constants.prefPassword, "").toString()
+        this.loginUser = this.prefs.getString(Constants.prefLogin, "").toString()
+        if (this.email.trim().isNotEmpty() && password.trim().isNotEmpty()
+                && this.loginUser.trim().isNotEmpty()){
+            this.passwordUser = password.let { AES.decrypt(it, Constants.seed) }
+            return true
         }
 
+        return false
     }
+
+    private fun controlAccess(){
+        if (verifyUserData()){
+            if ((networkHandler.isConnected || Variables.isServerUp)){
+                checkPermissionCloud()
+            }else {
+                notify(R.string.failure_network_connection)
+                defineAccess()
+            }
+
+        }else{
+            enableControls(true)
+        }
+    }
+
+//    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+//    private fun verifyEmail(){
+//        this.email = this.prefs.getString(Constants.prefEmail, "").toString()
+//        if (email.trim().isEmpty()){
+//            enableControls(true)
+//        }else{
+//            enableControls(false)
+//        }
+//
+//    }
     private fun enableControls(value: Boolean){
         if (value){
             et_email.visibility = View.VISIBLE
@@ -108,66 +140,75 @@ class LoginFragment: BaseFragment() {
 
     private fun checkPermission(){
         if (validatedInput(et_user.text.toString(),
-                        et_password.text.toString())){
+                        et_password.text.toString(), et_email.text.toString()) &&
+                (networkHandler.isConnected || Variables.isServerUp)){
+            checkPermissionCloud()
 
-            if ((!networkHandler.isConnected || !Variables.isServerUp) && isRegisterPermission()){
-                checkPermissionLocal()
-            }else{
-                checkPermissionCloud()
-            }
+//            if ((!networkHandler.isConnected || !Variables.isServerUp) && isRegisterPermission()){
+//                checkPermissionLocal()
+//            }else{
+//                checkPermissionCloud()
+//            }
         }else{
             notify(R.string.failure_input)
         }
     }
 
-    private fun isRegisterPermission(): Boolean{
-        val password = this.prefs.getString(Constants.prefPassword, "")
-        return !password.isNullOrEmpty()
-    }
+//    private fun isRegisterPermission(): Boolean{
+//        val password = this.prefs.getString(Constants.prefPassword, "")
+//        return !password.isNullOrEmpty()
+//    }
+
 
     private fun checkPermissionCloud(){
-        if (this.email.isEmpty() && Validate.isValidEmail(et_email.text.toString())){
-            this.email = et_email.text.toString()
-        }
+//        if (this.email.isEmpty() && Validate.isValidEmail(et_email.text.toString())){
+//            this.email = et_email.text.toString()
+//        }
 
-        if (this.email.isNotEmpty()){
-            permissionViewModel.url = String.format("${Constants.urlBase}${Constants.serviceLogin}")
-            permissionViewModel.email = this.email
-            permissionViewModel.login = et_user.text.toString()
-            permissionViewModel.password = et_password.text.toString()
-            if (permissionViewModel.verifyInput()){
-                permissionViewModel.requestPermission()
-            }
-        }else{
-            notify(R.string.msg_email_not_found)
+        //if (this.email.isNotEmpty()){
+        permissionViewModel.url = String.format("${Constants.urlBase}${Constants.serviceLogin}")
+        permissionViewModel.email = this.email
+        permissionViewModel.login = this.loginUser
+        permissionViewModel.password = this.passwordUser
+        if (permissionViewModel.verifyInput()){
+            permissionViewModel.requestPermission()
         }
+//        }else{
+//            notify(R.string.msg_email_not_found)
+//        }
     }
 
-    private fun checkPermissionLocal(){
-        if (validatedInput(et_user.text.toString(),
-                        et_password.text.toString())){
-
-            val password = this.prefs.getString(Constants.prefPassword, "")
-            val login = this.prefs.getString(Constants.prefLogin, "")
-            val decrypt = password?.let { AES.decrypt(it, Constants.seed) }
-            if (et_user.text.toString() == login && et_password.text.toString() == decrypt){
-                navigator.showMenu(requireActivity())
-                (requireActivity() as LoginActivity).finish()
-            }else{
-                notify(R.string.msg_user_not_found)
-            }
-
-        }else{
-            notify(R.string.failure_input)
-        }
-
-    }
+//    private fun checkPermissionLocal(){
+//        if (validatedInput(et_user.text.toString(),
+//                        et_password.text.toString(), this.email)){
+//
+//            val password = this.prefs.getString(Constants.prefPassword, "")
+//            val login = this.prefs.getString(Constants.prefLogin, "")
+//            val decrypt = password?.let { AES.decrypt(it, Constants.seed) }
+//            if (et_user.text.toString() == login && et_password.text.toString() == decrypt){
+//                navigator.showMenu(requireActivity())
+//                (requireActivity() as LoginActivity).finish()
+//            }else{
+//                notify(R.string.msg_user_not_found)
+//            }
+//
+//        }else{
+//            notify(R.string.failure_input)
+//        }
+//
+//    }
 
     override fun renderFailure(message: Int) {
         notify(message)
     }
 
-    private fun validatedInput(name: String, password: String): Boolean{
-        return name.length > 4 && password.length > 5
+    private fun validatedInput(name: String, password: String, email: String): Boolean{
+        if(name.length > 4 && password.length > 5 && Validate.isValidEmail(email)){
+            this.email = email;
+            this.passwordUser = password
+            this.loginUser = name
+            return true
+        }
+        return false
     }
 }

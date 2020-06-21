@@ -70,7 +70,7 @@ class ProjectsFragment: BaseFragment() {
         loadProjectList()
         initializeView()
         setupSwipeRefresh()
-
+        setListProjectForUnity()
     }
 
     override fun onStart() {
