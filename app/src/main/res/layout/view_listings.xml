@@ -14,7 +14,7 @@
             android:id="@+id/tl_options"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorSecondaryDark"
+            android:background="@color/colorPrimary"
             app:tabTextColor="@color/colorPrimaryText"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:tabGravity="fill"

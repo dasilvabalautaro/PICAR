@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background">
+        android:background="@color/colorPrimary">
         <androidx.constraintlayout.widget.Guideline
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/top_guideline"
-            app:layout_constraintGuide_percent=".05"
+            app:layout_constraintGuide_percent=".10"
             android:orientation="horizontal"/>
 
         <androidx.constraintlayout.widget.Guideline
@@ -65,42 +65,56 @@
             app:layout_constraintGuide_percent=".95"
             android:orientation="horizontal"/>
 
-        <ImageView
-            android:id="@+id/iv_mdr"
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/lbl_image"
-            android:src="@drawable/logo_mdr"
-            app:layout_constraintDimensionRatio="H,49:20"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_title"
+            android:text="@string/lbl_title_splash"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryText"
             app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
-            app:layout_constraintRight_toRightOf="@+id/right_three_guideline"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline" />
-
-        <ImageView
-            android:id="@+id/iv_bm"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:contentDescription="@string/lbl_image"
-            android:src="@drawable/logo_bm"
-            android:layout_marginTop="5dp"
-            app:layout_constraintDimensionRatio="H,219:50"
-            app:layout_constraintLeft_toLeftOf="@+id/left_three_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_guideline"
-            app:layout_constraintTop_toTopOf="@+id/top_guideline" />
+            app:layout_constraintTop_toTopOf="@+id/top_guideline"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_lbl_app"
+            android:text="@string/lbl_title_app"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textColor="@color/colorPrimaryText"
+            app:layout_constraintLeft_toLeftOf="@+id/left_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_title"/>
+
 
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/lbl_image"
-            android:src="@drawable/logo_picar"
-            android:layout_marginTop="25dp"
-            app:layout_constraintDimensionRatio="H,161:100"
+            android:src="@drawable/picar"
+            android:layout_marginTop="30dp"
+            app:layout_constraintDimensionRatio="1.743f"
             app:layout_constraintLeft_toLeftOf="@+id/left_two_guideline"
             app:layout_constraintRight_toRightOf="@+id/right_two_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/iv_mdr" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_lbl_app" />
 
-
+        <ImageView
+            android:id="@+id/iv_sigg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/lbl_image"
+            android:src="@drawable/sigg"
+            android:layout_marginTop="25dp"
+            app:layout_constraintDimensionRatio="0.998f"
+            app:layout_constraintLeft_toLeftOf="@+id/left_two_guideline"
+            app:layout_constraintRight_toRightOf="@+id/right_two_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

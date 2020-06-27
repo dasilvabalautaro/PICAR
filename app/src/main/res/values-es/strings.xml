@@ -76,4 +76,7 @@
     <string name="msg_error_connection_other">Error no especificado en la red.</string>
     <string name="msg_error_wrong_unit">Unidad incorrecta.</string>
     <string name="lbl_save_bodies">Guardar</string>
+    <string name="lbl_title_splash">BIENVENIDO AL SIGG PICAR</string>
+    <string name="lbl_title_app">Aplicación Móvil</string>
+    <string name="lbl_empoderar_picar">Empoderar PICAR</string>
 </resources>
