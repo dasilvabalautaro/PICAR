@@ -16,17 +16,21 @@
         <item>Action 2</item>
         <item>Action 3</item>
     </string-array>
-
     <string-array name="help">
         <item>Action 1</item>
         <item>Action 2</item>
         <item>Action 3</item>
+    </string-array>
+    <string-array name="graphics">
+        <item>Bar</item>
+        <item>Pie</item>
     </string-array>
 
     <string-array name="options">
         <item>Project</item>
         <item>Map</item>
         <item>System</item>
+        <item>Graphics</item>
         <item>Help</item>
     </string-array>
 

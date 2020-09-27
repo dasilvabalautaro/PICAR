@@ -18,11 +18,14 @@ class ExpandableListMenu {
                 .getStringArray(R.array.system).asList())
         val help = (context.resources
                 .getStringArray(R.array.help).asList())
+        val graphics = (context.resources
+                .getStringArray(R.array.graphics).asList())
+
         map[options[0]] = project
         map[options[1]] = maps
         map[options[2]] = system
-        map[options[3]] = help
-
+        map[options[3]] = graphics
+        map[options[4]] = help
         return map
     }
 }

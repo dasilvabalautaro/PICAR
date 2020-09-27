@@ -223,6 +223,33 @@ class MenuActivity : BaseActivity(){
                 }
 
             }
+            3 -> {
+                when(childPosition){
+                    0 -> {
+                        val graphicsBarFragment = GraphicsBarFragment()
+                        addFragment(graphicsBarFragment)
+                    }
+
+                    1 -> {
+
+                    }
+
+                }
+
+            }
+            4 -> {
+                when(childPosition){
+                    0 -> {
+
+                    }
+
+                    1 -> {
+
+                    }
+
+                }
+
+            }
         }
     }
 

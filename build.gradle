@@ -19,9 +19,9 @@ buildscript {
 //        test_runner = 'android.support.test.runner.AndroidJUnitRunner'
 //
 //    }
-    ext.kotlin_version = '1.3.72'
+    ext.kotlin_version = '1.4.0' //1.3.72
 //    ext.kotlin_version = '1.3.20' 21
-    ext.gradle_tools = '4.0.0'
+    ext.gradle_tools = '4.0.1'
     ext.build_tools = '28.0.3'
     ext.compile_sdk = 29
     ext.target_sdk = 29

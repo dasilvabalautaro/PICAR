@@ -33,4 +33,5 @@ interface ApplicationComponent {
     fun inject(downloadFragment: DownloadFragment)
     fun inject(bodiesFormFragment: BodiesFormFragment)
     fun inject(uploadFragment: UploadFragment)
+    fun inject(graphicsBarFragment: GraphicsBarFragment)
 }
