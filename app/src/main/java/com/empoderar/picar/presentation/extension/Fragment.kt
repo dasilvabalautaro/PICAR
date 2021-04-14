@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.empoderar.picar.presentation.extension
 
 import androidx.lifecycle.ViewModel
@@ -12,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.empoderar.picar.presentation.plataform.BaseActivity
 import com.empoderar.picar.presentation.plataform.BaseFragment
 import kotlinx.android.synthetic.main.activity_task.*
+
 
 inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) =
         beginTransaction().func().commit()
